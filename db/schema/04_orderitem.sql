@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS orderitem CASCADE;
+
 CREATE TABLE orderitem (
 order_id INTEGER REFERENCES menu_items(id) NOT NULL,
 menu_item_id INTEGER REFERENCES orders(id) NOT NULL,
