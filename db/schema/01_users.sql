@@ -9,7 +9,7 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   phone INTEGER,
   password VARCHAR(255) NOT NULL,
-  time_created DATE DEFAULT NOW();
+  time_created TIMESTAMP DEFAULT NOW();
   is_active BOOLEAN NOT NULL
 );
 
