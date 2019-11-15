@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TYPE status;
+
+CREATE TYPE status AS ENUM ('placed', 'accepted', 'rejected','preparing', 'ready', 'completed');
+
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -6,6 +11,6 @@ CREATE TABLE orders (
   start_time TIMESTAMP,
   estimated_end_time TIMESTAMP,
   is_active BOOLEAN DEFAULT TRUE,
-  status ENUM ('placed', 'accepted', 'rejected','preparing', 'ready', 'completed'),
-  time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+  current_status status,
+  time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
