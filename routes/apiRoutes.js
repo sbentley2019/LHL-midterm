@@ -21,7 +21,6 @@ router.get('/load_restaurants', (req, res) => {
   }).catch( (err) => {
     console.log('ERROR: ', err);
     throw Error('Could not get GET resturants');
-
   })
 });
 
@@ -31,6 +30,9 @@ router.get('/load_menu_items', (req, res) => {
   .then((menuItems) => {
     res.status(200);
     res.json(menuItems);
+  }).catch( (err) => {
+    console.log('ERROR: ', err);
+    throw Error('Could not get GET menu_items');
   })
 });
 
@@ -40,8 +42,39 @@ router.get('/loadOrders', (req, res) => {
       res.status(200);
       res.json(order);
     })
-})
+    .catch( (err) => {
+      console.log('ERROR: ', err);
+      throw Error('Could not get GET orders');
+    })
+});
 
+router.get('/loadMenuItems', (req, res) => {
+  //function to find the menu items associated to an order id
+  .then((menu_item) => {
+    res.status(200);
+    res.json(menu_item);
+  }).catch( (err) => {
+    console.log('ERROR: ', err);
+    throw Error('Could not get GET order items');
+  });
+});
+
+router.post('/order/:id/add', (req, res) => {
+  res.status(200);
+  const {
+    name,
+    description,
+    price,
+    img_url,
+    quantity
+  };
+  //function to insert menu_item to an order_id
+  .then((res) => {
+    console.log('success')
+  }).catch((err) => [
+    console.log("failed", err)
+  ])
+})
 
 router.post('/ordercart'), (req, res) => {
 }
@@ -51,6 +84,6 @@ router.post('/restaurant/:id/dish/:id'), (req, res) => {
 
 router.post('/checkout', (req, res) => {
 
-} = router;
+module.exports = router;
 
 
