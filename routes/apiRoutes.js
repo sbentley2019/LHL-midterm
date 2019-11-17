@@ -24,8 +24,8 @@ router.get('/load_restaurants', (req, res) => {
   })
 });
 
-/* GET menu_items from database */
-router.get('/load_menu_items', (req, res) => {
+/* GET menu_items from database from a restaurant*/
+router.get('restaurant/:id/load_menu_items', (req, res) => {
   //function find all menu items associated to a restaurant
   .then((menuItems) => {
     res.status(200);
@@ -36,19 +36,32 @@ router.get('/load_menu_items', (req, res) => {
   })
 });
 
-router.get('/loadOrders', (req, res) => {
+/* GET orders for a given restaurant */
+router.get('restaurant/:id/loadOrders', (req, res) => {
     //function to find orders by order id? or get all orders
-    .then((order) => {
+    .then((orders) => {
       res.status(200);
-      res.json(order);
-    })
-    .catch( (err) => {
+      res.json(orders);
+    }).catch( (err) => {
       console.log('ERROR: ', err);
       throw Error('Could not get GET orders');
     })
 });
 
-router.get('/loadMenuItems', (req, res) => {
+/* GET order for a given user_id */
+router.get('/order/:id', (req, res) => {
+  //function to load current order for a given user_id
+  .then((order) => {
+    res.status(200);
+    res.json(order);
+  }).catch( (err) => {
+    console.log('ERROR: ', err);
+    throw Error('Could not get GET order');
+  })
+})
+
+/* GET menu_Items for a given order_id*/
+router.get('/order/:id/loadMenuItems', (req, res) => {
   //function to find the menu items associated to an order id
   .then((menu_item) => {
     res.status(200);
@@ -59,6 +72,7 @@ router.get('/loadMenuItems', (req, res) => {
   });
 });
 
+/* POST menu_item to current order_id */
 router.post('/order/:id/add', (req, res) => {
   res.status(200);
   const {
@@ -75,9 +89,6 @@ router.post('/order/:id/add', (req, res) => {
     console.log("failed", err)
   ])
 })
-
-router.post('/ordercart'), (req, res) => {
-}
 
 router.post('/restaurant/:id/dish/:id'), (req, res) => {
 }
