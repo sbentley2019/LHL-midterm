@@ -13,12 +13,33 @@ router.get('/restaurants/:id', (req, res) => {
 
 
 /* GET restaurants from database */
-router.get('/load', (req, res) => {
+router.get('/load_restaurants', (req, res) => {
   //function.findAllRestuarants
   .then((restaurants) => {
     res.status(200);
     res.json(restaurants);
+  }).catch( (err) => {
+    console.log('ERROR: ', err);
+    throw Error('Could not get GET resturants');
+
   })
+});
+
+/* GET menu_items from database */
+router.get('/load_menu_items', (req, res) => {
+  //function find all menu items associated to a restaurant
+  .then((menuItems) => {
+    res.status(200);
+    res.json(menuItems);
+  })
+});
+
+router.get('/loadOrders', (req, res) => {
+    //function to find orders by order id? or get all orders
+    .then((order) => {
+      res.status(200);
+      res.json(order);
+    })
 })
 
 
