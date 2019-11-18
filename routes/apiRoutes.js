@@ -94,6 +94,3 @@ module.exports = function(database) {
 // router.post('/checkout', (req, res) => {
 
 // });
-
-return router;
-};
