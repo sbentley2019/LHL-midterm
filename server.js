@@ -51,6 +51,7 @@ const usersRoutes = require("./routes/users");
 const apiRoutes = require('./routes/apiRoutes.js');
 
 
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
@@ -76,6 +77,7 @@ app.get("/restaurant", (req, res) => {
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
 
 
 app.listen(PORT, () => {

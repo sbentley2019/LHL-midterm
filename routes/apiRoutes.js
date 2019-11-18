@@ -92,3 +92,9 @@ module.exports = function(database) {
   return router;
 };
 
+// router.post('/checkout', (req, res) => {
+
+// });
+
+  return router;
+};
