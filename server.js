@@ -54,7 +54,7 @@ app.get("/restaurant", (req, res) => {
   res.render("restaurant");
 });
 
-app.get("/restaurant/owner/:id", (req, res) => {
+app.get("/restaurant/owner", (req, res) => {
   res.render("owner_restaurant");
 });
 
