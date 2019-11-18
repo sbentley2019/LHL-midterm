@@ -19,7 +19,7 @@ VALUES
   true
 ),
 (
-  2,
+  1,
   'Pad Thai',
   'A flavorful noodle dish that is cooked in basil, chicken, and bean sprouts',
   12.99,

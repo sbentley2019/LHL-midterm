@@ -1,6 +1,6 @@
 -- Drop and recreate menu_item table (Example)
 
-DROP TABLE IF EXISTS menu_item CASCADE;
+DROP TABLE IF EXISTS menu_items CASCADE;
 
 CREATE TABLE menu_items (
   id SERIAL PRIMARY KEY NOT NULL,
