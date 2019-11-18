@@ -1,6 +1,6 @@
 // See: https://sass-lang.com/
 body {
-  background-color: #c7f0db;
+  background-color: white;
 
   h1 {
     color: #244751;
@@ -15,44 +15,6 @@ body {
   }
 }
 
-* {
-  padding: 0;
-  margin: 0;
-}
-
-nav {
-  background-color: #6c7b95;
-  width: 100%;
-  height: 75px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  img {
-    height: 75px;
-    width: 150px;
-  }
-  form {
-    width: 40%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    [type=email], [type=password] {
-      margin: 0;
-      width: 40%
-    }
-    input {
-      width: 30%;
-    }
-    button {
-      background-color: red;
-      border-radius: 5px;
-      padding: 10px 15px;
-    }
-  }
-}
 .restaurant-image {
   width: 90%;
   height: 35vh;
@@ -121,44 +83,147 @@ main.menu {
   }
 }
 
+/* Header */
+
+$topbar-responsive-bg: #2c3840;
+$topbar-responsive-animation-type: fade-in; // or use slide-down or none
+
+.topbar-container {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-responsive {
+  background: $topbar-responsive-bg;
+
+  .topbar-responsive-logo {
+    color: white;
+    flex-grow: 3;
+  }
+
+  .menu {
+    background: $topbar-responsive-bg;
+    flex-grow: 1;
+
+    li:last-of-type {
+      margin-right: 0;
+    }
+
+    a {
+      color: white;
+      transition: color 0.15s ease-in;
+
+      &:hover {
+        color: lighten($topbar-responsive-bg, 60%);
+      }
+
+      @media screen and (max-width: 39.9375em) {
+        padding: 0.875rem 0;
+      }
+    }
+
+    .topbar-responsive-button {
+      color: white;
+      border-color: white;
+      border-radius: 5000px;
+      transition: color 0.15s ease-in, border-color 0.15s ease-in;
+
+      &:hover {
+        color: lighten($topbar-responsive-bg, 60%);
+        border-color: lighten($topbar-responsive-bg, 60%);
+      }
+
+      @media screen and (max-width: 39.9375em) {
+        width: 100%;
+        margin: 0.875rem 0;
+      }
+    }
+  }
+
+   @media screen and (max-width: 39.9375em) {
+     padding: 0.75rem;
+
+    .top-bar-title {
+      width: 1;
+      flex-grow: 3;
+
+      span {
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 0.25rem 0.45rem;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .menu-icon {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+  } to {
+    opacity:1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
 
 /* HOME PAGE */
 .page-container {
+  position: absolute;
+  top: 5%;
   display: flex;
   background-color: red;
   width: 100%;
-  margin: auto auto;
+  margin: 0 auto;
+  min-height: 90%;
 }
 
 .restaurants-container {
   position: absolute;
-  top: 8%;
+  top: 1%;
   display: flex;
   flex-direction: column;
   background-color: blue;
   width: 35%;
   margin-left: 1%;
-}
 
-.restaurant-cards {
-  display: flex;
-  flex-wrap: wrap;
-  border: 1px solid  black;
-  margin-bottom: 2.5%;
-  cursor: pointer;
-
-  img {
-    padding: 1%;
-    max-width: 40%;
-    margin-right: 2.5%
-  }
-
-  .card-text {
+  a.restaurant-cards {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid  black;
+    margin-bottom: 2.5%;
+    cursor: pointer;
 
-    footer {
-      justify-content: flex-end;
+    img {
+      padding: 1%;
+      max-width: 40%;
+      margin-right: 2.5%
+    }
+
+    .card-text {
+      display: flex;
+      flex-direction: column;
+
+      footer {
+        justify-content: flex-end;
+        text-align: left;
+        background: transparent;
+        font-size: 0.75rem;
+      }
     }
   }
 }
+
