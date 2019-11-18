@@ -5,15 +5,16 @@ require('dotenv').config();
 const restaurants = require('./lib/database/restaurants');
 
 // Web server config
-const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
 const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
-const app        = express();
-const morgan     = require('morgan');
+const sass = require("node-sass-middleware");
+const app = express();
+const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
+
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -66,7 +67,7 @@ app.get('/', (req, res) => {
   res.status(200);
   restaurants.findAllRestaurants().then(restaurants => {
     let allRestaurants = restaurants;
-    res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+    res.render('index', { title: 'Ritual', restaurants: allRestaurants });
   });
 });
 
@@ -77,6 +78,7 @@ app.get("/restaurant", (req, res) => {
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
 
 
 

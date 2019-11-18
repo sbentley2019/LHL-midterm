@@ -1,7 +1,7 @@
 const restaurants = require('../lib/database/restaurants');
 const orders = require('../lib/database/orders');
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = function(database) {
 
@@ -35,7 +35,7 @@ module.exports = function(database) {
       .then((orders) => {
         res.status(200);
         res.json(orders);
-      }).catch( (err) => {
+      }).catch((err) => {
         console.log('ERROR: ', err);
         throw Error('Could not get GET orders');
       });
@@ -84,8 +84,7 @@ module.exports = function(database) {
       ]);
   });
 
-  router.post('/restaurant/:id/dish/:id', (req, res) => {
-  });
+  router.post('/restaurant/:id/dish/:id', (req, res) => {});
 
   router.post('/checkout', (req, res) => {});
 
@@ -96,5 +95,5 @@ module.exports = function(database) {
 
 // });
 
-  return router;
+return router;
 };
