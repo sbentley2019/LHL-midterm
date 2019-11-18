@@ -50,6 +50,7 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const apiRoutes = require('./routes/apiRoutes.js');
+const restaurant_owner_routes = require('./routes/restaurant_owner_routes');
 
 
 
@@ -62,6 +63,8 @@ app.use("/api/users", usersRoutes(db));
 /* /api/endpoints/ */
 
 app.use('/api', apiRoutes(db));
+
+app.use('/restaurant/owner', restaurant_owner_routes(db));
 
 app.get('/', (req, res) => {
   res.status(200);
@@ -79,6 +82,8 @@ app.get("/restaurants/:id", (req, res) => {
     res.render('restaurant', {menu_items: allItems});
   });
 });
+
+
 
 // Home page
 // Warning: avoid creating more routes in this file!
