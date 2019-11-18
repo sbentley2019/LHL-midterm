@@ -5,16 +5,6 @@ const router  = express.Router();
 
 module.exports = function(database) {
 
-  router.get('/', (req, res) => {
-    res.status(200);
-    res.render('index', {title: 'Ritual', restaurants: ''});
-  });
-
-  router.get('/restaurants/:id', (req, res) => {
-    res.render('restaurant');
-  });
-
-
   /* GET restaurants from database */
   router.get('/load_restaurants', (req, res) => {
     restaurants.findAllRestaurants()

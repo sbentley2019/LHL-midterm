@@ -46,36 +46,22 @@
     <div class="page-container">MAPS IMG</div>
     <div class="restaurants-container">
 
-      <article class="card restaurant-cards">
-        <header>
-          <h1>Restaurant Name</h1>
-        </header>
-        <img src="assets/img/generic/rectangle-1.jpg">
-        <div class="card-section">
-          <p>This is a simple card with an image.</p>
+    <% for (const restaurant of restaurants) {%>
+      <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>">
+        <img src="<%= restaurant.img_url %>">
+        <div class="card-text">
+          <header>
+            <h2><%= restaurant.name %></h2>
+          </header>
+          <div class="card-section">
+            <p><%= restaurant.description %></p>
+          </div>
+          <footer>
+            <span><%= restaurant.location %></span>
+          </footer>
         </div>
-      </article>
-
-      <article class="card restaurant-cards">
-        <header>
-          <h1>Restaurant Name</h1>
-        </header>
-        <img src="assets/img/generic/rectangle-1.jpg">
-        <div class="card-section">
-          <p>This is a simple card with an image.</p>
-        </div>
-      </article>
-
-      <article class="card restaurant-cards">
-        <header>
-          <h1>Restaurant Name</h1>
-        </header>
-        <img src="assets/img/generic/rectangle-1.jpg">
-        <div class="card-section">
-          <p>This is a simple card with an image.</p>
-        </div>
-      </article>
-
+      </a>
+    <% } %>
     </div>
   </body>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

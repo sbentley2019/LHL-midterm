@@ -1,6 +1,9 @@
 // load .env data into process.env
 require('dotenv').config();
 
+// Imported Modules
+const restaurants = require('./lib/database/restaurants');
+
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
@@ -57,6 +60,14 @@ app.use("/api/users", usersRoutes(db));
 /* /api/endpoints/ */
 
 app.use('/api', apiRoutes(db));
+
+app.get('/', (req, res) => {
+  res.status(200);
+  restaurants.findAllRestaurants().then(restaurants => {
+    let allRestaurants = restaurants;
+    res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+  });
+});
 
 app.get("/restaurant", (req, res) => {
   res.render("restaurant");
