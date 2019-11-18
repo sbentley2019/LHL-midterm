@@ -10,5 +10,6 @@ CREATE TABLE restaurants (
   is_active BOOLEAN NOT NULL,
   location VARCHAR(255) NOT NULL,
   start_hour TIME,
-  end_hour TIME
+  end_hour TIME,
+  img_url VARCHAR(255)
 )
