@@ -63,7 +63,7 @@ module.exports = function(router, database) {
 
   /* GET menu_Items for a given order_id*/
   router.get('/order/:id/loadMenuItems', (req, res) => {
-    //function to find the menu items associated to an order id
+    orders.findAllMenuItemsForOrder(req.params)
     .then((menu_item) => {
       res.status(200);
       res.json(menu_item);
@@ -82,8 +82,9 @@ module.exports = function(router, database) {
       price,
       img_url,
       quantity
-    };
+    } = req.params;
     //function to insert menu_item to an order_id
+    orders.findAllMenuItemsForOrder(req.params)
     .then((res) => {
       console.log('success')
     }).catch((err) => [
