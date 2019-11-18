@@ -1,5 +1,5 @@
-const restaurants = require('../lib/restaurants');
-const orders = require('../lib/orders');
+const restaurants = require('../lib/database/restaurants');
+const orders = require('../lib/database/orders');
 const express = require('express');
 const router  = express.Router();
 
