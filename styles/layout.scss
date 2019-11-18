@@ -1,18 +1,6 @@
 // See: https://sass-lang.com/
 body {
   background-color: #c7f0db;
-
-  h1 {
-    color: #244751;
-  }
-  footer {
-    background-color: #464159;
-    text-align: center;
-    p {
-      padding: 20px 0;
-      margin-bottom: 0;
-    }
-  }
 }
 
 * {
@@ -33,24 +21,6 @@ nav {
   img {
     height: 75px;
     width: 150px;
-  }
-  form {
-    width: 40%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    [type=email], [type=password] {
-      margin: 0;
-      width: 40%
-    }
-    input {
-      width: 30%;
-    }
-    button {
-      background-color: red;
-      border-radius: 5px;
-      padding: 10px 15px;
-    }
   }
 }
 .restaurant-image {
@@ -96,13 +66,11 @@ main.menu {
     .card {
       margin-top: 50px;
       width: 300px;
+      height: 300px;
       background-color: #8bbabb;
-      .card-section {
-        width: 100%;
-        padding: 2%;
-        p {
-          margin-top: 10px;
-        }
+      img {
+        width: 300px;
+        height: 75%;
       }
     }
     .item-header {
@@ -120,3 +88,46 @@ main.menu {
     right: 5%;
   }
 }
+
+
+/* HOME PAGE */
+.page-container {
+  display: flex;
+  background-color: red;
+  width: 100%;
+  margin: auto auto;
+}
+
+.restaurants-container {
+  position: absolute;
+  top: 8%;
+  display: flex;
+  flex-direction: column;
+  background-color: blue;
+  width: 35%;
+  margin-left: 1%;
+}
+
+.restaurant-cards {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid  black;
+  margin-bottom: 2.5%;
+  cursor: pointer;
+
+  img {
+    padding: 1%;
+    max-width: 40%;
+    margin-right: 2.5%
+  }
+
+  .card-text {
+    display: flex;
+    flex-direction: column;
+
+    footer {
+      justify-content: flex-end;
+    }
+  }
+}
+
