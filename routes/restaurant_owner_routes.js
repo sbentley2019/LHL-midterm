@@ -6,7 +6,10 @@ const router = express.Router();
 module.exports = function(database) {
 
   router.get('/', (req, res) => {
-    res.render('owner_restaurant');
+    database.findAllMenuItemsForRestaurant(1).then(
+      rows => {
+        res.render('owner_restaurant', { menuItems: rows });
+      });
   })
   return router;
 };

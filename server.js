@@ -64,7 +64,7 @@ app.use("/api/users", usersRoutes(db));
 
 app.use('/api', apiRoutes(db));
 
-app.use('/restaurant/owner', restaurant_owner_routes(db));
+app.use('/restaurant/owner', restaurant_owner_routes(restaurants));
 
 app.get('/', (req, res) => {
   res.status(200);
@@ -79,7 +79,7 @@ app.get("/restaurants/:id", (req, res) => {
   restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
     let allItems = menu_items;
     console.log(allItems);
-    res.render('restaurant', {menu_items: allItems});
+    res.render('restaurant', { menu_items: allItems });
   });
 });
 

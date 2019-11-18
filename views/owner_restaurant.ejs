@@ -36,7 +36,6 @@
                 <div class="table-scroll">
                     <table>
                         <thead>
-
                             <tr>
                                 <th>
                                     <h3 class="restaurant-owner-label">Preview</h3>
@@ -79,61 +78,73 @@
 
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>
-                                    <button class="button" data-open="menuItemPreviewModul">Click TO Preview</button>
-                                </th>
-                                <th>
-                                    <div>
-                                        <img src="https://img.icons8.com/offices/40/000000/food.png">
-                                    </div>
-                                    <div>
-                                        <button class="button" data-open="editImageModul">EDIT</button>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        <h5>Thai Fried Rice</h2>
-                                    </div>
-                                    <div>
-                                        <button class="button" data-open="editNameModul">EDIT</button>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus.</h5>
-                                    </div>
-                                    <div>
-                                        <button class="button" data-open="editDescriptionModul">EDIT</button>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        <h5>$10.00</h5>
-                                    </div>
-                                    <div>
-                                        <button class="button" data-open="editPriceModul">EDIT</button>
-                                    </div>
+                            <% menuItems.forEach(item => {%>
+                                <tr>
+                                    <th>
+                                        <button class="button" data-open="menuItemPreviewModul">Click TO Preview</button>
+                                    </th>
+                                    <th class="restaurant-owner-table-cell">
+                                        <div class="restaurant-owner-table-image-container">
+                                            <img src="<%=item.image_url%>">
+                                        </div>
+                                        <div>
+                                            <button class="button" data-open="editImageModul">EDIT</button>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <h5>
+                                                <%=item.name%>
+                                                    </h2>
+                                        </div>
+                                        <div>
+                                            <button class="button" data-open="editNameModul">EDIT</button>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <h5>
+                                                <%=item.description%>
+                                            </h5>
+                                        </div>
+                                        <div>
+                                            <button class="button" data-open="editDescriptionModul">EDIT</button>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <h5>
+                                                <%=item.price%>
+                                            </h5>
+                                        </div>
+                                        <div>
+                                            <button class="button" data-open="editPriceModul">EDIT</button>
+                                        </div>
 
-                                </th>
-                                <th>
-                                    <div>
-                                        <h5>30 Minutes</h5>
-                                    </div>
-                                    <div>
-                                        <button class="button " data-open="editTimeModul">EDIT</button>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        <h5>True</h5>
-                                    </div>
-                                    <div class="restaurant-owner-field-item">
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <h5>
+                                                <%=item.time_to_prepare%>
+                                            </h5>
+                                        </div>
+                                        <div>
+                                            <button class="button " data-open="editTimeModul">EDIT</button>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <h5>
+                                                <%=item.is_active%>
+                                            </h5>
+                                        </div>
+                                        <div class="restaurant-owner-field-item">
 
-                                        <button class="button" data-open="editActiveModul">EDIT</button>
-                                    </div>
-                                </th>
-                            </tr>
+                                            <button class="button" data-open="editActiveModul">EDIT</button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <%})%>
 
                         </tbody>
                     </table>
