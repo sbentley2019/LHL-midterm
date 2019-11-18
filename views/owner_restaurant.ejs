@@ -2,33 +2,306 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Home Page</title>
 
-    <!-- Compressed CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="" crossorigin="anonymous">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/owner_restaurant.css" type="text/css" />
 
-    <!-- Compressed JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
 
-    <link rel="stylesheet" href="/Midterm-Project//public/styles/owner_restaurant.css">
-</head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/vendor/foundation.min.css" />
 
-<body>
+    <body>
 
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <ul class="menu">
-                <li><a href="#">ORDERS</a></li>
-                <li class="menu-text is-active">DASHBOARD</li>
-                <li><a href="#">ADMIN</a></li>
-                <button class="restaurant-owner-logout-button">logout</button>
-            </ul>
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <ul class="menu">
+                    <li><a href="#">ORDERS</a></li>
+                    <li class="menu-text is-active">DASHBOARD</li>
+                    <li><a href="#">ADMIN</a></li>
+                    <button class="restaurant-owner-logout-button button">logout</button>
+                    <img class="restaurant-owner-profile-img" src="https://img.icons8.com/ultraviolet/40/000000/user-female-circle.png">
+                </ul>
+            </div>
         </div>
-    </div>
 
-</body>
+        <div class="row">
+            <div class="columns">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+
+                            <tr>
+                                <th>
+                                    <h3 class="restaurant-owner-label">Preview</h3>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h3 class="restaurant-owner-label">Image</h3>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h3 class="restaurant-owner-label">Name</h3>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h3 class="restaurant-owner-label">Description</h3>
+
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h3 class="restaurant-owner-label">Price</h3>
+
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h3 class="restaurant-owner-label">Time To Prepare</h3>
+
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h3 class="restaurant-owner-label">Is Active</h3>
+
+                                    </div>
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <div class="card restaurant-owner-card" style="width: 300px;">
+                                        <div class="card-divider">
+                                            <h4>Thai fried rice</h4>
+                                        </div>
+                                        <img src="https://img.icons8.com/offices/40/000000/food.png">
+                                        <div class="card-section">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique.</p>
+                                            <p>$10.00</p>
+                                            <button class="button">Add To Cart</button>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <img src="https://img.icons8.com/offices/40/000000/food.png">
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>Lorem ipsum</h2>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus.</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>$10.00</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>30 Minutes</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>True</h5>
+                                    </div>
+                                    <div class="restaurant-owner-field-item">
+
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div class="card restaurant-owner-card" style="width: 300px;">
+                                        <div class="card-divider">
+                                            <h4>Thai fried rice</h4>
+                                        </div>
+                                        <img src="https://img.icons8.com/offices/40/000000/food.png">
+                                        <div class="card-section">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique.</p>
+                                            <p>$10.00</p>
+                                            <button class="button">Add To Cart</button>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <img src="https://img.icons8.com/offices/40/000000/food.png">
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>Lorem ipsum</h2>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus.</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>$10.00</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>30 Minutes</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>True</h5>
+                                    </div>
+                                    <div class="restaurant-owner-field-item">
+
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div class="card restaurant-owner-card" style="width: 300px;">
+                                        <div class="card-divider">
+                                            <h4>Thai fried rice</h4>
+                                        </div>
+                                        <img src="https://img.icons8.com/offices/40/000000/food.png">
+                                        <div class="card-section">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique.</p>
+                                            <p>$10.00</p>
+                                            <button class="button">Add To Cart</button>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <img src="https://img.icons8.com/offices/40/000000/food.png">
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>Lorem ipsum</h2>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus.</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>$10.00</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>30 Minutes</h5>
+                                    </div>
+                                    <div>
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <h5>True</h5>
+                                    </div>
+                                    <div class="restaurant-owner-field-item">
+
+                                        <button class="button ">EDIT</button>
+                                    </div>
+                                </th>
+                            </tr>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Here's a footer, just in case</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        >
+
+
+
+    </body>
 
 </html>
