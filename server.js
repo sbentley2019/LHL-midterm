@@ -70,8 +70,13 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get("/restaurant", (req, res) => {
-  res.render("restaurant");
+app.get("/restaurants/:id", (req, res) => {
+  res.status(200);
+  restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
+    let allItems = menu_items;
+    console.log(allItems);
+    res.render('restaurant', {menu_items: allItems});
+  });
 });
 
 // Home page
