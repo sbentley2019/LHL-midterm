@@ -14,7 +14,7 @@ const methodOverride = require('method-override');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
-const dbParams = require('./lib/database/db.js/index.js');
+const dbParams = require('./lib/database/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
