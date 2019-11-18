@@ -1,27 +1,35 @@
-module.exports = function(router, database) {
- //export functions
-};
+const express = require('express');
+const router = express.Router();
+const request = require('request');
 
-router.get('/login', (req, res) => {
-  // should trigger login event
-});
+module.exports = (db) => {
 
-router.get('/home', (req, res) => {
-  res.render('home');
-});
-
-router.get('/restaurants/:id', (req, res) => {
+router.get('/:id', (req, res) => {
+  console.log(req);
   res.render('restaurant');
 });
 
-router.post('/ordercart', (req, res) => {
-});
+// router.get('/login', (req, res) => {
+//   // should trigger login event
+// });
 
-router.post('/restaurant/:id/dish/:id', (req, res) => {
-});
+// router.get('/home', (req, res) => {
+//   res.render('home');
+// });
 
-router.post('/checkout', (req, res) => {
+// router.get('/restaurants/:id', (req, res) => {
+//   res.render('restaurant');
+// });
 
-});
+// router.post('/ordercart', (req, res) => {
+// });
 
+// router.post('/restaurant/:id/dish/:id', (req, res) => {
+// });
 
+// router.post('/checkout', (req, res) => {
+
+// });
+
+  return router;
+};
