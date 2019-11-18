@@ -17,8 +17,19 @@
   </head>
 
   <body>
-    <h1 class="subheader">Hello World!</h1>
+    <h1 class="subheader"><%= `${title}` %></h1>
     <h2 class="subheader">Test</h2>
+
+    <ul>
+      <h1>Restaurants</h1>
+      <% if (restaurants) { %>
+        <% for (const restaurant of restaurants) { %>
+          <li>
+            <a><%= restaurant.name %>}`</a>
+          </li>
+        <% } %>
+      <%} %>
+    </ul>
 
   <!-- Buttons (actions) -->
   <button type="button" class="success button">Save</button>

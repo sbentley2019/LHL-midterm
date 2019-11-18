@@ -7,7 +7,7 @@ module.exports = function(database) {
 
   router.get('/', (req, res) => {
     res.status(200);
-    res.render('index', {title: 'Ritual'});
+    res.render('index', {title: 'Ritual', restaurants: ''});
   });
 
   router.get('/restaurants/:id', (req, res) => {
