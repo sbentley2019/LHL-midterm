@@ -14,7 +14,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="vendor/foundation.min.css" />
+    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 
   </head>
   <body>
@@ -22,11 +22,6 @@
     <header>
       <nav>
         <a href="#"><img src="https://via.placeholder.com/50" alt="restaurant logo"></a>
-        <form class="login-form">
-          <input type="email" name="email" placeholder="Email">
-          <input type="password" name="password" placeholder="Password">
-          <button>Login</button>
-        </form>
       </nav>
     </header>
 
@@ -44,93 +39,16 @@
 
       <div class="menu_items">
         <h2 id="menu-popular">Popular</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
 
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-        <h2 class="menu-starters">Starters</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-        <h2 class="menu-mains">Mains</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-        <h2 class="menu-desserts">Desserts</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
+        <% for (const item of menu_items) { %>
+           <div class="card">
+             <img src="<%= item.image_url %>" alt="">
+             <h4><%= item.name %></h4>
+             <h4><%= item.price %></h4>
+             <p><%= item.description %></p>
+           </div>
+        <% } %>
+      </div>
 
       <div class="order">
         <h6>Your Cart</h6>
@@ -142,4 +60,9 @@
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, necessitatibus.</p>
     </footer>
   </body>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </html>
