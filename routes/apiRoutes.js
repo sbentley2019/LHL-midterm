@@ -33,10 +33,10 @@ module.exports = function(database) {
       .then((menuItems) => {
         res.status(200);
         res.json(menuItems);
-      }).catch( (err) => {
+      }).catch((err) => {
         console.log('ERROR: ', err);
         throw Error('Could not get GET menu_items');
-      })
+      });
   });
 
   /* GET orders for a given restaurant */
@@ -48,7 +48,7 @@ module.exports = function(database) {
       }).catch( (err) => {
         console.log('ERROR: ', err);
         throw Error('Could not get GET orders');
-      })
+      });
   });
 
   /* GET order for a given user_id */

@@ -9,6 +9,8 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -29,7 +31,16 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
 app.use(express.static("public"));
+
+
+/* Session Manager */
+app.use(cookieSession({
+  name: 'session',
+  keys: ['user_id'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
