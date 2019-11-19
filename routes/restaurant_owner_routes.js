@@ -16,14 +16,29 @@ module.exports = function(database) {
       });
   })
 
+  /**
+   * Updates photo URL of a menu item given and menu item id
+   */
   router.post('/uploadPhoto', (req, res) => {
     const updatedImageURL = req.body.updateURL;
     const menuItemId = req.body.menuItemId;
-    console.log(menuItemId);
-    database.updateMenuItem(updatedImageURL, menuItemId).then(
-      rows => {
-        res.redirect('/restaurant/owner');
-      });
+    console.log(typeof(menuItemId));
+    database.updateMenuItem(updatedImageURL, menuItemId, 'image_url')
+      .then(
+        rows => {
+          res.redirect('/restaurant/owner');
+        });
   })
+
+  router.post('/updateName', (req, res) => {
+    const updatedName = req.body.updateName;
+    const menuItemId = req.body.menuItemId;
+    database.updateMenuItem(updatedName, menuItemId, 'name')
+      .then(
+        rows => {
+          res.redirect('/restaurant/owner');
+        }
+      );
+  });
   return router;
 };
