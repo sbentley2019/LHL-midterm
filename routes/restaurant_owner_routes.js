@@ -17,10 +17,13 @@ module.exports = function(database) {
   })
 
   router.post('/uploadPhoto', (req, res) => {
-    const updatedImageURL = req.body.updatedURL;
+    const updatedImageURL = req.body.updateURL;
     const menuItemId = req.body.menuItemId;
     console.log(menuItemId);
-    database.updateMenuItem(updatedImageURL, menuItemId);
+    database.updateMenuItem(updatedImageURL, menuItemId).then(
+      rows => {
+        res.redirect('/restaurant/owner');
+      });
   })
   return router;
 };
