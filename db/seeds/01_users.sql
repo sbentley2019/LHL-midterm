@@ -21,4 +21,6 @@ VALUES(
   'boyleSusan',
   CURRENT_TIMESTAMP,
   true
-);
+),
+
+('Jack', 'Ryan', 'jack@cia.com', 1168101214, 'ryanJack', CURRENT_TIMESTAMP, true);
