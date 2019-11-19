@@ -1,145 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Restaurant</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+<head>
+  <title>Restaurant</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="vendor/foundation.min.css" />
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/order.js"></script>
 
-  </head>
-  <body>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 
-    <header>
-      <nav>
-        <a href="#"><img src="https://via.placeholder.com/50" alt="restaurant logo"></a>
-        <form class="login-form">
-          <input type="email" name="email" placeholder="Email">
-          <input type="password" name="password" placeholder="Password">
-          <button>Login</button>
-        </form>
-      </nav>
-    </header>
+</head>
 
-    <div class="restaurant-image">
-      <img src="https://via.placeholder.com/650x250" alt="">
+<body>
+
+  <header>
+    <nav>
+      <a href="#"><img src="https://via.placeholder.com/50" alt="restaurant logo"></a>
+    </nav>
+  </header>
+
+  <div class="restaurant-image">
+    <img src="https://via.placeholder.com/650x250" alt="">
+  </div>
+
+  <main class="menu">
+    <div class="menu_categories">
+      <a href="#menu-popular">All</a>
+      <a href="#menu-starters">Mains</a>
+      <a href="#menu-mains">Appetizers</button></a>
+      <a href="#menu-desserts">Dessert</a>
     </div>
 
-    <main class="menu">
-      <div class="menu_categories">
-        <a href="#menu-popular">All</a>
-        <a href="#menu-starters">Mains</a>
-        <a href="#menu-mains">Appetizers</button></a>
-        <a href="#menu-desserts">Dessert</a>
+    <div class="menu_items">
+      <h2 id="menu-popular">Popular</h2>
+
+      <% for (const item of menu_items) { %>
+      <div class="card">
+        <form method="post" action="/order/<%= order_id%>">
+          <img src="<%= item.image_url %>" alt="">
+          <h4><%= item.name %></h4>
+          <h4><%= item.price %></h4>
+          <p><%= item.description %></p>
+          <input type='hidden' name='menu_item' value='<%=item.id%>'>
+          <input type="hidden" name="order_id" value='<%=order_id%>'>
+          <button type='submit'>Add</button>
+        </form>
       </div>
+      <% } %>
+    </div>
 
-      <div class="menu_items">
-        <h2 id="menu-popular">Popular</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-        <h2 class="menu-starters">Starters</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-        <h2 class="menu-mains">Mains</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-        <h2 class="menu-desserts">Desserts</h2>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150">
-          <div class="card-section">
-            <div class="item-header">
-              <h4>Item</h4>
-              <h4>$Price</h4>
-            </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatum.</p>
-          </div>
-        </div>
-
-      <div class="order">
-        <h6>Your Cart</h6>
-      </div>
-    </main>
+  </main>
+  <div class="order">
+    <h6>Your Cart</h6>
+  </div>
 
 
-    <footer>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, necessitatibus.</p>
-    </footer>
-  </body>
+  <footer>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, necessitatibus.</p>
+  </footer>
+</body>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script>
+  $(document).foundation();
+
+</script>
+
 </html>
