@@ -11,6 +11,8 @@ module.exports = function(database) {
    * TODO: Add different owner id functionality
    */
   router.get('/', (req, res) => {
+
+    //TODO: Restaurant ID should be retrieved from session/cookie
     database.findAllMenuItemsForRestaurant(1).then(
       rows => {
         res.render('owner_restaurant', { menuItems: rows });
@@ -87,6 +89,20 @@ module.exports = function(database) {
           res.redirect('/restaurant/owner');
         }
       );
+  });
+
+  router.post('/addMenuItem', (req, res) => {
+    const newMenuItemObject = {
+      imageUrl: req.body.newImageUrl,
+      name: req.body.newName,
+      description: req.body.newDescription,
+      price: req.body.newPrice,
+      timeToPrepare: req.body.newTimeToPrepare,
+      isActive: req.body.newActive
+    }
+
+    //TODO: Make restaurant ID fetch from session, hardcoded at the moment
+    database.addMenuItem(newMenuItemObject, 1);
   });
 
   return router;
