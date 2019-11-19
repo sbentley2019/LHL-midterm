@@ -6,15 +6,16 @@ const restaurants = require('./lib/database/restaurants');
 const orders = require('./lib/database/orders');
 
 // Web server config
-const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
 const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
-const app        = express();
-const morgan     = require('morgan');
+const sass = require("node-sass-middleware");
+const app = express();
+const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
+
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -52,6 +53,7 @@ app.use(cookieSession({
 const usersRoutes = require("./routes/users");
 const apiRoutes = require('./routes/apiRoutes');
 const orderRoutes = require('./routes/orders');
+const restaurant_owner_routes = require('./routes/restaurant_owner_routes');
 
 
 // Mount all resource routes
@@ -63,6 +65,8 @@ app.use("/api/users", usersRoutes(db));
 /* /api/endpoints/ */
 
 app.use('/api', apiRoutes(db));
+
+app.use('/restaurant/owner', restaurant_owner_routes(restaurants));
 
 app.get('/', (req, res) => {
   res.status(200);
