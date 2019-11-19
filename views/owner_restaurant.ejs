@@ -187,21 +187,22 @@
                                 </div>
 
                                 <div class="reveal restaurant-owner-edit-modul " id="editNameModul<%=item.id%>" data-reveal>
-                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                    <form action="owner/updateName" method="POST" class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
                                                 <div class="medium-12 cell ">
                                                     <label>Name
-                        <input type="text " placeholder="name ">
+                        <input type="text " placeholder="name" name="updateName">
                       </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <button class="button ">Confirm</button>
+                                            <button class="button " type="submit">Confirm</button>
                                             <button class="button ">Cancel</button>
                                         </div>
+                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
                                     </form>
                                     <button class="close-button " data-close aria-label="Close modal " type="button ">
               <span aria-hidden="true ">&times;</span>
