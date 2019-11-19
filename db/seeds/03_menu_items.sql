@@ -26,5 +26,7 @@ VALUES
   time '00:30',
   'https://www.gimmesomeoven.com/wp-content/uploads/2019/01/Pad-Thai-Recipe-1.jpg',
   true
-)
+),
+(2, 'salmon sushi', 'A dish made from freshly cut salmon on top the finest rice', 4.99, time '00:15', 'https://p7.hiclipart.com/preview/96/643/620/california-roll-sashimi-smoked-salmon-sushi-pitstsa-mitstsa-sushi.jpg', true),
 
+(2, 'sushi platter', 'An assorted platter of the chefs favourites', 5.99, time '00:15', 'http://clipart-library.com/images_k/sushi-transparent/sushi-transparent-13.png', true);
