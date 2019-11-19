@@ -1,0 +1,50 @@
+<!--Add Menu Item modal-->
+
+<div class="reveal" id="addMenuItemModal" data-reveal>
+    <form action='owner/addMenuItem' method="POST">
+        <h1>Create Menu Item</h1>
+
+        <label>
+          Image URL
+          <input type="text" placeholder="url" name="newImageUrl">
+        </label>
+
+        <label>
+          Name
+          <input type="text" placeholder="Name" name="newName">
+        </label>
+
+        <label>
+          Description
+          <textarea placeholder="Description" name="newDescription"></textarea>
+        </label>
+
+        <div class="input-group">
+            <span class="input-group-label">$</span>
+            <input class="input-group-field" type="number" name="newPrice">
+        </div>
+
+        <label>
+          Time to Prepare
+          <div class="input-group">
+            <input class="input-group-field" type="number" name="newTimeToPrepare">
+        </div>
+        </label>
+
+        <label>Is Active
+      <select name="newActive">
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+      </label>
+
+        <div>
+            <button class="button" type="submit">Confirm</button>
+            <button class="button ">Cancel</button>
+        </div>
+        <input type="hidden" name="menuItemId" value="">
+    </form>
+    <button class="close-button " data-close aria-label="Close modal " type="button">
+      <span aria-hidden="true ">&times;</span>
+    </button>
+</div>
