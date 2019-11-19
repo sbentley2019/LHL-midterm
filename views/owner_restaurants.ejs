@@ -21,26 +21,23 @@
 
     <body>
         <div class="row">
-            <!--Tabbed Pages-->
             <div class="columns">
                 <ul class="tabs" data-tabs id="example-tabs">
                     <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Orders</a></li>
-                    <li class="tabs-title"><a href="#panel2">Dashoard</a></li>
+                    <li class="tabs-title"><a href="#panel2">Dashboard</a></li>
                 </ul>
 
-                <!--Orders Tab-->
                 <div class="tabs-content" data-tabs-content="example-tabs">
                     <div class="tabs-panel is-active" id="panel1">
                         <%include ./owner_orders%>
                     </div>
-                </div>
-
-                <!--Dashboard Tab-->
-                <div class="tabs-panel" id="panel2">
-                    <%include ./owner_dashboard%>
+                    <div class="tabs-panel" id="panel2">
+                        <%include ./owner_dashboard%>
+                    </div>
                 </div>
             </div>
         </div>
+
     </body>
 
     <script>

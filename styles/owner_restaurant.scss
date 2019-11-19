@@ -1,3 +1,4 @@
+//----------Dashboard css--------------------------
 .restaurant-owner-logout-button {
     position: absolute;
     right: 20px;
@@ -54,6 +55,31 @@
 .owner_footer_add_button {
     position: absolute;
     right: 40px;
+}
+
+//-------------orders css-------------
+.owner_orders_main_container {
+    position: relative;
+    height: 900px;
+}
+
+.owner_new_orders_container {
+    position: absolute;
+    height: 100%;
+    width: 70%;
+}
+
+.owner_completed_orders_container {
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    left: 70%;
+    top: 0%;
+}
+
+.owner_new_orders_header_container {
+    display: flex;
+    margin: 2%;
 }
 
 //Foundation building blocs--------------------------------------------
