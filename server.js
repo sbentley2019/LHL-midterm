@@ -3,6 +3,7 @@ require('dotenv').config();
 
 // Imported Modules
 const restaurants = require('./lib/database/restaurants');
+const orders = require('./lib/database/orders');
 
 // Web server config
 const PORT       = process.env.PORT || 8080;
@@ -36,20 +37,21 @@ app.use("/styles", sass({
 }));
 
 app.use(express.static("public"));
+app.use(methodOverride('_method'));
 
 
 /* Session Manager */
 app.use(cookieSession({
   name: 'session',
-  keys: ['user_id'],
+  keys: ['user_id','order_id'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const apiRoutes = require('./routes/apiRoutes.js');
-
+const apiRoutes = require('./routes/apiRoutes');
+const orderRoutes = require('./routes/orders');
 
 
 // Mount all resource routes
@@ -64,9 +66,17 @@ app.use('/api', apiRoutes(db));
 
 app.get('/', (req, res) => {
   res.status(200);
-  restaurants.findAllRestaurants().then(restaurants => {
-    let allRestaurants = restaurants;
-    res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+  console.log('session', req.session);
+
+  // Sets session order_id
+  orders.createOrder().then(order => {
+
+    // Assign Order Id to session
+    req.session.order_id = order[0].id;
+    restaurants.findAllRestaurants().then(restaurants => {
+      let allRestaurants = restaurants;
+      res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+    }).catch(err => console.log('err', err));
   });
 });
 
@@ -74,15 +84,15 @@ app.get("/restaurants/:id", (req, res) => {
   res.status(200);
   restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
     let allItems = menu_items;
-    console.log(allItems);
-    res.render('restaurant', {menu_items: allItems});
+    res.render('restaurant', {menu_items: allItems, order_id: req.session.order_id});
   });
 });
+
+app.use('/order', orderRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
 
 
 app.listen(PORT, () => {
