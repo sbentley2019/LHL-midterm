@@ -97,7 +97,7 @@
                                                     </h2>
                                         </div>
                                         <div>
-                                            <button class="button" data-open="editNameModul">EDIT</button>
+                                            <button class="button" data-open="editNameModul<%=item.id%>">EDIT</button>
                                         </div>
                                     </th>
                                     <th>
@@ -107,7 +107,7 @@
                                             </h5>
                                         </div>
                                         <div>
-                                            <button class="button" data-open="editDescriptionModul">EDIT</button>
+                                            <button class="button" data-open="editDescriptionModul<%=item.id%>">EDIT</button>
                                         </div>
                                     </th>
                                     <th>
@@ -117,7 +117,7 @@
                                             </h5>
                                         </div>
                                         <div>
-                                            <button class="button" data-open="editPriceModul">EDIT</button>
+                                            <button class="button" data-open="editPriceModul<%=item.id%>">EDIT</button>
                                         </div>
 
                                     </th>
@@ -128,7 +128,7 @@
                                             </h5>
                                         </div>
                                         <div>
-                                            <button class="button " data-open="editTimeModul">EDIT</button>
+                                            <button class="button " data-open="editTimeModul<%=item.id%>">EDIT</button>
                                         </div>
                                     </th>
                                     <th>
@@ -139,7 +139,7 @@
                                         </div>
                                         <div class="restaurant-owner-field-item">
 
-                                            <button class="button" data-open="editActiveModul">EDIT</button>
+                                            <button class="button" data-open="editActiveModul<%=item.id%>">EDIT</button>
                                         </div>
                                     </th>
                                 </tr>
@@ -186,7 +186,7 @@
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editNameModul " data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editNameModul<%=item.id%>" data-reveal>
                                     <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
@@ -208,7 +208,7 @@
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editDescriptionModul " data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editDescriptionModul<%=item.id%>" data-reveal>
 
                                     <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
@@ -232,7 +232,7 @@
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editPriceModul " data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editPriceModul<%=item.id%>" data-reveal>
 
                                     <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
@@ -256,7 +256,7 @@
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul " data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul<%=item.id%>" data-reveal>
 
                                     <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
@@ -280,7 +280,7 @@
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul " data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul<%=item.id%>" data-reveal>
 
                                     <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
 
@@ -294,15 +294,15 @@
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editActiveModul " data-reveal>
+                                <div class="reveal" id="editActiveModul<%=item.id%>" data-reveal>
 
-                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
-
-                                        <fieldset class="large-5 cell ">
-                                            <legend>Change Active</legend>
-                                            <input type="radio " name="isActive " value="True " id="isActiveTrue " required><label for="isActiveTrue ">True</label>
-                                            <input type="radio " name="isNotActive " value="False " id="isNotActive "><label for="isNotActive ">False</label>
-                                        </fieldset>
+                                    <form action=" " method="POST">
+                                        <label>Select Menu
+                                        <select>
+                                          <option value="true">True</option>
+                                          <option value="false">False</option>
+                                        </select>
+                                      </label>
 
                                         <div>
                                             <button class="button ">Confirm</button>
