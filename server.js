@@ -86,9 +86,12 @@ app.get('/', (req, res) => {
 
 app.get("/restaurants/:id", (req, res) => {
   res.status(200);
+
   restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
-    let allItems = menu_items;
-    res.render('restaurant', {menu_items: allItems, order_id: req.session.order_id});
+    restaurants.findRestaurantById(req.params.id).then(restaurant => {
+      let allItems = menu_items;
+      res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
+    });
   });
 });
 
