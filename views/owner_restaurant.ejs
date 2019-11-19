@@ -144,7 +144,7 @@
                                     </th>
                                 </tr>
 
-                                <!-- Modals -->
+                                <!------------------------------------------------------------------- Modals -->
 
                                 <div class="reveal" id="menuItemPreviewModul<%=item.id%>" data-reveal>
                                     <div class="card restaurant-owner-card" style="width: 300px;">
@@ -170,50 +170,52 @@
                                     <div class="restaurant-owner-edit-image-modul-image">
                                         <img style="max-width: 200px" src="<%=item.image_url%>">
                                     </div>
-                                    <form action="" method="POST" class="restaurant-owner-edit-image-modul-image">
-                                        <button class="button">
-                  Change
-              </button>
+                                    <form action="owner/uploadPhoto" method="POST" class="restaurant-owner-edit-image-modul-image">
+                                        <label>
+                                          <h5>Image URL</h5>
+                                          <input type="text" placeholder="url" name="updateURL">
+                                        </label>
                                         <div>
-                                            <button class="button">Confirm</button>
+                                            <button class="button" type="submit">Confirm</button>
                                             <button class="button">Cancel</button>
                                         </div>
+                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
                                     </form>
-                                    <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+              <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editNameModul" data-reveal>
-                                    <form action="" method="POST" class="restaurant-owner-edit-image-modul-image">
-                                        <div class="grid-container">
-                                            <div class="grid-x grid-padding-x">
-                                                <div class="medium-12 cell">
+                                <div class="reveal restaurant-owner-edit-modul " id="editNameModul " data-reveal>
+                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                        <div class="grid-container ">
+                                            <div class="grid-x grid-padding-x ">
+                                                <div class="medium-12 cell ">
                                                     <label>Name
-                        <input type="text" placeholder="name">
+                        <input type="text " placeholder="name ">
                       </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <button class="button">Confirm</button>
-                                            <button class="button">Cancel</button>
+                                            <button class="button ">Confirm</button>
+                                            <button class="button ">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+              <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editDescriptionModul" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editDescriptionModul " data-reveal>
 
-                                    <form action="" method="POST" class="restaurant-owner-edit-image-modul-image">
-                                        <div class="grid-container">
-                                            <div class="grid-x grid-padding-x">
-                                                <div class="medium-12 cell">
+                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                        <div class="grid-container ">
+                                            <div class="grid-x grid-padding-x ">
+                                                <div class="medium-12 cell ">
                                                     <label>Description
-                                <textarea placeholder="Placeholder text"></textarea>
+                                <textarea placeholder="Placeholder text "></textarea>
                       </label>
                                                 </div>
 
@@ -221,23 +223,23 @@
                                         </div>
 
                                         <div>
-                                            <button class="button">Confirm</button>
-                                            <button class="button">Cancel</button>
+                                            <button class="button ">Confirm</button>
+                                            <button class="button ">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+              <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editPriceModul" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editPriceModul " data-reveal>
 
-                                    <form action="" method="POST" class="restaurant-owner-edit-image-modul-image">
-                                        <div class="grid-container">
-                                            <div class="grid-x grid-padding-x">
-                                                <div class="medium-12 cell">
+                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                        <div class="grid-container ">
+                                            <div class="grid-x grid-padding-x ">
+                                                <div class="medium-12 cell ">
                                                     <label>Price
-                        <input type="text" placeholder="Price">
+                        <input type="text " placeholder="Price ">
                       </label>
                                                 </div>
 
@@ -245,23 +247,23 @@
                                         </div>
 
                                         <div>
-                                            <button class="button">Confirm</button>
-                                            <button class="button">Cancel</button>
+                                            <button class="button ">Confirm</button>
+                                            <button class="button ">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+              <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editTimeModul" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul " data-reveal>
 
-                                    <form action="" method="POST" class="restaurant-owner-edit-image-modul-image">
-                                        <div class="grid-container">
-                                            <div class="grid-x grid-padding-x">
-                                                <div class="medium-12 cell">
+                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                        <div class="grid-container ">
+                                            <div class="grid-x grid-padding-x ">
+                                                <div class="medium-12 cell ">
                                                     <label>Time in Minutes
-                        <input type="text" placeholder="Minutes">
+                        <input type="text " placeholder="Minutes ">
                       </label>
                                                 </div>
 
@@ -269,46 +271,46 @@
                                         </div>
 
                                         <div>
-                                            <button class="button">Confirm</button>
-                                            <button class="button">Cancel</button>
+                                            <button class="button ">Confirm</button>
+                                            <button class="button ">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+              <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editTimeModul" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul " data-reveal>
 
-                                    <form action="" method="POST" class="restaurant-owner-edit-image-modul-image">
+                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
 
                                         <div>
-                                            <button class="button">Confirm</button>
-                                            <button class="button">Cancel</button>
+                                            <button class="button ">Confirm</button>
+                                            <button class="button ">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+              <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editActiveModul" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editActiveModul " data-reveal>
 
-                                    <form action="" method="POST" class="restaurant-owner-edit-image-modul-image">
+                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
 
-                                        <fieldset class="large-5 cell">
+                                        <fieldset class="large-5 cell ">
                                             <legend>Change Active</legend>
-                                            <input type="radio" name="isActive" value="True" id="isActiveTrue" required><label for="isActiveTrue">True</label>
-                                            <input type="radio" name="isNotActive" value="False" id="isNotActive"><label for="isNotActive">False</label>
+                                            <input type="radio " name="isActive " value="True " id="isActiveTrue " required><label for="isActiveTrue ">True</label>
+                                            <input type="radio " name="isNotActive " value="False " id="isNotActive "><label for="isNotActive ">False</label>
                                         </fieldset>
 
                                         <div>
-                                            <button class="button">Confirm</button>
-                                            <button class="button">Cancel</button>
+                                            <button class="button ">Confirm</button>
+                                            <button class="button ">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+              <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
                                 <%})%>
@@ -317,8 +319,8 @@
                     </div>
                 </div>
             </div>
-            <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-            <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+            <script src="https://code.jquery.com/jquery-2.1.4.min.js "></script>
+            <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js "></script>
             <script>
                 $(document).foundation();
             </script>
