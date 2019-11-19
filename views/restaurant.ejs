@@ -1,76 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Restaurant</title>
 
-<head>
-  <title>Restaurant</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/order_items.js"></script>
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/order_items.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  </head>
 
-</head>
+  <body>
 
-<body>
+    <header>
+      <nav>
+        <a href="#"><img src="https://via.placeholder.com/50" alt="restaurant logo"></a>
+      </nav>
+    </header>
 
-  <header>
-    <nav>
-      <a href="#"><img src="https://via.placeholder.com/50" alt="restaurant logo"></a>
-    </nav>
-  </header>
-
-  <div class="restaurant-image">
-    <img src="https://via.placeholder.com/650x250" alt="">
-  </div>
-
-  <main class="menu">
-    <div class="menu_categories">
-      <a href="#menu-popular">All</a>
-      <a href="#menu-starters">Mains</a>
-      <a href="#menu-mains">Appetizers</button></a>
-      <a href="#menu-desserts">Dessert</a>
-    </div>
-
-    <div class="menu_items">
-      <h2 id="menu-popular">Popular</h2>
-
-      <% for (const item of menu_items) { %>
-      <div class="card">
-        <form method="post" action="/order/<%= order_id%>">
-          <img src="<%= item.image_url %>" alt="">
-          <h4><%= item.name %></h4>
-          <h4><%= item.price %></h4>
-          <p><%= item.description %></p>
-          <input type='hidden' name='menu_item' value='<%=item.id%>'>
-          <input type="hidden" name="order_id" value='<%=order_id%>'>
-          <button type='submit'>Add</button>
-        </form>
+    <main id="page-container">
+      <div id="nav-container">
+        <p> <%=restaurant.name%></p>
       </div>
-      <% } %>
-    </div>
+      <div id="restaurant-container">
+        <img id="restaurant-img" src='<%=restaurant.img_url%>'>
+        <div id="menu-items-container">
+          <% for (const item of menu_items) { %>
+            <div class="menu-item-card">
+              <form method="post" action="/order/<%= order_id%>">
+                <div class="menu-item-card-thumbnail">
+                  <img src="<%= item.image_url %>"/>
+                </div>
+                <h2 class="menu-item-card-title"><%= item.name %></h2>
+                <span class="menu-item-card-desc"><%= item.description %></span>
+                <span class="menu-item-card-price">$ <%= item.price %></span>
+                <div class="menu-item-card-colors">
+                  <button type="submit" class="menu-item-card-color-option"><img src="https://placehold.it/30x30"/></button>
+                </div>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      </div>
+      <div id="order-container">
+        <div id="orders">
+        </div>
+        <button>Checkout</button>
+      </div>
+    </main>
+  </body>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+  <script>
+    $(document).foundation();
 
-  </main>
-  <div class="order-container">
-    <div id="orders">
-    </div>
-    <button>Checkout</button>
-  </div>
-
-
-  <footer>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, necessitatibus.</p>
-  </footer>
-</body>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-<script>
-  $(document).foundation();
-
-</script>
+  </script>
 
 </html>
