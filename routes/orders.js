@@ -1,9 +1,10 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const orders = require('../lib/database/orders');
 const menu_items = require('../lib/database/menu_items');
 
 module.exports = (db) => {
+
   /* GET order for a given user_id */
   router.get('/:id', (req, res) => {
     orders.findByUserId()
@@ -18,7 +19,7 @@ module.exports = (db) => {
 
   /* GET menu_Items for a given order_id*/
   router.get('/:id/loadMenuItems', (req, res) => {
-    orders.findAllMenuItemsForOrder(req.params)
+    menu_items.findByOrderId(req.session.order_id)
       .then((menu_item) => {
         res.status(200);
         res.json(menu_item);
@@ -47,7 +48,7 @@ module.exports = (db) => {
     });
   });
 
-  /* POST menu_item to current order_id */
+  /* POST menu_item to current order_id (Unused) */
   router.post('/:id/add', (req, res) => {
     res.status(200);
     orders.updateOrderItem(req.session.order_id, req.params.body.menu_item).then(res => {
