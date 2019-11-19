@@ -1,7 +1,7 @@
 const restaurants = require('../lib/database/restaurants');
 const orders = require('../lib/database/orders');
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = function(database) {
 
@@ -42,8 +42,7 @@ module.exports = function(database) {
   });
 
 
-  router.post('/restaurant/:id/dish/:id', (req, res) => {
-  });
+  router.post('/restaurant/:id/dish/:id', (req, res) => {});
 
 
   return router;
