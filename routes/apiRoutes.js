@@ -5,6 +5,12 @@ const router = express.Router();
 
 module.exports = function(database) {
 
+  /* GET order_id from session */
+
+  router.get('/session', (req, res) => {
+    res.json(req.session.order_id);
+  });
+
   /* GET restaurants from database */
   router.get('/load_restaurants', (req, res) => {
     restaurants.findAllRestaurants()
@@ -42,7 +48,8 @@ module.exports = function(database) {
   });
 
 
-  router.post('/restaurant/:id/dish/:id', (req, res) => {});
+  router.post('/restaurant/:id/dish/:id', (req, res) => {
+  });
 
 
   return router;
