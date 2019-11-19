@@ -29,11 +29,17 @@ module.exports = (db) => {
 
   router.post('/:id', (req, res) => {
     res.status(200);
-    orders.addOrderItem(req.session.order_id, req.body.menu_item).then((res) => {
-      console.log('success');
+    orders.findById(req.session.order_id).then(order => {
+      orders.addOrderItem(req.session.order_id).then(res => {
+        console.log('added');
+      }).catch(err => console.log("adding error", err));
     }).catch(err => {
-      console.log('failed', err);
-    });
+      orders.createOrderItem(req.session.order_id, req.body.menu_item).then((res) => {
+        console.log('success');
+      }).catch(err => {
+        console.log('failed', err);
+      });
+    })
   });
 
   /* POST menu_item to current order_id */
