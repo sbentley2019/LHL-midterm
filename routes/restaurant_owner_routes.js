@@ -97,12 +97,18 @@ module.exports = function(database) {
       name: req.body.newName,
       description: req.body.newDescription,
       price: req.body.newPrice,
-      timeToPrepare: req.body.newTimeToPrepare,
+      timeToPrepare: utility.minutesToQueryFormat(req.body.newTimeToPrepare),
       isActive: req.body.newActive
     }
 
     //TODO: Make restaurant ID fetch from session, hardcoded at the moment
-    database.addMenuItem(newMenuItemObject, 1);
+    database.addMenuItem(newMenuItemObject, 1).
+    then(row => {
+        res.redirect('/restaurant/owner');
+      },
+      rej => {
+        console.log(rej);
+      });
   });
 
   return router;
