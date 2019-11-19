@@ -6,9 +6,10 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/home_page.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +17,10 @@
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 </head>
 
-<header>
+
+
+<body>
+  <header class="head-nav">
     <div class="top-bar">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
@@ -40,29 +44,35 @@
             </ul>
         </div>
     </div>
-</header>
+  </header>
 
-<body>
-    <div class="page-container">MAPS IMG</div>
+    <div class="map-container">
+      <div id="map" class="page-container"></div>
+    </div>
+
     <div class="restaurants-container">
+      <% for (const restaurant of restaurants) {%>
 
-        <% for (const restaurant of restaurants) {%>
-            <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>">
-        <img src="<%= restaurant.img_url %>">
-        <div class="card-text">
-          <header>
-            <h2><%= restaurant.name %></h2>
-          </header>
-          <div class="card-section">
-            <p><%= restaurant.description %></p>
+        <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>">
+          <div class="restaurant-div">
+            <img src="<%= restaurant.img_url %>">
+            <div class="card-text">
+              <header>
+                <h4><%= restaurant.name %></h4>
+                <h5 class="marker"><%= restaurant.id %></h5>
+              </header>
+              <div class="card-section">
+                <p><%= restaurant.description %></p>
+              </div>
+              <footer>
+                <span><%= restaurant.location %></span>
+              </footer>
+            </div>
           </div>
-          <footer>
-            <span><%= restaurant.location %></span>
-          </footer>
-        </div>
       </a>
             <% } %>
     </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
@@ -70,4 +80,6 @@
     $(document).foundation();
 </script>
 
+<script src="/scripts/googleMaps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script>
 </html>
