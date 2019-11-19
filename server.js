@@ -43,6 +43,7 @@ app.use(methodOverride('_method'));
 
 /* Session Manager */
 app.use(cookieSession({
+  httpOnly: false,
   name: 'session',
   keys: ['user_id','order_id'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
@@ -52,7 +53,7 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const apiRoutes = require('./routes/apiRoutes');
-const orderRoutes = require('./routes/orders');
+const orderRoutes = require('./routes/orderRoutes');
 const restaurant_owner_routes = require('./routes/restaurant_owner_routes');
 
 
@@ -64,7 +65,6 @@ app.use("/api/users", usersRoutes(db));
 
 /* /api/endpoints/ */
 
-app.use('/api', apiRoutes(db));
 
 app.use('/restaurant/owner', restaurant_owner_routes(restaurants));
 
@@ -93,6 +93,7 @@ app.get("/restaurants/:id", (req, res) => {
 });
 
 app.use('/order', orderRoutes(db));
+app.use('/api', apiRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
