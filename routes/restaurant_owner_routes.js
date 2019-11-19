@@ -15,5 +15,12 @@ module.exports = function(database) {
         res.render('owner_restaurant', { menuItems: rows });
       });
   })
+
+  router.post('/uploadPhoto', (req, res) => {
+    const updatedImageURL = req.body.updatedURL;
+    const menuItemId = req.body.menuItemId;
+    console.log(menuItemId);
+    database.updateMenuItem(updatedImageURL, menuItemId);
+  })
   return router;
 };
