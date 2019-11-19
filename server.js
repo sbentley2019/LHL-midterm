@@ -42,6 +42,7 @@ app.use(methodOverride('_method'));
 
 /* Session Manager */
 app.use(cookieSession({
+  httpOnly: false,
   name: 'session',
   keys: ['user_id','order_id'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
@@ -62,7 +63,6 @@ app.use("/api/users", usersRoutes(db));
 
 /* /api/endpoints/ */
 
-app.use('/api', apiRoutes(db));
 
 app.get('/', (req, res) => {
   res.status(200);
@@ -89,6 +89,7 @@ app.get("/restaurants/:id", (req, res) => {
 });
 
 app.use('/order', orderRoutes(db));
+app.use('/api', apiRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
