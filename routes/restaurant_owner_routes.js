@@ -2,6 +2,7 @@ const restaurants = require('../lib/database/restaurants');
 const orders = require('../lib/database/orders');
 const express = require('express');
 const router = express.Router();
+const utility = require('../lib/utility');
 
 module.exports = function(database) {
 
@@ -40,5 +41,54 @@ module.exports = function(database) {
         }
       );
   });
+
+  router.post('/updateDescription', (req, res) => {
+    const update = req.body.updateDescription;
+    const menuItemId = req.body.menuItemId;
+    database.updateMenuItem(update, menuItemId, 'description')
+      .then(
+        rows => {
+          res.redirect('/restaurant/owner');
+        }
+      );
+  });
+
+  router.post('/updatePrice', (req, res) => {
+    const update = req.body.updatePrice;
+    const menuItemId = req.body.menuItemId;
+    database.updateMenuItem(update, menuItemId, 'price')
+      .then(
+        rows => {
+          res.redirect('/restaurant/owner');
+        }
+      );
+  });
+
+  //TODO: page not updating, database not updating
+  router.post('/updateTime', (req, res) => {
+    const update = utility.minutesToQueryFormat(Number(req.body.updateTime));
+    console.log(update);
+    const menuItemId = req.body.menuItemId;
+    database.updateMenuItem(update, menuItemId, 'time_to_prepare')
+      .then(
+        rows => {
+          console.log(rows);
+          res.redirect('/restaurant/owner');
+        }
+      );
+  });
+
+  //TODO: database not updating, need to figure out how to target selection
+  router.post('/updateActive', (req, res) => {
+    const update = req.body.updateActive;
+    const menuItemId = req.body.menuItemId;
+    database.updateMenuItem(update, menuItemId, 'is_active')
+      .then(
+        rows => {
+          res.redirect('/restaurant/owner');
+        }
+      );
+  });
+
   return router;
 };

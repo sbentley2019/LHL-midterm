@@ -211,22 +211,23 @@
 
                                 <div class="reveal restaurant-owner-edit-modul " id="editDescriptionModul<%=item.id%>" data-reveal>
 
-                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                    <form action="owner/updateDescription" method="POST" class="restaurant-owner-edit-image-modul-image">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
                                                 <div class="medium-12 cell ">
                                                     <label>Description
-                                <textarea placeholder="Placeholder text "></textarea>
-                      </label>
+                                                      <textarea placeholder="Description" name="updateDescription"></textarea>
+                                                    </label>
                                                 </div>
 
                                             </div>
                                         </div>
 
                                         <div>
-                                            <button class="button ">Confirm</button>
+                                            <button class="button " type="submit">Confirm</button>
                                             <button class="button ">Cancel</button>
                                         </div>
+                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
                                     </form>
                                     <button class="close-button " data-close aria-label="Close modal " type="button ">
               <span aria-hidden="true ">&times;</span>
@@ -235,12 +236,12 @@
 
                                 <div class="reveal restaurant-owner-edit-modul " id="editPriceModul<%=item.id%>" data-reveal>
 
-                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                    <form action="owner/updatePrice" method="POST" class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
                                                 <div class="medium-12 cell ">
                                                     <label>Price
-                        <input type="text " placeholder="Price ">
+                        <input type="text" placeholder="Price " name="updatePrice">
                       </label>
                                                 </div>
 
@@ -248,9 +249,10 @@
                                         </div>
 
                                         <div>
-                                            <button class="button ">Confirm</button>
+                                            <button class="button" type="submit">Confirm</button>
                                             <button class="button ">Cancel</button>
                                         </div>
+                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
                                     </form>
                                     <button class="close-button " data-close aria-label="Close modal " type="button ">
               <span aria-hidden="true ">&times;</span>
@@ -259,12 +261,12 @@
 
                                 <div class="reveal restaurant-owner-edit-modul " id="editTimeModul<%=item.id%>" data-reveal>
 
-                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
+                                    <form action="owner/updateTime" method="POST" class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
                                                 <div class="medium-12 cell ">
                                                     <label>Time in Minutes
-                        <input type="text " placeholder="Minutes ">
+                        <input type="text" placeholder="Minutes" name="updateTime">
                       </label>
                                                 </div>
 
@@ -272,24 +274,11 @@
                                         </div>
 
                                         <div>
-                                            <button class="button ">Confirm</button>
-                                            <button class="button ">Cancel</button>
+                                            <button class="button" class="submit">Confirm</button>
+                                            <button class="button">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
-              <span aria-hidden="true ">&times;</span>
-            </button>
-                                </div>
-
-                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul<%=item.id%>" data-reveal>
-
-                                    <form action=" " method="POST " class="restaurant-owner-edit-image-modul-image ">
-
-                                        <div>
-                                            <button class="button ">Confirm</button>
-                                            <button class="button ">Cancel</button>
-                                        </div>
-                                    </form>
+                                    <input type="hidden" name="menuItemId" value="<%=item.id%>">
                                     <button class="close-button " data-close aria-label="Close modal " type="button ">
               <span aria-hidden="true ">&times;</span>
             </button>
@@ -297,20 +286,21 @@
 
                                 <div class="reveal" id="editActiveModul<%=item.id%>" data-reveal>
 
-                                    <form action=" " method="POST">
+                                    <form action='owner/updateActive' method="POST">
                                         <label>Select Menu
-                                        <select>
+                                        <select name="updateActive">
                                           <option value="true">True</option>
                                           <option value="false">False</option>
                                         </select>
                                       </label>
 
                                         <div>
-                                            <button class="button ">Confirm</button>
+                                            <button class="button" type="submit">Confirm</button>
                                             <button class="button ">Cancel</button>
                                         </div>
                                     </form>
-                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+                                    <input type="hidden" name="menuItemId" value="<%=item.id%>">
+                                    <button class="close-button " data-close aria-label="Close modal " type="button">
               <span aria-hidden="true ">&times;</span>
             </button>
                                 </div>
