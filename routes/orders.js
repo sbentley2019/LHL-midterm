@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const orders = require('../lib/database/orders');
+const menu_items = require('../lib/database/menu_items');
 
 module.exports = (db) => {
   /* GET order for a given user_id */
@@ -29,17 +30,21 @@ module.exports = (db) => {
 
   router.post('/:id', (req, res) => {
     res.status(200);
-    orders.findById(req.session.order_id).then(order => {
-      orders.addOrderItem(req.session.order_id).then(res => {
-        console.log('added');
-      }).catch(err => console.log("adding error", err));
-    }).catch(err => {
-      orders.createOrderItem(req.session.order_id, req.body.menu_item).then((res) => {
-        console.log('success');
-      }).catch(err => {
-        console.log('failed', err);
-      });
-    })
+    menu_items.findById(req.session.order_id, req.body.menu_item).then(order => {
+
+      // Check if menu_item with order_id exist
+      if (order) {
+        orders.addOrderItem(req.session.order_id, req.body.menu_item).then(res => {
+          console.log('added');
+        });
+      } else {
+        orders.createOrderItem(req.session.order_id, req.body.menu_item).then((res) => {
+          console.log('success');
+        }).catch(err => {
+          console.log('failed', err);
+        });
+      }
+    });
   });
 
   /* POST menu_item to current order_id */
