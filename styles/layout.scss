@@ -138,19 +138,26 @@ main.menu {
   bottom: 2%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+
+  #orders {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 
   .order-card {
     display: flex;
     border: 1px solid black;
     max-width: 40%;
+    margin-bottom: 1%;
 
     img {
-      width: 30%;
+      height: 5rem;
+      width: 20%;
     }
 
     header {
-      flex-grow: 1;
+      font-weight: bold;
     }
   }
 }
