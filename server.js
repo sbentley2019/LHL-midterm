@@ -52,7 +52,7 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const apiRoutes = require('./routes/apiRoutes');
-const orderRoutes = require('./routes/orders');
+const orderRoutes = require('./routes/orderRoutes');
 
 
 // Mount all resource routes
