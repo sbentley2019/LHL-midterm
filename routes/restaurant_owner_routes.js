@@ -67,7 +67,6 @@ module.exports = function(database) {
   //TODO: page not updating, database not updating
   router.post('/updateTime', (req, res) => {
     const update = utility.minutesToQueryFormat(Number(req.body.updateTime));
-    console.log(update);
     const menuItemId = req.body.menuItemId;
     database.updateMenuItem(update, menuItemId, 'time_to_prepare')
       .then(
