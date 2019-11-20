@@ -22,6 +22,7 @@ module.exports = function(database, orders) {
     //TODO: Make restaurnts id dynamic to who ever is logged in
     orders.findByRestaurant(1).then(
       rows => {
+        console.log(rows);
         res.render('owner_restaurants', { orderItems: rows });
       });
   })
