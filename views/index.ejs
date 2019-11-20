@@ -21,19 +21,11 @@
     <header class="head-nav">
       <div class="top-bar">
         <div class="top-bar-left">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">Site Title</li>
-            <li>
-              <a href="#">One</a>
-              <ul class="menu vertical">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Two</a></li>
-            <li><a href="#">Three</a></li>
-          </ul>
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text"><a href="/">Site Title</a></li>
+                <!-- hard coded restaurant id for owner -->
+                <li><a href="/restaurant/owner">Owner's</a></li>
+            </ul>
         </div>
         <div class="top-bar-right">
           <ul class="menu">
@@ -49,21 +41,21 @@
     </div>
 
     <div class="restaurants-container">
-        <% for (const restaurant of restaurants) {%>
-          <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>">
-            <div class="restaurant-div">
-              <img src="<%= restaurant.img_url %>">
-              <div class="card-text">
-                <header>
-                  <h4><%= restaurant.name %></h4>
-                  <h5 class="marker"><%= restaurant.id %></h5>
-                </header>
-                <div class="card-section">
-                  <p><%= restaurant.description %></p>
-                </div>
-                <footer>
-                  <span><%= restaurant.location %></span>
-                </footer>
+      <% for (const restaurant of restaurants) {%>
+        <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>" data-name="<%= restaurant.name %>">
+          <div class="restaurant-div">
+            <img src="<%= restaurant.img_url %>">
+            <div class="card-text">
+              <header>
+                <h4><%= restaurant.name %></h4>
+                <h5 class="marker"><%= restaurant.id %></h5>
+              </header>
+              <div class="card-section">
+                <p><%= restaurant.description %></p>
+              </div>
+              <footer>
+                <span><%= restaurant.location %></span>
+              </footer>
               </div>
             </div>
         </a>
@@ -77,6 +69,6 @@
         $(document).foundation();
         </script>
 
-<script src="/scripts/googleMaps.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script>
+<!-- <script src="/scripts/googleMaps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script> -->
 </html>
