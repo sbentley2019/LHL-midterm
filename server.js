@@ -45,7 +45,7 @@ app.use(methodOverride('_method'));
 app.use(cookieSession({
   httpOnly: false,
   name: 'session',
-  keys: ['user_id','order_id'],
+  keys: ['user_id', 'order_id'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
@@ -66,7 +66,8 @@ app.use("/api/users", usersRoutes(db));
 /* /api/endpoints/ */
 
 
-app.use('/restaurant/owner', restaurant_owner_routes(restaurants));
+//ANDY: Passes restaurants database as well as orders database.
+app.use('/restaurant/owner', restaurant_owner_routes(restaurants, orders));
 
 app.get('/', (req, res) => {
   res.status(200);
