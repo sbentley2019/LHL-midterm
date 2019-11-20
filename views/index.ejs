@@ -53,7 +53,7 @@
     <div class="restaurants-container">
       <% for (const restaurant of restaurants) {%>
 
-        <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>">
+        <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>" data-name="<%= restaurant.name %>">
           <div class="restaurant-div">
             <img src="<%= restaurant.img_url %>">
             <div class="card-text">
