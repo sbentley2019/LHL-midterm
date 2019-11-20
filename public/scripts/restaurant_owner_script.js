@@ -22,7 +22,8 @@ const generateOrderItemsList = function(orderItemList) {
   for (const menuItem of orderItemList) {
     let listItem = `
     <li><a>
-    ${menuItem.name}
+    ${menuItem.name}:
+    ${menuItem.quantity}
     </a></li>
     `;
     listBody += listItem;
@@ -81,6 +82,7 @@ $(() => {
   fetchOrderList().then(orderList => {
     for (const key of Object.keys(orderList)) {
       const order = orderList[key][0];
+      console.log(order);
       $("#ordersGrid").prepend(generateOrder(order));
       retrieveMenuItem(order.id).then(orderItemList => {
         $("#order-body").prepend(generateOrderItemsList(orderItemList));
