@@ -46,11 +46,11 @@ module.exports = (db) => {
 
       // Check if menu_item with order_id exist
       if (order) {
-        orders.addOrderItem(req.session.order_id, req.body.menu_item).then( data => res.json(data)
-        );
+        console.log('Adding to existing order');
+        orders.addOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data));
       } else {
-        orders.createOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data)
-        ).catch(err => {
+        console.log('Creating new order');
+        orders.createOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data)).catch(err => {
           console.log('failed', err);
         });
       }
