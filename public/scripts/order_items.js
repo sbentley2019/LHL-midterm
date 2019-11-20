@@ -22,17 +22,13 @@ const retrieveOrderItem = function(order_id) {
 
 const createOrderItem = function(menu_item) {
   return $(
-    `<section class="order-card">
-      <img src="${menu_item.image_url}">
-        <header>${menu_item.name}</header>
-        <div>
-          <p>Price ${menu_item.price}</p>
-        </div>
-        <div>
-          <p>Quantity ${menu_item.quantity}</p>
-        </div>
+    `<div class="order-card">
+      <div class="order-item-description">
+        <p class="order-item-quantity">${menu_item.quantity}</p>
+        <p class="order-item-name">${menu_item.name}</p>
+        <p class="order-item-price">$ ${menu_item.price}</p>
       </div>
-    </section>`);
+    </div>`);
 };
 
 const renderOrderItem = function(menu_items) {
@@ -41,14 +37,30 @@ const renderOrderItem = function(menu_items) {
   }
 };
 
+const getOrderTotal = function(order_id) {
+  return $.ajax({
+    method: "GET",
+    url: '/order/' + order_id + "/orderTotal",
+  });
+};
+
 const clearRenderOrderItem = function() {
   $("#orders").children().detach();
+};
+
+const updateOrderTotal = function(orderTotal) {
+  console.log('hi');
+  $('#checkout-total').text(`$ ${orderTotal}`);
 };
 
 $(() => {
   fetchOrderId().then(order_id => {
     retrieveOrderItem(order_id).then(menu_items => {
       renderOrderItem(menu_items);
+
+      getOrderTotal(order_id).then(orderTotal => {
+        updateOrderTotal(orderTotal);
+      });
     });
   });
 
@@ -58,9 +70,16 @@ $(() => {
     const data = $(this).serialize();
     submitOrderItem(url, data).then(submited => {
       clearRenderOrderItem();
+
       retrieveOrderItem(submited.order_id).then(menu_items => {
         renderOrderItem(menu_items);
+
+        getOrderTotal(submited.order_id).then(orderTotal => {
+          updateOrderTotal(orderTotal);
+        });
       });
+
+
     }
     );
   });
