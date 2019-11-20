@@ -26,5 +26,50 @@ VALUES
   time '00:30',
   'https://www.gimmesomeoven.com/wp-content/uploads/2019/01/Pad-Thai-Recipe-1.jpg',
   true
+),
+(
+  1,
+  'Pad Thai-9',
+  'A flavorful noodle dish that is cooked in basil, chicken, and bean sprouts',
+  12.99,
+  time '00:30',
+  'https://www.gimmesomeoven.com/wp-content/uploads/2019/01/Pad-Thai-Recipe-1.jpg',
+  true
+),
+(
+  1,
+  'Pad Thai-6',
+  'A flavorful noodle dish that is cooked in basil, chicken, and bean sprouts',
+  12.99,
+  time '00:30',
+  'https://www.gimmesomeoven.com/wp-content/uploads/2019/01/Pad-Thai-Recipe-1.jpg',
+  true
+),
+(
+  1,
+  'Pad Thai-2',
+  'A flavorful noodle dish that is cooked in basil, chicken, and bean sprouts',
+  12.99,
+  time '00:30',
+  'https://www.gimmesomeoven.com/wp-content/uploads/2019/01/Pad-Thai-Recipe-1.jpg',
+  true
+),
+(
+  1,
+  'Pad Thai-3',
+  'A flavorful noodle dish that is cooked in basil, chicken, and bean sprouts',
+  12.99,
+  time '00:30',
+  'https://www.gimmesomeoven.com/wp-content/uploads/2019/01/Pad-Thai-Recipe-1.jpg',
+  true
+),
+(
+  1,
+  'Pad Thai-5',
+  'A flavorful noodle dish that is cooked in basil, chicken, and bean sprouts',
+  12.99,
+  time '00:30',
+  'https://www.gimmesomeoven.com/wp-content/uploads/2019/01/Pad-Thai-Recipe-1.jpg',
+  true
 )
 

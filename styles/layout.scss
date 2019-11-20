@@ -131,37 +131,6 @@ main.menu {
   }
 }
 
-/* Order Items */
-.order-container {
-  position: fixed;
-  right: 2%;
-  bottom: 2%;
-  display: flex;
-  flex-direction: column;
-
-  #orders {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  .order-card {
-    display: flex;
-    border: 1px solid black;
-    max-width: 40%;
-    margin-bottom: 1%;
-
-    img {
-      height: 5rem;
-      width: 20%;
-    }
-
-    header {
-      font-weight: bold;
-    }
-  }
-}
-
 /* Restaurant Page */
 #page-container {
   position: relative;
@@ -170,23 +139,49 @@ main.menu {
   padding: 1% 1%;
 
   #nav-container {
-    border: 1px solid black;
-    width: 20%;
+    // border: 1px solid black;
+    // width: 20%;
     margin-right: 2.5%;
     display: flex;
     flex-direction: column;
   }
 
   #restaurant-container {
-    border: 1px solid black;
+    // border: 1px solid black;
     width: 60%;
-    margin-right: 2.5%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 
-    #restaurant-img {
-      max-height: 25%;
-      margin-bottom: 1%;
+    header.restaurant-header {
+      display: flex;
+      height: 200px;
+
+      #restaurant-img {
+      width: 75%;
+      object-fit: cover;
+      }
+
+      #restaurant-information {
+        display: block;
+        background: lightblue;
+        width: 25%;
+        flex-grow: 1;
+        padding-top: 15%;
+        text-align: right;
+
+        p {
+          font-size: 0.65rem;
+          margin-bottom: 0.25rem;
+          margin-right: 0.5rem;
+        }
+      }
+
+    }
+
+
+    h1.restaurant-title {
+      text-align: center;
     }
 
     #menu-items-container {
@@ -197,73 +192,137 @@ main.menu {
     }
   }
 
+  /* Order Container */
   #order-container {
-    border: 1px solid black;
+    // border: 1px solid black;
+    position: fixed;
+    bottom: 1.5%;
+    right: 0%;
     width: 20%;
+    padding-bottom: 1.5%;
     flex-grow: 1;
     display: flex;
     flex-direction: column-reverse;
+
+    #orders {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .order-card {
+      display: flex;
+      width: 90%;
+      margin: 0 auto;
+      margin-bottom: 5%;
+
+      &:hover {
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+
+      img.order-img {
+        height: 100px;
+        width: 100px;
+        margin-right: 0.5rem;
+      }
+
+      .order-item-description {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 0.25rem;
+
+        p {
+          margin: 0.5rem;
+        }
+        .order-item-quantity {
+          flex-grow: 1
+        }
+
+        .order-item-name {
+          flex-grow: 5;
+          font-size: 0.75rem;
+        }
+
+        .order-item-price {
+          margin-left: 25%;
+          flex-grow: 1;
+          font-size: 0.75rem;
+
+        }
+      }
+
+
+    }
+
+    #checkout-container {
+      width: 90%;
+      margin: 0 auto;
+      order:-1;
+    }
+
+    button#checkout {
+      order: -99;
+      margin: 0 auto;
+    }
+
   }
 }
 
 /* Menu-Item-Cardss */
+.card  {
+  padding: 5%;
 
-.menu-item-card {
-  background-color: #fefefe;
-  border: 1px solid #e6e6e6;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-}
+  .card-img {
+    height: 160px;
+    width: 160px;
+  }
 
-.menu-item-card-thumbnail {
-  display: block;
-  position: relative;
+  .card-img-container {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
 
-  img {
-    height: 250px;
+  .card-info {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 2fr;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
+
+  .card-icon {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    justify-self: right;
+    font-size: 0.75rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .card-price {
+    justify-self: right;
+  }
+
+  .card-description {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    font-size: 0.75rem;
+  }
+
+  button.card-button {
+    padding-top: 3rem;
+    justify-self: right;
   }
 }
-
-.menu-item-card-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.45rem;
-  margin-top: 1rem;
-  margin-bottom: 0;
-}
-
-.menu-item-card-desc {
-  color: #8a8a8a;
-  display: block;
-  font-family: 'Open sans', sans-serif;
-  font-size: 0.85rem;
-}
-
-.menu-item-card-price {
-  color: #3e3e3e;
-  display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-top: 0.8rem;
-}
-
-.menu-item-card-sale {
-  color: #cacaca;
-  display: inline-block;
-  font-size: 0.85rem;
-  margin-left: 0.3rem;
-  text-decoration: line-through;
-}
-
-.menu-item-card-colors {
-  display: block;
-  margin-top: 0.8rem;
-}
-
-.menu-item-card-color-option {
-  display: inline-block;
-  height: 25px;
-  width: 25px;
-}
-
-
