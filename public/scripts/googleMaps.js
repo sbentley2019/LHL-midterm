@@ -1,6 +1,6 @@
 $(() => {
   // This function uses the google maps api and the location is centered around lat 43.644, long -79.402
-  function initMap() {
+  const initMap = function() {
     let coordinates = {lat: 43.644, lng: -79.402};
     let map = new google.maps.Map(document.getElementById('map'), {
       center: coordinates,
@@ -24,5 +24,5 @@ $(() => {
   //This loads the google map when the home-page is finished loaded
   window.onload = function() {
     initMap();
-  }
+  };
 });
