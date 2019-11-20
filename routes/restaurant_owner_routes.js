@@ -15,9 +15,16 @@ module.exports = function(database) {
     //TODO: Restaurant ID should be retrieved from session/cookie
     database.findAllMenuItemsForRestaurant(1).then(
       rows => {
-        res.render('owner_restaurant', { menuItems: rows });
+        res.render('owner_restaurants', { menuItems: rows });
       });
   })
+
+  router.get('/orders', (req, res) => {
+    database.findAllMenuItemsForRestaurant(1).then(
+      rows => {
+        res.render('owner_orders', { menuItems: rows });
+      });
+  });
 
   /**
    * Updates photo URL of a menu item given and menu item id
