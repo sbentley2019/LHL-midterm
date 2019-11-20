@@ -73,3 +73,4 @@ VALUES
   true
 )
 
+(2, 'sushi platter', 'An assorted platter of the chefs favourites', 5.99, time '00:15', 'http://clipart-library.com/images_k/sushi-transparent/sushi-transparent-13.png', true);
