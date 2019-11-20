@@ -66,7 +66,22 @@ app.use("/api/users", usersRoutes(db));
 /* /api/endpoints/ */
 
 
-app.use('/restaurant/owner', restaurant_owner_routes(restaurants));
+app.use('/restaurant/owner', (req, res, next) => {
+  req.session.user_id = 2;
+  const restaurant_id = 1;
+  const user_id = req.session.user_id;
+  if (user_id) {
+    restaurants.findRestaurantOwnerId(restaurant_id).then(owner_id => {
+      if (owner_id && owner_id === user_id) {
+        next();
+      } else {
+        res.redirect('/');
+      }
+    })
+  } else {
+    res.redirect('/');
+  }
+}, restaurant_owner_routes(restaurants));
 
 app.get('/', (req, res) => {
   res.status(200);
