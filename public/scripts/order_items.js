@@ -49,8 +49,7 @@ const clearRenderOrderItem = function() {
 };
 
 const updateOrderTotal = function(orderTotal) {
-  console.log('hi');
-  $('#checkout-total').text(`$ ${orderTotal}`);
+  $('#checkout-total').text(`$ ${orderTotal || 0}`);
 };
 
 $(() => {

@@ -71,8 +71,6 @@ app.use('/restaurant/owner', restaurant_owner_routes(restaurants, orders));
 
 app.get('/', (req, res) => {
   res.status(200);
-  console.log('session', req.session);
-
   restaurants.findAllRestaurants().then(restaurants => {
     let allRestaurants = restaurants;
     res.render('index', {title: 'Ritual', restaurants: allRestaurants});
@@ -83,11 +81,30 @@ app.get('/', (req, res) => {
 app.get("/restaurants/:id", (req, res) => {
   res.status(200);
 
-  restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
-    restaurants.findRestaurantById(req.params.id).then(restaurant => {
-      let allItems = menu_items;
-      res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
-    });
+  // TODO: feed user_id - hardcoded 1 for now
+  orders.findOrderId(1, req.params.id).then(order_id => {
+    if (order_id) {
+      req.session.order_id = order_id;
+      restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
+        restaurants.findRestaurantById(req.params.id).then(restaurant => {
+          let allItems = menu_items;
+          res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
+        });
+      });
+    } else {
+      //If no order_id exist create one
+      // HARD CODED USER ID
+      orders.createOrder(1,req.params.id).then(order => {
+        // Sets session on GET request before page loads
+        req.session.order_id = order[0].id;
+        restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
+          restaurants.findRestaurantById(req.params.id).then(restaurant => {
+            let allItems = menu_items;
+            res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
+          });
+        });
+      });
+    }
   });
 });
 

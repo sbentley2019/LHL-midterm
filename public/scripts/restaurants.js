@@ -1,6 +1,6 @@
 
 $(() => {
-  $("a.restaurant-cards").submit(function(event) {
+  $("a.restaurant-cards").click(function(event) {
     console.log(this);
   });
 });
