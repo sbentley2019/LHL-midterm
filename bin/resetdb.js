@@ -17,7 +17,7 @@ const runSchemaFiles = function() {
   const schemaFilenames = fs.readdirSync('./db/schema');
 
   for (const fn of schemaFilenames) {
-    const sql = fs.readFileSync(`./db/schema/${fn}`, 'utf8');
+    const sql = fs.readFileSync(`../db/schema/${fn}`, 'utf8');
     console.log(`\t-> Running ${chalk.green(fn)}`);
     client.querySync(sql);
   }
@@ -44,5 +44,3 @@ try {
   console.error(chalk.red(`Failed due to error: ${err}`));
   client.end();
 }
-
-

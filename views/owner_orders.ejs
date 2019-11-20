@@ -32,8 +32,12 @@
                                     <h6>32 Minutes remaining</h6>
                                 </div>
                                 <div style="margin-left: auto; margin-top: auto">
-                                    <button class="button">Confirm</button>
-                                    <button class="button">Cancel</button>
+                                    <form action="/owner/confirm_order" method="POST">
+                                        <button class="button" type="submit">Confirm</button>
+                                    </form>
+                                    <form action="/owner/cancel_order" method="POST">
+                                        <button class="button" type="submit">Cancel</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="owner_order_card_body">
