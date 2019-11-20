@@ -61,7 +61,6 @@ $(() => {
       retrieveOrderItem(submited.order_id).then(menu_items => {
         renderOrderItem(menu_items);
       });
-    }
-    );
+    });
   });
 });

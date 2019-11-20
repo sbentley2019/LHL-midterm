@@ -4,6 +4,7 @@ require('dotenv').config();
 // Imported Modules
 const restaurants = require('./lib/database/restaurants');
 const orders = require('./lib/database/orders');
+const menu_items = require('./lib/database/menu_items');
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -67,7 +68,7 @@ app.use("/api/users", usersRoutes(db));
 
 
 //ANDY: Passes restaurants database as well as orders database.
-app.use('/restaurant/owner', restaurant_owner_routes(restaurants, orders));
+app.use('/restaurant/owner', restaurant_owner_routes(restaurants, orders, menu_items));
 
 app.get('/', (req, res) => {
   res.status(200);
