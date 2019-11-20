@@ -91,20 +91,20 @@ app.get("/restaurants/:id", (req, res) => {
           res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
         });
       });
-    } else {
-      //If no order_id exist create one
-      // HARD CODED USER ID
-      orders.createOrder(1,req.params.id).then(order => {
-        // Sets session on GET request before page loads
-        req.session.order_id = order[0].id;
-        restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
-          restaurants.findRestaurantById(req.params.id).then(restaurant => {
-            let allItems = menu_items;
-            res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
-          });
+    }
+  }).catch(no_order_id => {
+  //If no order_id exist create one
+  // HARD CODED USER ID
+    orders.createOrder(1,req.params.id).then(order => {
+    // Sets session on GET request before page loads
+      req.session.order_id = order[0].id;
+      restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
+        restaurants.findRestaurantById(req.params.id).then(restaurant => {
+          let allItems = menu_items;
+          res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
         });
       });
-    }
+    });
   });
 });
 
