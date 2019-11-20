@@ -1,10 +1,4 @@
-const submitOrderItem = function(url, data) {
-  return $.ajax({
-    method: "POST",
-    url: url,
-    data,
-  });
-};
+
 
 $(() => {
   $("form").submit(function(event) {

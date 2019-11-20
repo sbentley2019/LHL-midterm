@@ -72,16 +72,11 @@ app.get('/', (req, res) => {
   res.status(200);
   console.log('session', req.session);
 
-  // Sets session order_id
-  orders.createOrder().then(order => {
+  restaurants.findAllRestaurants().then(restaurants => {
+    let allRestaurants = restaurants;
+    res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+  }).catch(err => console.log('err', err));
 
-    // Assign Order Id to session
-    req.session.order_id = order[0].id;
-    restaurants.findAllRestaurants().then(restaurants => {
-      let allRestaurants = restaurants;
-      res.render('index', {title: 'Ritual', restaurants: allRestaurants});
-    }).catch(err => console.log('err', err));
-  });
 });
 
 app.get("/restaurants/:id", (req, res) => {
