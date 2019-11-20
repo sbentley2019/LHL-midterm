@@ -29,6 +29,17 @@ module.exports = (db) => {
       });
   });
 
+  router.get('/:id/orderTotal', (req, res) => {
+    menu_items.totalOrder(req.session.order_id)
+      .then(total => {
+        res.status(200);
+        res.json(total);
+      }).catch((err) => {
+        console.log('ERROR: ', err);
+        throw Error('Could not get GET total');
+      });
+  });
+
   router.post('/:id', (req, res) => {
     res.status(200);
     menu_items.findById(req.session.order_id, req.body.menu_item).then(order => {

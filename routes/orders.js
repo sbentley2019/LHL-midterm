@@ -28,6 +28,14 @@ module.exports = (db) => {
       });
   });
 
+  router.post('/newOrder', (req, res) => {
+    orders.createOrder().then(order => {
+      // Assign Order Id to session
+      req.session.order_id = order[0].id;
+      console.log("session created..");
+    })
+  }
+
   router.post('/:id', (req, res) => {
     res.status(200);
     menu_items.findById(req.session.order_id, req.body.menu_item).then(order => {

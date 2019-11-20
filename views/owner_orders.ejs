@@ -1,0 +1,88 @@
+<div class="owner_orders_main_container">
+    <div class="owner_new_orders_container">
+        <div>
+            <span class="owner_new_orders_header_container">
+                <h3 class="subheader">Pending Orders</h3>
+                <div class="row">
+                    <div class="columns">
+                      <ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
+                        <li>
+                          <a href="#">Filter By</a>
+                          <ul class="vertical menu">
+                            <li>
+                              <a href="#">Oldest</a>
+                            </li>
+                            <li><a href="#">Newest</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+            </span>
+
+            <div class="grid-container">
+                <div class="grid-x grid-margin-x small-up-1 medium-up-2">
+
+                    <!--TODO: JQUERY to update orders on page-->>
+                    <div class="cell">
+                        <div class="card">
+                            <div class="card-divider">
+                                <div class="owner_order_card_header">
+                                    <h4>Order #32</h4>
+                                    <h6>32 Minutes remaining</h6>
+                                </div>
+                                <div style="margin-left: auto; margin-top: auto">
+                                    <form action="/owner/confirm_order" method="POST">
+                                        <button class="button" type="submit">Confirm</button>
+                                    </form>
+                                    <form action="/owner/cancel_order" method="POST">
+                                        <button class="button" type="submit">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="owner_order_card_body">
+                                <ul class="vertical menu" style="margin: 25px;">
+                                    <li><a href="#">One</a></li>
+                                    <li><a href="#">Two</a></li>
+                                    <li><a href="#">Three</a></li>
+                                    <li><a href="#">Four</a></li>
+                                    <li><a href="#">One</a></li>
+                                    <li><a href="#">Two</a></li>
+                                    <li><a href="#">Three</a></li>
+                                    <li><a href="#">Four</a></li>
+                                </ul>
+
+                            </div>
+                            <div class="card-divider">
+                                <span class="owner_order_card_footer">
+                                    <div>
+                                        <p>From:</p>
+                                        <p>name</p>
+                                    </div>
+                                    <h5>price</h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="owner_completed_orders_container">
+        <div>
+            <h3 class="subheader">Completed Orders</h3>
+            <div class="grid-container" data-smooth-scroll>
+                <div class="cell">
+                    <div class="card">
+                        <img src="assets/img/generic/rectangle-1.jpg">
+                        <div class="card-section">
+                            <h4>This is a row of cards.</h4>
+                            <p>This row of cards is embedded in an X-Y Block Grid.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

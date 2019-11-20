@@ -18,12 +18,7 @@
     <link rel="stylesheet" href="/vendor/foundation.min.css" />
 
     <body>
-
-        <header>
-            <%include ./partials/_owner_header%>
-        </header>
-
-        <div class="row" style="height: 900px">
+        <div style="height: 800px">
             <div class="columns" style="height: 100%">
                 <div class="table-scroll" style="height: 100%">
                     <table>
@@ -138,7 +133,7 @@
 
                                 <!------------------------------------------------------------------- Modals -->
 
-                                <div class="reveal" id="menuItemPreviewModul<%=item.id%>" data-reveal>
+                                <div class="reveal" id="menuItemPreviewModul<%=item.id%>" data-reveal data-animation-out="fade-out">
                                     <div class="card restaurant-owner-card" style="width: 300px;">
                                         <div class="card-divider">
                                             <h4>
@@ -159,7 +154,7 @@
                                 </div>
 
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editImageModul<%=item.id%>" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul" id="editImageModul<%=item.id%>" data-reveal data-animation-out="fade-out">
                                     <div class="restaurant-owner-edit-image-modul-image">
                                         <img style="max-width: 200px" src="<%=item.image_url%>">
                                     </div>
@@ -174,12 +169,12 @@
                                         </div>
                                         <input type="hidden" name="menuItemId" value="<%=item.id%>">
                                     </form>
-                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+                                    <button class="close-button " data-close aria-label="Close modal " type="button">
                   <span aria-hidden="true ">&times;</span>
                 </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editNameModul<%=item.id%>" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editNameModul<%=item.id%>" data-reveal data-animation-out="fade-out">
                                     <form action="owner/updateName" method="POST" class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
@@ -202,7 +197,7 @@
                 </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editDescriptionModul<%=item.id%>" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editDescriptionModul<%=item.id%>" data-reveal data-animation-out="fade-out">
 
                                     <form action="owner/updateDescription" method="POST" class="restaurant-owner-edit-image-modul-image">
                                         <div class="grid-container ">
@@ -218,7 +213,7 @@
 
                                         <div>
                                             <button class="button " type="submit">Confirm</button>
-                                            <button class="button ">Cancel</button>
+                                            <button class="button ">Cancel</button>E
                                         </div>
                                         <input type="hidden" name="menuItemId" value="<%=item.id%>">
                                     </form>
@@ -227,7 +222,7 @@
                 </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editPriceModul<%=item.id%>" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editPriceModul<%=item.id%>" data-reveal data-animation-out="fade-out">
 
                                     <form action="owner/updatePrice" method="POST" class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
@@ -252,7 +247,7 @@
                 </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul<%=item.id%>" data-reveal>
+                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul<%=item.id%>" data-reveal data-animation-out="fade-out">
 
                                     <form action="owner/updateTime" method="POST" class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
@@ -277,7 +272,7 @@
                 </button>
                                 </div>
 
-                                <div class="reveal" id="editActiveModul<%=item.id%>" data-reveal>
+                                <div class="reveal" id="editActiveModul<%=item.id%>" data-reveal data-animation-out="fade-out">
 
                                     <form action='owner/updateActive' method="POST">
                                         <label>Select Menu
@@ -303,9 +298,6 @@
                     </div>
                 </div>
             </div>
-
-
-
             <footer>
                 <%include ./partials/_owner_dashboard_footer%>
             </footer>

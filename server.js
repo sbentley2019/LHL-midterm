@@ -45,7 +45,7 @@ app.use(methodOverride('_method'));
 app.use(cookieSession({
   httpOnly: false,
   name: 'session',
-  keys: ['user_id','order_id'],
+  keys: ['user_id', 'order_id'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
@@ -65,7 +65,7 @@ app.use("/api/users", usersRoutes(db));
 
 /* /api/endpoints/ */
 
-
+//Passes restaurants database as well as orders database.
 app.use('/restaurant/owner', (req, res, next) => {
   req.session.user_id = 2;
   const restaurant_id = 1;
@@ -81,29 +81,27 @@ app.use('/restaurant/owner', (req, res, next) => {
   } else {
     res.redirect('/');
   }
-}, restaurant_owner_routes(restaurants));
+}, restaurant_owner_routes(restaurants, orders));
 
 app.get('/', (req, res) => {
   res.status(200);
   console.log('session', req.session);
 
-  // Sets session order_id
-  orders.createOrder().then(order => {
+  restaurants.findAllRestaurants().then(restaurants => {
+    let allRestaurants = restaurants;
+    res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+  }).catch(err => console.log('err', err));
 
-    // Assign Order Id to session
-    req.session.order_id = order[0].id;
-    restaurants.findAllRestaurants().then(restaurants => {
-      let allRestaurants = restaurants;
-      res.render('index', {title: 'Ritual', restaurants: allRestaurants});
-    }).catch(err => console.log('err', err));
-  });
 });
 
 app.get("/restaurants/:id", (req, res) => {
   res.status(200);
+
   restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
-    let allItems = menu_items;
-    res.render('restaurant', {menu_items: allItems, order_id: req.session.order_id});
+    restaurants.findRestaurantById(req.params.id).then(restaurant => {
+      let allItems = menu_items;
+      res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
+    });
   });
 });
 

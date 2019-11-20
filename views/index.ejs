@@ -9,19 +9,17 @@
     <link rel="stylesheet" href="/styles/home_page.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/restaurants.js"></script>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foundation | Welcome</title>
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-</head>
+  </head>
 
-
-
-<body>
-  <header class="head-nav">
-    <div class="top-bar">
+  <body>
+    <header class="head-nav">
+      <div class="top-bar">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="menu-text"><a href="/">Site Title</a></li>
@@ -30,13 +28,13 @@
             </ul>
         </div>
         <div class="top-bar-right">
-            <ul class="menu">
-                <li><input type="search" placeholder="Search"></li>
-                <li><button type="button" class="button">Search</button></li>
-            </ul>
+          <ul class="menu">
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+          </ul>
         </div>
-    </div>
-  </header>
+      </div>
+    </header>
 
     <div class="map-container">
       <div id="map" class="page-container"></div>
@@ -44,7 +42,6 @@
 
     <div class="restaurants-container">
       <% for (const restaurant of restaurants) {%>
-
         <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>" data-name="<%= restaurant.name %>">
           <div class="restaurant-div">
             <img src="<%= restaurant.img_url %>">
@@ -59,18 +56,18 @@
               <footer>
                 <span><%= restaurant.location %></span>
               </footer>
+              </div>
             </div>
-          </div>
-      </a>
-            <% } %>
-    </div>
+        </a>
+              <% } %>
+      </div>
 
-</body>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-<script>
-    $(document).foundation();
-</script>
+      </body>
+      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+      <script>
+        $(document).foundation();
+        </script>
 
 <!-- <script src="/scripts/googleMaps.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script> -->
