@@ -28,4 +28,6 @@ INSERT INTO restaurants (
 
   (3, 'Test McDonalds', 'This is a test McDonalds', true, '022 test street, Test City', time '11:00', time '22:00', 'https://logos-download.com/wp-content/uploads/2016/03/McDonalds_logo_lovin_it.png', '43.645', '-79.400'),
 
-  (3, 'Test Burger Priest', 'This is a test Burger Priest', true, '056 test street, Test City', time '11:00', time '22:00', 'https://alumni.uoguelph.ca/sites/default/files/burgers-priest.png', '43.643', '-79.399');
+  (3, 'Test Burger Priest', 'This is a test Burger Priest', true, '056 test street, Test City', time '11:00', time '22:00', 'https://alumni.uoguelph.ca/sites/default/files/burgers-priest.png', '43.643', '-79.399'),
+
+  (3, 'Test Subway', 'This is a test Subway', true, '066 test street, Test City', time '11:00', time '22:00', 'https://image.businessinsider.com/57b231c1db5ce94f008b6df4?width=300&format=jpeg&auto=webp', '43.645', '-79.402');;
