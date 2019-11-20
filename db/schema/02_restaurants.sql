@@ -11,5 +11,7 @@ CREATE TABLE restaurants (
   location VARCHAR(255) NOT NULL,
   start_hour TIME,
   end_hour TIME,
-  img_url VARCHAR(255)
+  img_url VARCHAR(255),
+  lat VARCHAR(255),
+  lng VARCHAR(255)
 )
