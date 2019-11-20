@@ -4,6 +4,7 @@ require('dotenv').config();
 // Imported Modules
 const restaurants = require('./lib/database/restaurants');
 const orders = require('./lib/database/orders');
+const users = require('./lib/database/users');
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -67,9 +68,9 @@ app.use("/api/users", usersRoutes(db));
 
 //Passes restaurants database as well as orders database.
 app.use('/restaurant/owner', (req, res, next) => {
-  req.session.user_id = 2;
   const restaurant_id = 1;
   const user_id = req.session.user_id;
+  console.log("user_id: " + req.session);
   if (user_id) {
     restaurants.findRestaurantOwnerId(restaurant_id).then(owner_id => {
       if (owner_id && owner_id === user_id) {
@@ -82,6 +83,19 @@ app.use('/restaurant/owner', (req, res, next) => {
     res.redirect('/');
   }
 }, restaurant_owner_routes(restaurants, orders));
+
+app.post("/user", (req, res) => {
+  if (!req.body.email) {
+    res.status(400).json({ error: 'invalid request: no data in POST body'});
+    return;
+  }
+  users.findUserId(req.body.email).then(user => {
+    if (user.id) {
+      req.session.user_id = user.id;
+      console.log("user_id: " + req.session.user_id);
+    }
+  });
+});
 
 app.get('/', (req, res) => {
   res.status(200);

@@ -4,10 +4,21 @@
   position: fixed;
   z-index: 5;
   width: 100%;
-}
-
-.top-bar {
-  background-color: skyblue;
+  .top-bar {
+    background-color: #8bbabb;
+    .menu {
+      background-color: #8bbabb;
+    }
+  }
+  #form-login {
+    display: flex;
+    input {
+      width: 75%;
+    }
+    button {
+      width: 25%;
+    }
+  }
 }
 
 .map-container {
@@ -28,7 +39,7 @@
 .restaurants-container {
   position: absolute;
   z-index: 2;
-  top: 7.3%;
+  top: 10%;
   left: 0;
   display: flex;
   flex-direction: column;
