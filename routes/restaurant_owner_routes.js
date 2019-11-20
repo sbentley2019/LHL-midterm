@@ -4,10 +4,10 @@ const express = require('express');
 const router = express.Router();
 const utility = require('../lib/utility');
 
-module.exports = function(database) {
+module.exports = function(database, orders) {
 
   /**
-   * Dashboard Of restaurant owner/
+   * Restaurant owner side. This contains two views, dashboard and orders
    * TODO: Add different owner id functionality
    */
   router.get('/', (req, res) => {
@@ -16,6 +16,13 @@ module.exports = function(database) {
     database.findAllMenuItemsForRestaurant(1).then(
       rows => {
         res.render('owner_restaurants', { menuItems: rows });
+      });
+
+    //Finds all orders corresponding to restaurant 1
+    //TODO: Make restaurnts id dynamic to who ever is logged in
+    orders.findByRestaurant(1).then(
+      rows => {
+        res.render('owner_restaurants', { orderItems: rows });
       });
   })
 
@@ -117,6 +124,9 @@ module.exports = function(database) {
         console.log(rej);
       });
   });
+
+  //-------------Orders view-------------------------
+
 
   return router;
 };

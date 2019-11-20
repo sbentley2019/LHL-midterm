@@ -45,7 +45,7 @@ app.use(methodOverride('_method'));
 app.use(cookieSession({
   httpOnly: false,
   name: 'session',
-  keys: ['user_id','order_id'],
+  keys: ['user_id', 'order_id'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
@@ -66,7 +66,8 @@ app.use("/api/users", usersRoutes(db));
 /* /api/endpoints/ */
 
 
-app.use('/restaurant/owner', restaurant_owner_routes(restaurants));
+//ANDY: Passes restaurants database as well as orders database.
+app.use('/restaurant/owner', restaurant_owner_routes(restaurants, orders));
 
 app.get('/', (req, res) => {
   res.status(200);
@@ -79,7 +80,7 @@ app.get('/', (req, res) => {
     req.session.order_id = order[0].id;
     restaurants.findAllRestaurants().then(restaurants => {
       let allRestaurants = restaurants;
-      res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+      res.render('index', { title: 'Ritual', restaurants: allRestaurants });
     }).catch(err => console.log('err', err));
   });
 });
@@ -88,7 +89,7 @@ app.get("/restaurants/:id", (req, res) => {
   res.status(200);
   restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
     let allItems = menu_items;
-    res.render('restaurant', {menu_items: allItems, order_id: req.session.order_id});
+    res.render('restaurant', { menu_items: allItems, order_id: req.session.order_id });
   });
 });
 
