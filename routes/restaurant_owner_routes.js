@@ -32,6 +32,10 @@ module.exports = function(database, orders, menu_items) {
       });
   });
 
+  router.get('/getOrderItems', (req, res) => {
+    menu_items.findByOrderId()
+  })
+
   /**
    * Updates photo URL of a menu item given and menu item id
    */
