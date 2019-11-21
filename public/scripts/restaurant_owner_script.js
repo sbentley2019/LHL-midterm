@@ -117,8 +117,8 @@ $(() => {
   clearRenderOrderItem('ordersGrid');
   fetchOrderList().then(orderList => {
     for (const order of orderList.orderItems) {
-      console.log(order.is_active);
-      if (order.is_active === true) {
+      console.log(order.current_status);
+      if (order.current_status !== 'Rejected') {
         if (order.current_status !== 'Pending') {
           $("#ordersGrid").prepend(generateOrder(order));
           retrieveMenuItem(order.id).then(orderItemList => {
