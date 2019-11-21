@@ -103,7 +103,7 @@ app.post("/user/login", (req, res) => {
         }
       })
     }
-      // res.send(req.session);
+    // res.send(req.session);
   });
 });
 
@@ -118,6 +118,7 @@ app.post('/user/logout', (req, res) => {
 
 app.get('/', (req, res) => {
   res.status(200);
+
   restaurants.findAllRestaurants().then(restaurants => {
     let allRestaurants = restaurants;
     res.render('index', { title: 'Ritual', restaurants: allRestaurants });
