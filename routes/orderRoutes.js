@@ -40,6 +40,16 @@ module.exports = (db) => {
       });
   });
 
+  /* POST to process checkout */
+  router.post('/checkout', (req,res) => {
+    menu_items.totalOrder(req.session.order_id).then(total_cost => {
+      console.log("totalcost: ", total_cost);
+      orders.processOrder(req.session.order_id, total_cost);
+      res.end();
+    });
+  });
+
+
   router.post('/:id', (req, res) => {
     res.status(200);
     menu_items.findById(req.session.order_id, req.body.menu_item).then(order => {
@@ -58,16 +68,6 @@ module.exports = (db) => {
   router.post('/:id/deleteItem', (req, res) => {
     menu_items.removeOrderItem(req.session.order_id, req.body.menu_item_id);
     res.end();
-  });
-
-  /* POST to process checkout */
-  router.post('/checkout', (req,res) => {
-    console.log('here');
-    // menu_items.totalOrder(req.session.order_id).then(total_cost => {
-    //   console.log("totalcost: ", total_cost);
-    //   orders.processOrder(req.session.order_id, total_cost);
-    //   res.end();
-    // }).catch(err => console.log('error here'));
   });
 
   return router;
