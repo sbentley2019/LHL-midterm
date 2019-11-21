@@ -1,6 +1,26 @@
 $(() => {
   let map;
   const restMark = {};
+  let currentLat, currentLng;
+  // Request current location
+  if ("geolocation" in navigator) {
+    // check if geolocation is supported/enabled on current browser
+    navigator.geolocation.getCurrentPosition(
+      function success(position) {
+        // for when getting location is a success
+        currentLat = position.coords.latitude,
+        currentLng = position.coords.longitude
+      }, function error(error_message) {
+        // for when getting location results in an error
+        console.error('An error has occured while retrieving location', error_message);
+      }
+    );
+  } else {
+    // geolocation is not supported
+    // get your location some other way
+    console.log('geolocation is not enabled on this browser')
+  }
+
 
   // This function uses the google maps api and the location is centered around lat 43.644, long -79.402
 
@@ -24,8 +44,8 @@ $(() => {
         animation: google.maps.Animation.DROP,
         icon: `http://thydzik.com/thydzikGoogleMap/markerlink.php?text=${Number(restaurant_id)}&color=5680FC&image=.png`,
         title:$(this).attr("data-name")});
-      });
-    };
+    });
+  };
 
   $('.restaurant-cards').on('mouseenter', function() {
     let restaurant_id = ($(this).attr('href')).split('/')[2];
