@@ -4,14 +4,13 @@ const express = require('express');
 const router = express.Router();
 const utility = require('../lib/utility');
 
-module.exports = function(database, orders) {
+module.exports = function(database, orders, menu_items) {
 
   /**
    * Restaurant owner side. This contains two views, dashboard and orders
    * TODO: Add different owner id functionality
    */
   router.get('/', (req, res) => {
-
     //TODO: Restaurant ID should be retrieved from session/cookie
     database.findAllMenuItemsForRestaurant(1).then(
       rows => {
@@ -20,19 +19,24 @@ module.exports = function(database, orders) {
 
     //Finds all orders corresponding to restaurant 1
     //TODO: Make restaurnts id dynamic to who ever is logged in
-    orders.findByRestaurant(1).then(
-      rows => {
-        console.log(rows);
-        res.render('owner_restaurants', { orderItems: rows });
-      });
+    // orders.findByRestaurant(1).then(
+    //   rows => {
+    //     res.render('owner_restaurants', { orderItems: rows });
+    //   });
   })
 
-  router.get('/orders', (req, res) => {
-    database.findAllMenuItemsForRestaurant(1).then(
+  router.get('/getOrders', (req, res) => {
+    orders.findByRestaurant(1).then(
       rows => {
-        res.render('owner_orders', { menuItems: rows });
+        console.log('Gettring orders for restaurant 1');
+        console.log(rows);
+        res.json({ orderItems: rows });
       });
   });
+
+  router.get('/getOrderItems', (req, res) => {
+    menu_items.findByOrderId()
+  })
 
   /**
    * Updates photo URL of a menu item given and menu item id
