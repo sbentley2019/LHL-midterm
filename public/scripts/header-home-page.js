@@ -8,13 +8,6 @@ $(() => {
     });
     }
 
-  const logoutAjax = function() {
-    return $.ajax({
-      type: 'POST',
-      url: '/user/logout'
-    });
-  }
-
   const newUser = function(obj) {
     return $.ajax({
       type: 'POST',
@@ -22,15 +15,6 @@ $(() => {
       data: $(obj).serialize()
     });
   }
-
-  const logout = function() {
-    console.log("logout")
-    logoutAjax().then(() => {
-      console.log("starting nav detach");
-      $('#nav').detach();
-      // $('.head-nav').append(buildNav(3));
-    });
-  };
 
   $('#form-sign-up').submit((e)=> {
     e.preventDefault();
@@ -54,7 +38,9 @@ $(() => {
         <ul class="menu">
           <li>Welcome</li>
           <li>
-            <button onclick="logout()" class="button">Logout</button>
+            <form id="form-logout" action="/user/logout" method="POST" >
+              <input type="submit" class="button" value="Logout">
+            </form>
           </li>
         </ul>
       </div>
@@ -72,7 +58,9 @@ $(() => {
       <ul class="menu">
         <li>Welcome</li>
         <li>
-          <button id="logout" class="button">Logout</button>
+          <form id="form-logout" action="/user/logout" method="POST" >
+          <input type="submit" class="button" value="Logout">
+          </form>
         </li>
       </ul>
     </div>
@@ -84,9 +72,9 @@ $(() => {
       <div class="top-bar-right">
         <ul class="menu">
           <li>
-            <form id="form-login" action="" method="POST" >
+            <form id="form-login" action="/user/login" method="POST" >
               <input type="email" id="email" name="email" placeholder="email">
-              <button class="button" type="submit" value="login">Login</button>
+              <button class="button" type="submit">Login</button>
             </form>
           </li>
           <li>
