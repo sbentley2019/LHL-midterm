@@ -18,7 +18,6 @@ const retrieveMenuItem = function(order_id) {
 
 const generateOrderItemsList = function(orderItemList) {
   let listBody = '';
-  console.log(orderItemList);
   for (const menuItem of orderItemList) {
     let listItem = `
     <li><a>
@@ -28,7 +27,6 @@ const generateOrderItemsList = function(orderItemList) {
     `;
     listBody += listItem;
   }
-  console.log(listBody);
   return listBody;
 }
 
@@ -37,7 +35,7 @@ const clearRenderOrderItem = function(element) {
   $(`#${element}`).children().detach();
 };
 
-const generateOrder = function(order, orderDetails) {
+const generateOrder = function(order) {
   let orderBody = $(`
   <div class="cell">
     <div class="card">
@@ -76,6 +74,7 @@ const generateOrder = function(order, orderDetails) {
   return orderBody;
 };
 
+
 $(() => {
   console.log("Orders page reloaded");
   clearRenderOrderItem('ordersGrid');
@@ -87,6 +86,7 @@ $(() => {
       retrieveMenuItem(order.id).then(orderItemList => {
         $("#order-body").prepend(generateOrderItemsList(orderItemList));
       })
+
     }
   })
 });
