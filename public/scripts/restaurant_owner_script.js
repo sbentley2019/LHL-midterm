@@ -38,7 +38,7 @@ const clearRenderOrderItem = function(element) {
 const generateOrder = function(order) {
   let orderBody = $(`
   <div class="cell">
-    <div class="card">
+    <div class="card active_order_card_container">
       <div class="card-divider">
           <div class="owner_order_card_header">
               <h4>Order #${order.id}</h4>
@@ -81,7 +81,7 @@ const generatePendingOrder = function(order) {
                         <div class="card-divider">
                             <div class="owner_order_card_header">
                                 <h4>Order #${order.id}</h4>
-                                <h6>Estimated Cook time: 1 hr</h6>
+                                <h6>Estimated Cook time: ${order.estimated_end_time - order.start_time}</h6>
                             </div>
                             <div style="margin-left: auto; margin-top: auto">
                             </div>
@@ -93,13 +93,7 @@ const generatePendingOrder = function(order) {
                         </div>
                         <div class="card-divider owner_order_card_footer">
                             <span style="width: 60%; margin: auto">
-                                    <div>
-                                        <div class="slider" data-slider data-initial-start="50" data-step="5">
 
-                            <span class="slider-fill" data-slider-fill></span>
-                        </div>
-
-                    </div>
                     <div class="cell small-2">
                         <input type="number" id="sliderOutput2">
                     </div>
