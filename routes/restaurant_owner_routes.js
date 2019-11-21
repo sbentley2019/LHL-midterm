@@ -4,10 +4,13 @@ const menu_items = require('../lib/database/menu_items');
 const express = require('express');
 const router = express.Router();
 const utility = require('../lib/utility');
+
+
+/* Twilio Imports */
 const accountSid = 'AC6aeef0c97f09d55152dc6242c62a5191';
 const authToken = '0958ca806061cb75d424c3b6115cd6cf';
-const twailo = require('twilio');
-const tclient = twailo(accountSid, authToken);
+const twilio = require('twilio');
+const tclient = twilio(accountSid, authToken);
 
 module.exports = function(database) {
 
@@ -48,24 +51,21 @@ module.exports = function(database) {
 
     const order = orders.findById(order_id)
       .then(order => {
-          tclient.messages
-            .create({
-              from: 'whatsapp:+14155238886',
-              body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
-              to: 'whatsapp:+17059873696'
-            })
-            .then(message => {
-              res.redirect('/restaurant/owner');
-            });
-          orders.updateOrder('Accepted', order.id, 'current_status').then(
-            rows => {
-              //Sends Ajax request to re render;
-            }
-          );
-        },
-        err => {
-          console.log(err);
-        });
+        tclient.messages
+          .create({
+            from: 'whatsapp:+14155238886',
+            body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
+            to: 'whatsapp:+17059873696'
+          })
+          .then(message => {
+            console.log(message);
+            res.redirect('/restaurant/owner');
+          });
+
+      },
+      err => {
+        console.log(err);
+      });
   });
 
   /**
@@ -181,6 +181,7 @@ module.exports = function(database) {
       isActive: req.body.newActive
     }
 
+<<<<<<< HEAD
   //Restaurant ID fetch from session
   const owner_id = req.session.user_id;
   restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id)
@@ -192,6 +193,16 @@ module.exports = function(database) {
       console.log(rej);
     })
   );
+=======
+    //TODO: Make restaurant ID fetch from session, hardcoded at the moment
+    database.addMenuItem(newMenuItemObject, 1).
+      then(row => {
+        res.redirect('/restaurant/owner');
+      },
+      rej => {
+        console.log(rej);
+      });
+>>>>>>> merge
   });
 
   //-------------Orders view-------------------------

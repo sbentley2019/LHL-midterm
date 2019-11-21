@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/styles/home_page.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/restaurants.js"></script>
     <script type="text/javascript" src="/scripts/header-home-page.js"></script>
 
     <meta charset="utf-8" />
@@ -41,6 +40,19 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+
+    <% if (msg) { %>
+        <!-- The Modal -->
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p><%= msg %></p>
+        </div>
+
+      </div>
+    <% } %>
 
     <div class="map-container">
       <div id="map" class="page-container"></div>
@@ -74,8 +86,8 @@
       <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
       <script>
         $(document).foundation();
-        </script>
+      </script>
 
-<!-- <script src="/scripts/googleMaps.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script> -->
+<script src="/scripts/googleMaps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script>
 </html>
