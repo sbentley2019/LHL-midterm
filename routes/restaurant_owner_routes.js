@@ -1,10 +1,11 @@
 const restaurants = require('../lib/database/restaurants');
 const orders = require('../lib/database/orders');
+const menu_items = require('../lib/database/menu_items');
 const express = require('express');
 const router = express.Router();
 const utility = require('../lib/utility');
 
-module.exports = function(database, orders, menu_items) {
+module.exports = function(database) {
 
   /**
    * Restaurant owner side. This contains two views, dashboard and orders
@@ -23,7 +24,7 @@ module.exports = function(database, orders, menu_items) {
     //   rows => {
     //     res.render('owner_restaurants', { orderItems: rows });
     //   });
-  })
+  });
 
   router.get('/getOrders', (req, res) => {
     orders.findByRestaurant(1).then(
@@ -34,9 +35,16 @@ module.exports = function(database, orders, menu_items) {
       });
   });
 
-  router.get('/getOrderItems', (req, res) => {
-    menu_items.findByOrderId()
-  })
+  router.get('/:id/loadMenuItems', (req, res) => {
+    menu_items.findByOrderId(req.params.id)
+      .then((menu_item) => {
+        res.status(200);
+        res.json(menu_item);
+      }).catch((err) => {
+        console.log('ERROR: ', err);
+        throw Error('Could not get GET order items');
+      });
+  });
 
   /**
    * Updates photo URL of a menu item given and menu item id
