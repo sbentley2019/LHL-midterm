@@ -47,10 +47,10 @@ const generateOrder = function(order) {
       <div style="margin-left: auto; margin-top: auto">
 
         <form action="/owner/confirm_order" method="POST">
-            <button class="button" type="submit">Confirm</button>
+            <button class="button orderButtons" type="submit">Confirm</button>
         </form>
         <form action="/owner/cancel_order" method="POST">
-          <button class="button" type="submit">Cancel</button>
+          <button class="button orderButtons" type="submit">Cancel</button>
         </form>
       </div>
       </div>
@@ -99,11 +99,11 @@ const generatePendingOrder = function(order) {
                               </div>
                             </span>
                           <div>
-                          <button class="button" type="submit">Accept</button>
+                          <button class="button orderButtons" type="submit">Accept</button>
                           <input type="hidden" name="order_id" value="${order.id}">
                         </form>
                         <form action="/restaurant/owner/cancel_order" method="POST">
-                            <button class="button" type="submit">Cancel</button>
+                            <button class="button orderButtons" type="submit">Cancel</button>
                             <input type="hidden" name="order_id" value="${order.id}">
                         </form>
                     </div>
@@ -116,8 +116,6 @@ const generatePendingOrder = function(order) {
 $(() => {
   clearRenderOrderItem('ordersGrid');
   fetchOrderList().then(orderList => {
-    console.log("Fetching Orders List from restaruant 1");
-    console.log(orderList);
     for (const order of orderList.orderItems) {
       if (order.current_status !== 'Pending') {
         $("#ordersGrid").prepend(generateOrder(order));
@@ -133,3 +131,9 @@ $(() => {
     }
   })
 });
+
+$(".orderButtons ").submit(function(event) {
+
+});
+
+console.log($(".orderButtons"));
