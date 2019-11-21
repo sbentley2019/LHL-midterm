@@ -14,7 +14,7 @@ const tclient = twilio(accountSid, authToken);
 
 module.exports = function(database) {
 
-   /**
+  /**
    * Restaurant owner side. This contains two views, dashboard and orders
    * Restaurant id is queried using owner_id from cookie
    */
@@ -181,28 +181,16 @@ module.exports = function(database) {
       isActive: req.body.newActive
     }
 
-<<<<<<< HEAD
-  //Restaurant ID fetch from session
-  const owner_id = req.session.user_id;
-  restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id)
-  .then(database.addMenuItem(newMenuItemObject, restaurant).
-  then(row => {
-      res.redirect('/restaurant/owner');
-    },
-    rej => {
-      console.log(rej);
-    })
-  );
-=======
-    //TODO: Make restaurant ID fetch from session, hardcoded at the moment
-    database.addMenuItem(newMenuItemObject, 1).
-      then(row => {
+    //Restaurant ID fetch from session
+    const owner_id = req.session.user_id;
+    restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id)
+      .then(database.addMenuItem(newMenuItemObject, restaurant).then(row => {
         res.redirect('/restaurant/owner');
       },
       rej => {
         console.log(rej);
-      });
->>>>>>> merge
+      })
+      );
   });
 
   //-------------Orders view-------------------------
