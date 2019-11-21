@@ -49,10 +49,18 @@ module.exports = (db) => {
   /* POST to process checkout */
   router.post('/checkout', (req,res) => {
     menu_items.totalOrder(req.session.order_id).then(total_cost => {
+
+      const current_lat = 43.644;
+      const current_lng = -79.402;
+      const destination_lat = 43.643;
+      const destination_lng = -79.399;
+
+      console.log('here');
       tclient.messages
         .create({
           from: 'whatsapp:+14155238886',
-          body: `Order #${req.session.order_id} has been placed, you will be charged $ ${total_cost} when the order is accepted.`,
+          body: `Order #${req.session.order_id} has been placed, you will be charged $ ${total_cost} when the order is accepted.
+          LINK TO RESTAURANT https://www.google.com/maps/dir/?api=1&origin=${current_lat},${current_lng}&destination=${destination_lat},${destination_lng}&travelmode=walking`,
           to: 'whatsapp:+17059873696'
         }).then(messages_sent => {
           orders.processOrder(req.session.order_id, total_cost);

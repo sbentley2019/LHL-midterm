@@ -115,7 +115,6 @@ $(() => {
     processCheckout();
   });
 
-
   /* Event Listener for Adding Items*/
   $("form.order-form").submit(function(event) {
     event.preventDefault();
