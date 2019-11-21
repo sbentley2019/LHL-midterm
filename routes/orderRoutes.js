@@ -49,21 +49,26 @@ module.exports = (db) => {
         console.log('Adding to existing order');
         orders.addOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data));
       } else {
-        console.log('Creating new order');
-        orders.createOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data)).catch(err => {
-          console.log('failed', err);
-        });
+        orders.createOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data));
       }
     });
   });
 
   /* POST menu_item to current order_id (Unused) */
-  router.post('/:id/add', (req, res) => {
-    res.status(200);
-    orders.updateOrderItem(req.session.order_id, req.params.body.menu_item).then(res => {
-      console.log('success');
-    });
-
+  router.post('/:id/deleteItem', (req, res) => {
+    menu_items.removeOrderItem(req.session.order_id, req.body.menu_item_id);
+    res.end();
   });
+
+  /* POST to process checkout */
+  router.post('/checkout', (req,res) => {
+    console.log('here');
+    // menu_items.totalOrder(req.session.order_id).then(total_cost => {
+    //   console.log("totalcost: ", total_cost);
+    //   orders.processOrder(req.session.order_id, total_cost);
+    //   res.end();
+    // }).catch(err => console.log('error here'));
+  });
+
   return router;
 };
