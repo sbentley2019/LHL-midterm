@@ -113,7 +113,7 @@ app.post('/user/new', (req, res) => {
 
 app.post('/user/logout', (req, res) => {
   req.session.user_id = null;
-  res.send({});
+  res.redirect('/');
 })
 
 app.get('/', (req, res) => {
