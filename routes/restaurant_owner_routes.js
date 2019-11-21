@@ -28,6 +28,8 @@ module.exports = function(database, orders, menu_items) {
   router.get('/getOrders', (req, res) => {
     orders.findByRestaurant(1).then(
       rows => {
+        console.log('Gettring orders for restaurant 1');
+        console.log(rows);
         res.json({ orderItems: rows });
       });
   });
