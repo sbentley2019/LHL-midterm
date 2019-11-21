@@ -10,6 +10,7 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/restaurants.js"></script>
+    <script type="text/javascript" src="/scripts/header-home-page.js"></script>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,30 +20,27 @@
 
   <body>
     <header class="head-nav">
-      <div class="top-bar">
-        <div class="top-bar-left">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">Site Title</li>
-            <li>
-              <a href="#">One</a>
-              <ul class="menu vertical">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Two</a></li>
-            <li><a href="#">Three</a></li>
-          </ul>
-        </div>
-        <div class="top-bar-right">
-          <ul class="menu">
-            <li><input type="search" placeholder="Search"></li>
-            <li><button type="button" class="button">Search</button></li>
-          </ul>
-        </div>
-      </div>
     </header>
+
+    <div class="reveal" id="signUpModal" data-reveal>
+      <h1>Sign Up</h1>
+      <form id="form-sign-up" action="/user/new" method="POST">
+        <label for="first">First name:</label>
+        <input type="text" name="first" id="first">
+        <label for="last">Last name:</label>
+        <input type="text" name="last" id="last">
+        <label for="email">email:</label>
+        <input type="email" name="email" id="email">
+        <label for="phone">phone:</label>
+        <input type="text" name="phone" id="phone">
+        <label for="password">password:</label>
+        <input type="password" name="password" id="password">
+        <input type="submit" data-close value="submit">
+      </form>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
     <div class="map-container">
       <div id="map" class="page-container"></div>
@@ -78,6 +76,6 @@
         $(document).foundation();
         </script>
 
-<script src="/scripts/googleMaps.js"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script> -->
+<!-- <script src="/scripts/googleMaps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLzwHPbQY4g--CbfWPmdB0JyrVABxxX2w&callback=initMap" async defer></script> -->
 </html>

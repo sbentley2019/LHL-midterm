@@ -129,6 +129,7 @@ $(() => {
       clearRenderOrderItem();
 
       retrieveOrderItem(submited.order_id).then(menu_items => {
+        console.log(menu_items);
         renderOrderItem(menu_items);
 
         getOrderTotal(submited.order_id).then(orderTotal => {
