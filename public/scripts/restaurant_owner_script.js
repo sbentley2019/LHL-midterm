@@ -116,19 +116,17 @@ const generatePendingOrder = function(order) {
 $(() => {
   clearRenderOrderItem('ordersGrid');
   fetchOrderList().then(orderList => {
+    console.log("Fetching Orders List from restaruant 1");
+    console.log(orderList);
     for (const order of orderList.orderItems) {
-      console.log(order);
       if (order.current_status !== 'Pending') {
         $("#ordersGrid").prepend(generateOrder(order));
         retrieveMenuItem(order.id).then(orderItemList => {
-          console.log(orderItemList);
           $("#order-body").prepend(generateOrderItemsList(orderItemList));
         })
       } else {
-        console.log('pending order');
         $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
         retrieveMenuItem(order.id).then(orderItemList => {
-          console.log(orderItemList);
           $("#pendingOrderBody").prepend(generateOrderItemsList(orderItemList));
         });
       }
