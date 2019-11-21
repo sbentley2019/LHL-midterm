@@ -39,6 +39,7 @@ const processCheckout = function(data) {
   return $.ajax({
     method: "POST",
     url: "/order/checkout",
+    data
   });
 };
 
@@ -111,11 +112,7 @@ $(() => {
 
   /* Event Listener for Checkout */
   $("#checkout").click(function(event) {
-    event.preventDefault();
-    console.log('checking out..');
-    processCheckout().then(next => {
-      console.log('function ran..').catch(err => console.log('error on event listener'));
-    });
+    processCheckout();
   });
 
 
