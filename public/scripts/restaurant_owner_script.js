@@ -1,4 +1,4 @@
-const fetchOrderList = function() {
+const fetchOrderList = function () {
   return $.ajax({
     method: "GET",
     url: "/restaurant/owner/getOrders",
@@ -9,14 +9,14 @@ const fetchOrderList = function() {
  * Retrieves menu item corresponding to order id
  * @param {*} order_id
  */
-const retrieveMenuItem = function(order_id) {
+const retrieveMenuItem = function (order_id) {
   return $.ajax({
     method: "GET",
-    url: '/order/' + order_id + "/loadMenuItems",
+    url: "/restaurant/owner/" + order_id + "/loadMenuItems",
   });
 };
 
-const generateOrderItemsList = function(orderItemList) {
+const generateOrderItemsList = function (orderItemList) {
   let listBody = '';
   for (const menuItem of orderItemList) {
     let listItem = `
@@ -28,14 +28,14 @@ const generateOrderItemsList = function(orderItemList) {
     listBody += listItem;
   }
   return listBody;
-}
+};
 
 
-const clearRenderOrderItem = function(element) {
+const clearRenderOrderItem = function (element) {
   $(`#${element}`).children().detach();
 };
 
-const generateOrder = function(order) {
+const generateOrder = function (order) {
   let orderBody = $(`
   <div class="cell">
     <div class="card active_order_card_container">
@@ -55,7 +55,7 @@ const generateOrder = function(order) {
       </div>
       </div>
       <div class="owner_order_card_body">
-          <ul class="vertical menu" style="margin: 25px;" id="order-body">
+          <ul class="vertical menu" style="margin: 25px;" id="order-body-${order.id}">
 
           </ul>
 
@@ -74,7 +74,7 @@ const generateOrder = function(order) {
   return orderBody;
 };
 
-const generatePendingOrder = function(order) {
+const generatePendingOrder = function (order) {
   let orderBody = $(`
   <div class="cell">
                     <div class="card" style='padding: 0%;'>
@@ -120,9 +120,12 @@ $(() => {
     console.log(orderList);
     for (const order of orderList.orderItems) {
       if (order.current_status !== 'Pending') {
+
         $("#ordersGrid").prepend(generateOrder(order));
+
         retrieveMenuItem(order.id).then(orderItemList => {
-          $("#order-body").prepend(generateOrderItemsList(orderItemList));
+          console.log("orderitem_list: ", orderItemList);
+          $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
         })
       } else {
         $("#pendingOrdersGrid").prepend(generatePendingOrder(order));

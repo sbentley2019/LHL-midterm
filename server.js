@@ -129,7 +129,7 @@ app.get("/restaurants/:id", (req, res) => {
   res.status(200);
 
   // TODO: feed user_id - hardcoded 1 for now
-  orders.findOrderId(1, req.params.id).then(order_id => {
+  orders.findActiveOrderId(1, req.params.id).then(order_id => {
     if (order_id) {
       req.session.order_id = order_id;
       restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
