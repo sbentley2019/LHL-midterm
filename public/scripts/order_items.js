@@ -109,9 +109,18 @@ $(() => {
     });
   });
 
+  /* Event Listener for Checkout */
+  $("#checkout").click(function(event) {
+    event.preventDefault();
+    console.log('checking out..');
+    processCheckout().then(next => {
+      console.log('function ran..').catch(err => console.log('error on event listener'));
+    });
+  });
+
 
   /* Event Listener for Adding Items*/
-  $("form").submit(function(event) {
+  $("form.order-form").submit(function(event) {
     event.preventDefault();
     const url = this.action;
     const data = $(this).serialize();
@@ -130,9 +139,4 @@ $(() => {
     });
   });
 
-  /* Event Listener for Checkout */
-  $("#checkout").click(function(event) {
-    console.log('checking out..');
-    processCheckout();
-  });
 });

@@ -63,14 +63,12 @@ module.exports = (db) => {
   /* POST to process checkout */
   router.post('/checkout', (req,res) => {
     console.log('here');
-    console.log(req.session.order_id);
-    menu_items.totalOrder(req.session.order_id).then(total_cost => {
-      console.log("totalcost: ", total_cost);
-      orders.processOrder(req.session.order_id, total_cost);
-      res.end();
-    }).catch(err => console.log('error here'));
+    // menu_items.totalOrder(req.session.order_id).then(total_cost => {
+    //   console.log("totalcost: ", total_cost);
+    //   orders.processOrder(req.session.order_id, total_cost);
+    //   res.end();
+    // }).catch(err => console.log('error here'));
   });
-
 
   return router;
 };
