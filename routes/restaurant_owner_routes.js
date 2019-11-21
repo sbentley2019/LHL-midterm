@@ -53,10 +53,13 @@ module.exports = function(database) {
               to: 'whatsapp:+17059873696'
             })
             .then(message => {
-              console.log(message);
               res.redirect('/restaurant/owner');
             });
-
+          orders.updateOrder('Accepted', order.id, 'current_status').then(
+            rows => {
+              //Sends Ajax request to re render;
+            }
+          );
         },
         err => {
           console.log(err);
@@ -75,9 +78,13 @@ module.exports = function(database) {
         to: 'whatsapp:+17059873696'
       })
       .then(message => {
-        console.log(message);
         res.redirect('/restaurant/owner');
       });
+    orders.updateOrder(false, order_id, 'is_active').then(
+      rows => {
+        //Sends Ajax request to re render;
+      }
+    );
 
 
   })
