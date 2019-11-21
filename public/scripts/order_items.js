@@ -112,7 +112,7 @@ $(() => {
 
   /* Event Listener for Checkout */
   $("#checkout").click(function(event) {
-    processCheckout();
+    processCheckout().then(() => { window.location.href = '/' });
   });
 
   /* Event Listener for Adding Items*/

@@ -55,7 +55,6 @@ module.exports = (db) => {
       const destination_lat = 43.643;
       const destination_lng = -79.399;
 
-      console.log('here');
       tclient.messages
         .create({
           from: 'whatsapp:+14155238886',
@@ -64,10 +63,18 @@ module.exports = (db) => {
           to: 'whatsapp:+17059873696'
         }).then(messages_sent => {
           orders.processOrder(req.session.order_id, total_cost);
+
+          req.session.msg = "Order has been placed! Please check your phone for updates";
+
           res.end();
         });
     });
   });
+
+  router.post('/clearSession', (req,res) => {
+    req.session.msg = "";
+    res.end();
+  })
 
 
   router.post('/:id', (req, res) => {

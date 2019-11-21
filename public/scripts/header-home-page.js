@@ -14,13 +14,20 @@ const newUser = function(obj) {
   });
 };
 
+const clearMsg = function() {
+  return $.ajax({
+    type: 'POST',
+    url:'/order/clearSession'
+  });
+};
+
 const buildNav = function(user) {
   let nav = `
   <div id="nav" class="top-bar">
   <div class="top-bar-left">
     <ul class="menu">
       <li class="menu-text">
-        <h4>Site Title</h4>
+        <h4>!Ritual</h4>
       </li>
   `;
   if (user === 0) {
@@ -96,4 +103,30 @@ $(() => {
       $('.head-nav').append(buildNav(user));
     });
   });
+
+
+  // Get the modal
+  let modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  let btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  let span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+    clearMsg();
+
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      clearMsg();
+    }
+  };
+
 });
