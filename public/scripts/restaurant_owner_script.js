@@ -74,8 +74,6 @@ const generateOrder = function(order) {
   return orderBody;
 };
 
-<<<<<<< HEAD
-=======
 const generatePendingOrder = function(order) {
   let orderBody = $(`
   <div class="cell">
@@ -120,21 +118,10 @@ const generatePendingOrder = function(order) {
         </div>`);
   return orderBody;
 };
->>>>>>> restaurant_orders_functionality
 
 $(() => {
   clearRenderOrderItem('ordersGrid');
   fetchOrderList().then(orderList => {
-<<<<<<< HEAD
-    for (const key of Object.keys(orderList)) {
-      const order = orderList[key][0];
-      console.log(order);
-      $("#ordersGrid").prepend(generateOrder(order));
-      retrieveMenuItem(order.id).then(orderItemList => {
-        $("#order-body").prepend(generateOrderItemsList(orderItemList));
-      })
-
-=======
     for (const order of orderList.orderItems) {
       console.log(order);
       if (order.current_status !== 'Pending') {
@@ -151,7 +138,6 @@ $(() => {
           $("#pendingOrderBody").prepend(generateOrderItemsList(orderItemList));
         });
       }
->>>>>>> restaurant_orders_functionality
     }
   })
 });
