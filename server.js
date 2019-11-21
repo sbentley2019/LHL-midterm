@@ -5,6 +5,7 @@ require('dotenv').config();
 const restaurants = require('./lib/database/restaurants');
 const orders = require('./lib/database/orders');
 const users = require('./lib/database/users');
+const menu_items = require('./lib/database/menu_items');
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -125,7 +126,7 @@ app.get('/', (req, res) => {
 
   restaurants.findAllRestaurants().then(restaurants => {
     let allRestaurants = restaurants;
-    res.render('index', {title: 'Ritual', restaurants: allRestaurants});
+    res.render('index', { title: 'Ritual', restaurants: allRestaurants });
   }).catch(err => console.log('err', err));
 
 });
@@ -136,7 +137,7 @@ app.get("/restaurants/:id", (req, res) => {
   restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
     restaurants.findRestaurantById(req.params.id).then(restaurant => {
       let allItems = menu_items;
-      res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
+      res.render('restaurant', { restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id });
     });
   });
 });
