@@ -34,9 +34,10 @@ module.exports = function(database, orders, menu_items) {
       });
   });
 
-
+  /**
+   * Confirm order route
+   */
   router.post('/confirm_order', (req, res) => {
-    console.log(req.body);
     const order_id = req.body.order_id;
     const order_time = req.body.order_time;
 
@@ -49,18 +50,31 @@ module.exports = function(database, orders, menu_items) {
               to: 'whatsapp:+17059873696'
             })
             .then(message => {
-                console.log(message);
-                res.redirect('/restaurant/owner');
-              },
-              err => {
-                console.log(err);
-              });
+              console.log(message);
+              res.redirect('/restaurant/owner');
+            });
 
         },
         err => {
           console.log(err);
         });
   });
+
+  router.post('/cancel_order', (req, res) => {
+    const order_id = req.body.order_id;
+    tclient.messages
+      .create({
+        from: 'whatsapp:+14155238886',
+        body: `Order #${order_id} has been cancelled. We apologize for any inconvenience.`,
+        to: 'whatsapp:+17059873696'
+      })
+      .then(message => {
+        console.log(message);
+        res.redirect('/restaurant/owner');
+      });
+
+
+  })
 
   /**
    * Updates photo URL of a menu item given and menu item id
