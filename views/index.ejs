@@ -20,36 +20,27 @@
 
   <body>
     <header class="head-nav">
-      <div class="top-bar">
-        <div class="top-bar-left">
-          <ul class="menu">
-            <li class="menu-text">
-              <h4>Site Title</h4>
-            </li>
-            <li>
-              <a href="/restaurant/owner">
-                <button class="button">Restaurant</button>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="top-bar-right">
-          <ul class="menu">
-            <li>
-              <form id="form-login" action="" method="POST" >
-                <input type="email" id="email" name="email" placeholder="email">
-                <button class="button" type="submit" value="login">Login</button>
-              </form>
-            </li>
-            <li>
-              <a href="#">
-                <button class="button">Sign Up</button>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </header>
+
+    <div class="reveal" id="signUpModal" data-reveal>
+      <h1>Sign Up</h1>
+      <form id="form-sign-up" action="/user/new" method="POST">
+        <label for="first">First name:</label>
+        <input type="text" name="first" id="first">
+        <label for="last">Last name:</label>
+        <input type="text" name="last" id="last">
+        <label for="email">email:</label>
+        <input type="email" name="email" id="email">
+        <label for="phone">phone:</label>
+        <input type="text" name="phone" id="phone">
+        <label for="password">password:</label>
+        <input type="password" name="password" id="password">
+        <input type="submit" data-close value="submit">
+      </form>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
     <div class="map-container">
       <div id="map" class="page-container"></div>
