@@ -92,17 +92,14 @@ app.post("/user/login", (req, res) => {
   }
   users.findUserId(req.body.email).then(user => {
     if (!user.id) {
-      console.log("step1")
       res.json(null);
     } else {
       req.session.user_id = user.id;
       restaurants.findRestaurantOwnerId(1).then(owner_id => {
         if (owner_id && owner_id === user.id) {
-          console.log("step2")
-          res.json(2);
-        } else {
-          console.log("step3")
           res.json(1);
+        } else {
+          res.json(0);
         }
       })
     }
@@ -116,8 +113,7 @@ app.post('/user/new', (req, res) => {
 
 app.post('/user/logout', (req, res) => {
   req.session.user_id = null;
-  console.log(req.session);
-  return;
+  res.send({});
 })
 
 app.get('/', (req, res) => {
