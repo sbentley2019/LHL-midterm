@@ -80,7 +80,7 @@ module.exports = function(database) {
       .then(message => {
         res.redirect('/restaurant/owner');
       });
-    orders.updateOrder(false, order_id, 'is_active').then(
+    orders.updateOrder('Rejected', order_id, 'current_status').then(
       rows => {
         //Sends Ajax request to re render;
       }
