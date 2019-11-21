@@ -167,7 +167,7 @@ main.menu {
         background: lightblue;
         width: 25%;
         flex-grow: 1;
-        padding-top: 15%;
+        padding-top: 14%;
         text-align: right;
 
         p {
@@ -253,15 +253,18 @@ main.menu {
           font-size: 0.75rem;
 
         }
+
+        #remove-item {
+          font-size: 0.75rem;
+        }
       }
-
-
     }
 
     #checkout-container {
       width: 90%;
       margin: 0 auto;
       order:-1;
+      margin-bottom: 0.5rem;
     }
 
     button#checkout {

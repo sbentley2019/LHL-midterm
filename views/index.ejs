@@ -47,21 +47,22 @@
     </div>
 
     <div class="restaurants-container">
-      <% for (const restaurant of restaurants) {%>
-        <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>" data-name="<%= restaurant.name %>">
-          <div class="restaurant-div">
-            <img src="<%= restaurant.img_url %>">
-            <div class="card-text">
-              <header>
-                <h4><%= restaurant.name %></h4>
-                <h5 class="marker"><%= restaurant.id %></h5>
-              </header>
-              <div class="card-section">
-                <p><%= restaurant.description %></p>
-              </div>
-              <footer>
-                <span><%= restaurant.location %></span>
-              </footer>
+        <% for (const restaurant of restaurants) {%>
+          <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>"
+            data-id="<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>">
+            <div class="restaurant-div">
+              <img src="<%= restaurant.img_url %>">
+              <div class="card-text">
+                <header>
+                  <h4><%= restaurant.name %></h4>
+                  <h5 class="marker"><%= restaurant.id %></h5>
+                </header>
+                <div class="card-section">
+                  <p><%= restaurant.description %></p>
+                </div>
+                <footer>
+                  <span><%= restaurant.location %></span>
+                </footer>
               </div>
             </div>
         </a>
