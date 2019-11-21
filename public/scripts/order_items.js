@@ -59,6 +59,7 @@ $(() => {
     submitOrderItem(url, data).then(submited => {
       clearRenderOrderItem();
       retrieveOrderItem(submited.order_id).then(menu_items => {
+        console.log(menu_items);
         renderOrderItem(menu_items);
       });
     });
