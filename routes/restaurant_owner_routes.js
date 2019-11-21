@@ -1,8 +1,10 @@
-const restaurants = require('../lib/database/restaurants');
-const orders = require('../lib/database/orders');
 const express = require('express');
 const router = express.Router();
 const utility = require('../lib/utility');
+const accountSid = 'AC6aeef0c97f09d55152dc6242c62a5191';
+const authToken = '0958ca806061cb75d424c3b6115cd6cf';
+const twailo = require('twilio');
+const tclient = twailo(accountSid, authToken);
 
 module.exports = function(database, orders, menu_items) {
 
@@ -28,15 +30,37 @@ module.exports = function(database, orders, menu_items) {
   router.get('/getOrders', (req, res) => {
     orders.findByRestaurant(1).then(
       rows => {
-        console.log('Gettring orders for restaurant 1');
-        console.log(rows);
         res.json({ orderItems: rows });
       });
   });
 
-  router.get('/getOrderItems', (req, res) => {
-    menu_items.findByOrderId()
-  })
+
+  router.post('/confirm_order', (req, res) => {
+    console.log(req.body);
+    const order_id = req.body.order_id;
+    const order_time = req.body.order_time;
+
+    const order = orders.findById(order_id)
+      .then(order => {
+          tclient.messages
+            .create({
+              from: 'whatsapp:+14155238886',
+              body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
+              to: 'whatsapp:+17059873696'
+            })
+            .then(message => {
+                console.log(message);
+                res.redirect('/restaurant/owner');
+              },
+              err => {
+                console.log(err);
+              });
+
+        },
+        err => {
+          console.log(err);
+        });
+  });
 
   /**
    * Updates photo URL of a menu item given and menu item id
@@ -44,7 +68,6 @@ module.exports = function(database, orders, menu_items) {
   router.post('/uploadPhoto', (req, res) => {
     const updatedImageURL = req.body.updateURL;
     const menuItemId = req.body.menuItemId;
-    console.log(typeof(menuItemId));
     database.updateMenuItem(updatedImageURL, menuItemId, 'image_url')
       .then(
         rows => {
@@ -92,7 +115,6 @@ module.exports = function(database, orders, menu_items) {
     database.updateMenuItem(update, menuItemId, 'time_to_prepare')
       .then(
         rows => {
-          console.log(rows);
           res.redirect('/restaurant/owner');
         }
       );
@@ -131,7 +153,6 @@ module.exports = function(database, orders, menu_items) {
   });
 
   //-------------Orders view-------------------------
-
 
   return router;
 };
