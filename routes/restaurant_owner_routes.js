@@ -77,6 +77,11 @@ module.exports = function(database, orders, menu_items) {
       .then(message => {
         res.redirect('/restaurant/owner');
       });
+    orders.updateOrder(false, order_id, 'is_active').then(
+      rows => {
+        //Sends Ajax request to re render;
+      }
+    );
 
 
   })

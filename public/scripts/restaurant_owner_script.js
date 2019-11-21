@@ -117,16 +117,19 @@ $(() => {
   clearRenderOrderItem('ordersGrid');
   fetchOrderList().then(orderList => {
     for (const order of orderList.orderItems) {
-      if (order.current_status !== 'Pending') {
-        $("#ordersGrid").prepend(generateOrder(order));
-        retrieveMenuItem(order.id).then(orderItemList => {
-          $("#order-body").prepend(generateOrderItemsList(orderItemList));
-        })
-      } else {
-        $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
-        retrieveMenuItem(order.id).then(orderItemList => {
-          $("#pendingOrderBody").prepend(generateOrderItemsList(orderItemList));
-        });
+      console.log(order.is_active);
+      if (order.is_active === true) {
+        if (order.current_status !== 'Pending') {
+          $("#ordersGrid").prepend(generateOrder(order));
+          retrieveMenuItem(order.id).then(orderItemList => {
+            $("#order-body").prepend(generateOrderItemsList(orderItemList));
+          })
+        } else {
+          $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
+          retrieveMenuItem(order.id).then(orderItemList => {
+            $("#pendingOrderBody").prepend(generateOrderItemsList(orderItemList));
+          });
+        }
       }
     }
   })
