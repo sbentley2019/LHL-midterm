@@ -60,6 +60,9 @@ module.exports = function(database, orders, menu_items) {
         });
   });
 
+  /**
+   * Cancel order route
+   */
   router.post('/cancel_order', (req, res) => {
     const order_id = req.body.order_id;
     tclient.messages
