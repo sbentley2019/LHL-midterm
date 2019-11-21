@@ -71,10 +71,11 @@ module.exports = (db) => {
     });
   });
 
+  /* Clears Session Msg */
   router.post('/clearSession', (req,res) => {
     req.session.msg = "";
     res.end();
-  })
+  });
 
 
   router.post('/:id', (req, res) => {
