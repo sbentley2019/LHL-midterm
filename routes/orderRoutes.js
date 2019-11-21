@@ -49,10 +49,7 @@ module.exports = (db) => {
         orders.addOrderItem(req.session.order_id, req.body.menu_item).then( data => res.json(data)
         );
       } else {
-        orders.createOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data)
-        ).catch(err => {
-          console.log('failed', err);
-        });
+        orders.createOrderItem(req.session.order_id, req.body.menu_item).then(data => res.json(data));
       }
     });
   });
@@ -62,5 +59,18 @@ module.exports = (db) => {
     menu_items.removeOrderItem(req.session.order_id, req.body.menu_item_id);
     res.end();
   });
+
+  /* POST to process checkout */
+  router.post('/checkout', (req,res) => {
+    console.log('here');
+    console.log(req.session.order_id);
+    menu_items.totalOrder(req.session.order_id).then(total_cost => {
+      console.log("totalcost: ", total_cost);
+      orders.processOrder(req.session.order_id, total_cost);
+      res.end();
+    }).catch(err => console.log('error here'));
+  });
+
+
   return router;
 };
