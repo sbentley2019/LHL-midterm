@@ -92,19 +92,17 @@ const generatePendingOrder = function(order) {
                             </ul>
                         </div>
                         <form action="/restaurant/owner/confirm_order" method="POST">
-                        <div class="card-divider owner_order_card_footer">
+                          <div class="card-divider owner_order_card_footer">
                             <span style="width: 60%; margin: auto">
-
-                    <div class="cell small-2">
-                        <input type="number" id="sliderOutput2" name="order_time">
-                    </div>
-                    </span>
-
-                    <div>
-                            <button class="button" type="submit">Accept</button>
-                            <input type="hidden" name="order_id" value="${order.id}">
+                              <div class="cell small-2">
+                                <input type="number" id="sliderOutput2" name="order_time">
+                              </div>
+                            </span>
+                          <div>
+                          <button class="button" type="submit">Accept</button>
+                          <input type="hidden" name="order_id" value="${order.id}">
                         </form>
-                        <form action="/owner/cancel_order" method="POST">
+                        <form action="/restaurant/owner/cancel_order" method="POST">
                             <button class="button" type="submit">Cancel</button>
                             <input type="hidden" name="order_id" value="${order.id}">
                         </form>
