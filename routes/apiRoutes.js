@@ -48,8 +48,7 @@ module.exports = function(database) {
   });
 
 
-  router.post('/restaurant/:id/dish/:id', (req, res) => {
-  });
+  router.post('/restaurant/:id/dish/:id', (req, res) => {});
 
 
   return router;
