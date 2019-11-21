@@ -35,6 +35,13 @@ const removeOrderItem = function(data) {
   });
 };
 
+const processCheckout = function(data) {
+  return $.ajax({
+    method: "POST",
+    url: "/order/checkout",
+  });
+};
+
 const createOrderItem = function(menu_item) {
   return $(
     `<div class="order-card">
@@ -45,6 +52,7 @@ const createOrderItem = function(menu_item) {
       </div>
     </div>`);
 };
+
 
 const clearRenderOrderItem = function() {
   $("#orders").empty();
@@ -122,7 +130,9 @@ $(() => {
     });
   });
 
-  /* Event Listener for Removing Items */
-
-
+  /* Event Listener for Checkout */
+  $("#checkout").click(function(event) {
+    console.log('checking out..');
+    processCheckout();
+  });
 });
