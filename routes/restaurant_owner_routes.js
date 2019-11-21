@@ -11,16 +11,18 @@ const tclient = twailo(accountSid, authToken);
 
 module.exports = function(database) {
 
-  /**
+   /**
    * Restaurant owner side. This contains two views, dashboard and orders
-   * TODO: Add different owner id functionality
+   * Restaurant id is queried using owner_id from cookie
    */
   router.get('/', (req, res) => {
-    //TODO: Restaurant ID should be retrieved from session/cookie
-    database.findAllMenuItemsForRestaurant(1).then(
-      rows => {
-        res.render('owner_restaurants', { menuItems: rows });
-      });
+    const owner_id = req.session.user_id;
+    restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id).then((restaurant) => {
+      database.findAllMenuItemsForRestaurant(restaurant).then(
+        rows => {
+          res.render('owner_restaurants', { menuItems: rows });
+        })
+    })
 
     //Finds all orders corresponding to restaurant 1
     //TODO: Make restaurnts id dynamic to who ever is logged in
@@ -179,14 +181,17 @@ module.exports = function(database) {
       isActive: req.body.newActive
     }
 
-    //TODO: Make restaurant ID fetch from session, hardcoded at the moment
-    database.addMenuItem(newMenuItemObject, 1).
-    then(row => {
-        res.redirect('/restaurant/owner');
-      },
-      rej => {
-        console.log(rej);
-      });
+  //Restaurant ID fetch from session
+  const owner_id = req.session.user_id;
+  restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id)
+  .then(database.addMenuItem(newMenuItemObject, restaurant).
+  then(row => {
+      res.redirect('/restaurant/owner');
+    },
+    rej => {
+      console.log(rej);
+    })
+  );
   });
 
   //-------------Orders view-------------------------
