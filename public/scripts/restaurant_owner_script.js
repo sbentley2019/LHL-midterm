@@ -1,4 +1,4 @@
-const fetchOrderList = function () {
+const fetchOrderList = function() {
   return $.ajax({
     method: "GET",
     url: "/restaurant/owner/getOrders",
@@ -9,14 +9,14 @@ const fetchOrderList = function () {
  * Retrieves menu item corresponding to order id
  * @param {*} order_id
  */
-const retrieveMenuItem = function (order_id) {
+const retrieveMenuItem = function(order_id) {
   return $.ajax({
     method: "GET",
     url: "/restaurant/owner/" + order_id + "/loadMenuItems",
   });
 };
 
-const generateOrderItemsList = function (orderItemList) {
+const generateOrderItemsList = function(orderItemList) {
   let listBody = '';
   for (const menuItem of orderItemList) {
     let listItem = `
@@ -31,11 +31,11 @@ const generateOrderItemsList = function (orderItemList) {
 };
 
 
-const clearRenderOrderItem = function (element) {
+const clearRenderOrderItem = function(element) {
   $(`#${element}`).children().detach();
 };
 
-const generateOrder = function (order) {
+const generateOrder = function(order) {
   let orderBody = $(`
   <div class="cell">
     <div class="card active_order_card_container">
@@ -47,10 +47,10 @@ const generateOrder = function (order) {
       <div style="margin-left: auto; margin-top: auto">
 
         <form action="/owner/confirm_order" method="POST">
-            <button class="button" type="submit">Confirm</button>
+            <button class="button orderButtons" type="submit">Confirm</button>
         </form>
         <form action="/owner/cancel_order" method="POST">
-          <button class="button" type="submit">Cancel</button>
+          <button class="button orderButtons" type="submit">Cancel</button>
         </form>
       </div>
       </div>
@@ -74,7 +74,7 @@ const generateOrder = function (order) {
   return orderBody;
 };
 
-const generatePendingOrder = function (order) {
+const generatePendingOrder = function(order) {
   let orderBody = $(`
   <div class="cell">
                     <div class="card" style='padding: 0%;'>
@@ -87,7 +87,7 @@ const generatePendingOrder = function (order) {
                             </div>
                         </div>
                         <div class="owner_order_card_body">
-                            <ul class="vertical menu" style="margin: 25px;" id="pendingOrderBody">
+                            <ul class="vertical menu" style="margin: 25px;" id="pendingOrderBody-${order.id}">
 
                             </ul>
                         </div>
@@ -99,11 +99,11 @@ const generatePendingOrder = function (order) {
                               </div>
                             </span>
                           <div>
-                          <button class="button" type="submit">Accept</button>
+                          <button class="button orderButtons" type="submit">Accept</button>
                           <input type="hidden" name="order_id" value="${order.id}">
                         </form>
                         <form action="/restaurant/owner/cancel_order" method="POST">
-                            <button class="button" type="submit">Cancel</button>
+                            <button class="button orderButtons" type="submit">Cancel</button>
                             <input type="hidden" name="order_id" value="${order.id}">
                         </form>
                     </div>
@@ -116,23 +116,27 @@ const generatePendingOrder = function (order) {
 $(() => {
   clearRenderOrderItem('ordersGrid');
   fetchOrderList().then(orderList => {
-    console.log("Fetching Orders List from restaruant 1");
-    console.log(orderList);
     for (const order of orderList.orderItems) {
-      if (order.current_status !== 'Pending') {
-
-        $("#ordersGrid").prepend(generateOrder(order));
-
-        retrieveMenuItem(order.id).then(orderItemList => {
-          console.log("orderitem_list: ", orderItemList);
-          $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
-        })
-      } else {
-        $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
-        retrieveMenuItem(order.id).then(orderItemList => {
-          $("#pendingOrderBody").prepend(generateOrderItemsList(orderItemList));
-        });
+      console.log(order.is_active);
+      if (order.is_active === true) {
+        if (order.current_status !== 'Pending') {
+          $("#ordersGrid").prepend(generateOrder(order));
+          retrieveMenuItem(order.id).then(orderItemList => {
+            $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
+          })
+        } else {
+          $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
+          retrieveMenuItem(order.id).then(orderItemList => {
+            $(`#pendingOrderBody-${order.id}`).prepend(generateOrderItemsList(orderItemList));
+          });
+        }
       }
     }
   })
 });
+
+$(".orderButtons ").submit(function(event) {
+
+});
+
+console.log($(".orderButtons"));
