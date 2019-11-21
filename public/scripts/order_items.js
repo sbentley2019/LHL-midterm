@@ -20,6 +20,21 @@ const retrieveOrderItem = function(order_id) {
   });
 };
 
+const getOrderTotal = function(order_id) {
+  return $.ajax({
+    method: "GET",
+    url: '/order/' + order_id + "/orderTotal",
+  });
+};
+
+const removeOrderItem = function(data) {
+  return $.ajax({
+    method: "POST",
+    url: '/order/' + data.order_id + "/deleteItem",
+    data,
+  });
+};
+
 const createOrderItem = function(menu_item) {
   return $(
     `<div class="order-card">
@@ -31,26 +46,49 @@ const createOrderItem = function(menu_item) {
     </div>`);
 };
 
-const renderOrderItem = function(menu_items) {
-  for (const menu_item of menu_items) {
-    $("#orders").prepend(createOrderItem(menu_item));
-  }
-};
-
-const getOrderTotal = function(order_id) {
-  return $.ajax({
-    method: "GET",
-    url: '/order/' + order_id + "/orderTotal",
-  });
-};
-
 const clearRenderOrderItem = function() {
-  $("#orders").children().detach();
+  $("#orders").empty();
 };
 
 const updateOrderTotal = function(orderTotal) {
   $('#checkout-total').text(`$ ${orderTotal || 0}`);
 };
+
+const renderOrderItem = function(menu_items) {
+  for (const menu_item of menu_items) {
+    const $order = createOrderItem(menu_item);
+    $("#orders").prepend($order)
+
+    /* Event Listener for order item hover state */
+    $order.hover(function(event) {
+      $(this).children().children('.order-item-price').html(`<button id ="remove-item">remove</button>`);
+
+      /* Event Listener for remove order items */
+      $("#remove-item").click(function(event) {
+
+        removeOrderItem(menu_item).then(deleted => {
+
+          console.log('deleted');
+          clearRenderOrderItem();
+          console.log('cleared');
+          retrieveOrderItem(menu_item.order_id).then(menu_items => {
+            renderOrderItem(menu_items);
+
+            getOrderTotal(menu_item.order_id).then(orderTotal => {
+              updateOrderTotal(orderTotal);
+            });
+          });
+        });
+
+      });
+
+    }, function(event) {
+      $("#remove-item").empty();
+      $(this).children().children('.order-item-price').html(`$ ${menu_item.price}`);
+    });
+  }
+};
+
 
 $(() => {
   fetchOrderId().then(order_id => {
@@ -63,11 +101,14 @@ $(() => {
     });
   });
 
+
+  /* Event Listener for Adding Items*/
   $("form").submit(function(event) {
     event.preventDefault();
     const url = this.action;
     const data = $(this).serialize();
     submitOrderItem(url, data).then(submited => {
+
       clearRenderOrderItem();
 
       retrieveOrderItem(submited.order_id).then(menu_items => {
@@ -78,8 +119,10 @@ $(() => {
         });
       });
 
-
-    }
-    );
+    });
   });
+
+  /* Event Listener for Removing Items */
+
+
 });

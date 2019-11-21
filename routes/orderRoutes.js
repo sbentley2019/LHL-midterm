@@ -58,12 +58,9 @@ module.exports = (db) => {
   });
 
   /* POST menu_item to current order_id (Unused) */
-  router.post('/:id/add', (req, res) => {
-    res.status(200);
-    orders.updateOrderItem(req.session.order_id, req.params.body.menu_item).then(res => {
-      console.log('success');
-    });
-
+  router.post('/:id/deleteItem', (req, res) => {
+    menu_items.removeOrderItem(req.session.order_id, req.body.menu_item_id);
+    res.end();
   });
   return router;
 };
