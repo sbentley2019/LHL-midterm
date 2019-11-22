@@ -48,13 +48,13 @@ module.exports = function(database) {
       .then(order => {
         orders.updateOrder('Accepted', order.id, 'current_status').then(
           rows => {
-            // tclient.messages
-            //   .create({
-            //     from: 'whatsapp:+14155238886',
-            //     body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
-            //     to: 'whatsapp:+17059873696'
-            //   })
-            //   .then(message => {});
+            tclient.messages
+              .create({
+                from: 'whatsapp:+14155238886',
+                body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
+                to: 'whatsapp:+17059873696'
+              })
+              .then(message => {});
             console.log('updating orders to accepted');
             console.log(rows);
             res.end();
