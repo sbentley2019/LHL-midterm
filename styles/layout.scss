@@ -91,52 +91,10 @@ main.menu {
   }
 }
 
-
-/* HOME PAGE */
-// .page-container {
-//   display: flex;
-//   background-color: red;
-//   width: 100%;
-//   margin: auto auto;
-// }
-
-// .restaurants-container {
-//   position: absolute;
-//   top: 8%;
-//   display: flex;
-//   flex-direction: column;
-//   background-color: blue;
-//   width: 35%;
-//   margin-left: 1%;
-// }
-
-// .restaurant-cards {
-//   display: flex;
-//   flex-wrap: wrap;
-//   border: 1px solid  black;
-//   margin-bottom: 2.5%;
-//   cursor: pointer;
-
-//   img {
-//     padding: 1%;
-//     max-width: 40%;
-//     margin-right: 2.5%
-//   }
-
-//   .card-text {
-//     display: flex;
-//     flex-direction: column;
-
-//     footer {
-//       justify-content: flex-end;
-//     }
-//   }
-// }
-
 /* Restaurant Page */
 #page-container {
   position: relative;
-  top: 100px;
+  top: 8%;
   display: flex;
   padding: 0 1%;
 
@@ -150,7 +108,7 @@ main.menu {
 
   #restaurant-container {
     // border: 1px solid black;
-    width: 60%;
+    width: 53%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
