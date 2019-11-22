@@ -173,18 +173,18 @@ $(() => {
 
         console.log(order.current_status);
 
-        if (order.current_status !== 'Rejected') {
-          if (order.current_status === 'Accepted') {
-            $("#ordersGrid").prepend(generateOrder(order));
-            retrieveMenuItem(order.id).then(orderItemList => {
-              $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
-            })
-          } else if (order.current_status === 'Pending') {
-            $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
-            retrieveMenuItem(order.id).then(orderItemList => {
-              $(`#pendingOrderBody-${order.id}`).prepend(generateOrderItemsList(orderItemList));
-            });
-          }
+        if (order.current_status === 'Accepted') {
+          $("#ordersGrid").prepend(generateOrder(order));
+
+          retrieveMenuItem(order.id).then(orderItemList => {
+            $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
+          })
+        } else if (order.current_status === 'Pending') {
+          $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
+
+          retrieveMenuItem(order.id).then(orderItemList => {
+            $(`#pendingOrderBody-${order.id}`).prepend(generateOrderItemsList(orderItemList));
+          });
         }
       }
     });
