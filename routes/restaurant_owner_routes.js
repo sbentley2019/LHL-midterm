@@ -4,23 +4,28 @@ const menu_items = require('../lib/database/menu_items');
 const express = require('express');
 const router = express.Router();
 const utility = require('../lib/utility');
+
+
+/* Twilio Imports */
 const accountSid = 'AC6aeef0c97f09d55152dc6242c62a5191';
 const authToken = '0958ca806061cb75d424c3b6115cd6cf';
-const twailo = require('twilio');
-const tclient = twailo(accountSid, authToken);
+const twilio = require('twilio');
+const tclient = twilio(accountSid, authToken);
 
 module.exports = function(database) {
 
   /**
    * Restaurant owner side. This contains two views, dashboard and orders
-   * TODO: Add different owner id functionality
+   * Restaurant id is queried using owner_id from cookie
    */
   router.get('/', (req, res) => {
-    //TODO: Restaurant ID should be retrieved from session/cookie
-    database.findAllMenuItemsForRestaurant(1).then(
-      rows => {
-        res.render('owner_restaurants', { menuItems: rows });
-      });
+    const owner_id = req.session.user_id;
+    restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id).then((restaurant) => {
+      database.findAllMenuItemsForRestaurant(restaurant).then(
+        rows => {
+          res.render('owner_restaurants', { menuItems: rows });
+        })
+    })
 
     //Finds all orders corresponding to restaurant 1
     //TODO: Make restaurnts id dynamic to who ever is logged in
@@ -46,6 +51,7 @@ module.exports = function(database) {
 
     orders.findById(order_id)
       .then(order => {
+<<<<<<< HEAD
         orders.updateOrder('Accepted', order.id, 'current_status').then(
           rows => {
             tclient.messages
@@ -63,6 +69,24 @@ module.exports = function(database) {
       });
 
   })
+=======
+        tclient.messages
+          .create({
+            from: 'whatsapp:+14155238886',
+            body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
+            to: 'whatsapp:+17059873696'
+          })
+          .then(message => {
+            console.log(message);
+            res.redirect('/restaurant/owner');
+          });
+
+      },
+      err => {
+        console.log(err);
+      });
+  });
+>>>>>>> 499f3a05f84ad80a95ff6c78fbf1f76f3399b709
 
   /**
    * Cancel order route
@@ -191,19 +215,19 @@ module.exports = function(database) {
       price: req.body.newPrice,
       timeToPrepare: utility.minutesToQueryFormat(req.body.newTimeToPrepare),
       isActive: req.body.newActive
-    }
+    };
 
-    //TODO: Make restaurant ID fetch from session, hardcoded at the moment
-    database.addMenuItem(newMenuItemObject, 1).
-    then(row => {
+    //Restaurant ID fetch from session
+    const owner_id = req.session.user_id;
+    restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id)
+      .then(database.addMenuItem(newMenuItemObject, restaurant).then(row => {
         res.redirect('/restaurant/owner');
       },
       rej => {
         console.log(rej);
-      });
+      })
+      );
   });
-
-  //-------------Orders view-------------------------
 
   return router;
 };

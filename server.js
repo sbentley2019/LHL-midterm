@@ -47,7 +47,7 @@ app.use(methodOverride('_method'));
 app.use(cookieSession({
   httpOnly: false,
   name: 'session',
-  keys: ['user_id', 'order_id'],
+  keys: ['user_id', 'order_id','msg'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
@@ -103,7 +103,7 @@ app.post("/user/login", (req, res) => {
         }
       })
     }
-      // res.send(req.session);
+    // res.send(req.session);
   });
 });
 
@@ -118,10 +118,12 @@ app.post('/user/logout', (req, res) => {
 
 app.get('/', (req, res) => {
   res.status(200);
+
   restaurants.findAllRestaurants().then(restaurants => {
     let allRestaurants = restaurants;
-    res.render('index', { title: 'Ritual', restaurants: allRestaurants });
-  }).catch(err => console.log('err', err));
+
+    res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg });
+  });
 
 });
 
