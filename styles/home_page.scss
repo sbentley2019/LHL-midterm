@@ -1,4 +1,7 @@
 /* HOME PAGE */
+* {
+  font-family: 'Roboto', sans-serif;
+}
 
 .head-nav {
   position: fixed;
@@ -56,12 +59,14 @@
 .restaurants-container {
   position: absolute;
   z-index: 2;
-  top: 10%;
+  top: 7%;
   left: 0;
+  padding-top: 1%;
   display: flex;
   flex-direction: column;
   background-color: rgb(236, 236, 236);
   width: 35%;
+
   a {
     color: dimgray;
     &:hover {
@@ -74,35 +79,66 @@
 .restaurant-cards {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid #63707e;
+  border: 1px solid black;
   margin: 5px 10px;
+
   .restaurant-div {
+
     display: flex;
     height: 175px;
     padding: 10px;
     justify-content: space-around;
     align-items: center;
     background-color: white;
+    width: 100%;
+
     img {
       width: 35%;
-      height: 98%;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
     }
 
     .card-text {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      height: 90%;
       width: 60%;
+
       header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .header-text {
+          font-size: 2rem;
+          font-weight: 200;
+          margin-bottom: 0.5rem;
+          align-self: flex-start;
+        }
+
         .marker {
           color: lightskyblue;
           padding: 5px 10px;
           border: 1px solid lightskyblue;
           border-radius: 50%;
         }
+      }
+
+      .card-section {
+
+        .card-description {
+          font-size: 0.8rem;
+          margin-bottom: 0.3rem;
+        }
+        .card-business-hours {
+          font-size: 0.8rem;
+          margin-bottom: 0.3rem;
+        }
+      }
+
+      footer {
+        font-size: 0.7rem;
       }
     }
   }
@@ -128,7 +164,12 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
+    border-radius: 10px;
     width: 40%; /* Could be more or less, depending on screen size */
+  }
+
+  .modal-text{
+    font-size: 1.2rem;
   }
 
   /* The Close Button */
@@ -137,6 +178,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
+    line-height: 15px;
   }
 
   .close:hover,
