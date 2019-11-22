@@ -24,8 +24,8 @@ module.exports = function(database) {
       database.findAllMenuItemsForRestaurant(restaurant).then(
         rows => {
           res.render('owner_restaurants', { menuItems: rows });
-        })
-    })
+        });
+    });
 
     //Finds all orders corresponding to restaurant 1
     //TODO: Make restaurnts id dynamic to who ever is logged in
@@ -36,7 +36,7 @@ module.exports = function(database) {
   });
 
   router.get('/getOrders', (req, res) => {
-    orders.findByRestaurant(1).then(
+    orders.findByRestaurant(req.session.user_id).then(
       rows => {
         res.json({ orderItems: rows });
       });
