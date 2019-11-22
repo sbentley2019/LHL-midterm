@@ -44,27 +44,25 @@ module.exports = function(database) {
     const order_id = req.body.order_id;
     const order_time = req.body.order_time;
 
-    const order = orders.findById(order_id)
+    orders.findById(order_id)
       .then(order => {
-          tclient.messages
-            .create({
-              from: 'whatsapp:+14155238886',
-              body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
-              to: 'whatsapp:+17059873696'
-            })
-            .then(message => {
-              res.redirect('/restaurant/owner');
-            });
-          orders.updateOrder('Accepted', order.id, 'current_status').then(
-            rows => {
-              //Sends Ajax request to re render;
-            }
-          );
-        },
-        err => {
-          console.log(err);
-        });
-  });
+        orders.updateOrder('Accepted', order.id, 'current_status').then(
+          rows => {
+            // tclient.messages
+            //   .create({
+            //     from: 'whatsapp:+14155238886',
+            //     body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
+            //     to: 'whatsapp:+17059873696'
+            //   })
+            //   .then(message => {});
+            console.log('updating orders to accepted');
+            console.log(rows);
+            res.end();
+          }
+        );
+      });
+
+  })
 
   /**
    * Cancel order route
@@ -77,17 +75,33 @@ module.exports = function(database) {
         body: `Order #${order_id} has been cancelled. We apologize for any inconvenience.`,
         to: 'whatsapp:+17059873696'
       })
-      .then(message => {
-        res.redirect('/restaurant/owner');
-      });
+      .then(message => {});
     orders.updateOrder('Rejected', order_id, 'current_status').then(
       rows => {
-        //Sends Ajax request to re render;
+        res.end();
       }
     );
-
-
   })
+
+  /**
+   * Route for completing order
+   */
+  router.post('/complete_order', (req, res) => {
+    const order_id = req.body.order_id;
+    tclient.messages
+      .create({
+        from: 'whatsapp:+14155238886',
+        body: `Order #${order_id} has been completed. Please pick up at your earliest convenience`,
+        to: 'whatsapp:+17059873696'
+      })
+      .then(message => {});
+
+    orders.updateOrder('Ready', order_id, 'current_status')
+      .then(row => {
+        res.end()
+      });
+  });
+
   router.get('/:id/loadMenuItems', (req, res) => {
     menu_items.findByOrderId(req.params.id)
       .then((menu_item) => {
