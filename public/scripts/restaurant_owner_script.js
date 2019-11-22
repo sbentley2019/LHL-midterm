@@ -106,7 +106,7 @@ const generatePendingOrder = function(order) {
                           <div class="card-divider owner_order_card_footer">
                             <span style="width: 60%; margin: auto">
                               <div class="cell small-2">
-                                <input type="number" id="sliderOutput2" name="order_time" form="acceptForm-${order.id}">
+                                Time Required <input type="number" id="sliderOutput2" name="order_time" form="acceptForm-${order.id}">
                               </div>
                             </span>
                           <div>
