@@ -1,0 +1,41 @@
+.head-nav {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  .top-bar {
+    color: white;
+    background-color: #00203FFF;
+    height: 80px;
+    h3 {
+      line-height: 1.25;
+    }
+    .menu {
+      color: white;
+      background-color: #00203FFF;
+      a {
+        color: white;
+        padding: 0;
+      }
+    }
+    .top-bar-right {
+      .menu {
+        margin-top:10px;
+        padding-bottom: 7px;
+      }
+      width: 30%;
+      h4 {
+        margin-right: 50px;
+      }
+    }
+  }
+
+  #form-login {
+    display: flex;
+    input {
+      width: 75%;
+    }
+    button {
+      width: 25%;
+    }
+  }
+}
