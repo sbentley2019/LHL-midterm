@@ -141,7 +141,7 @@ app.get("/restaurants/:id", (req, res) => {
   res.status(200);
 
   // TODO: feed user_id - hardcoded 1 for now
-  orders.findActiveOrderId(1, req.params.id).then(order_id => {
+  orders.findActiveOrderId(req.session.user_id, req.params.id).then(order_id => {
     if (order_id) {
       req.session.order_id = order_id;
       restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
@@ -154,7 +154,7 @@ app.get("/restaurants/:id", (req, res) => {
   }).catch(no_order_id => {
     //If no order_id exist create one
     // HARD CODED USER ID
-    orders.createOrder(1, req.params.id).then(order => {
+    orders.createOrder(req.session.user_id, req.params.id).then(order => {
       // Sets session on GET request before page loads
       req.session.order_id = order[0].id;
       restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
