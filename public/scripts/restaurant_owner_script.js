@@ -46,11 +46,13 @@ const generateOrder = function(order) {
           </div>
       <div style="margin-left: auto; margin-top: auto">
 
-        <form action="/restaurant/owner/complete_order" method="POST" class="orderButtons">
+        <form action="/restaurant/owner/complete_order" method="POST" class="orderButtons" data-order-id=${order.id}
+        data-order-action="confirm">
             <button class="button orderButtons" type="submit" id="completeButton">Confirm</button>
             <input type="hidden" name="order_id" value="${order.id}">
         </form>
-        <form action="/restaurant/owner/cancel_order" method="POST" class="orderButtons">
+        <form action="/restaurant/owner/cancel_order" method="POST" class="orderButtons" data-order-id=${order.id}
+        data-order-action="cancel">
           <button class="button orderButtons" type="submit" id="cancelButton">Cancel</button>
           <input type="hidden" name="order_id" value="${order.id}">
         </form>
@@ -77,34 +79,6 @@ const generateOrder = function(order) {
 };
 
 const generatePendingOrder = function(order) {
-
-  // var form_1 = document.createElement("form");
-  // form_1.setAttribute("action", "/restaurant/owner/confirm_order");
-  // form_1.setAttribute("method", "POST");
-  // form_1.setAttribute("class", "orderButtons");
-  // form_1.setAttribute("id", "acceptForm");
-  // form_1.innerHTML = "";
-
-  // button_1 = $(`<button class="button orderButtons" type="submit" id="acceptButton">Accept</button>`);
-  // input_1 = $(`<input type="hidden" name="order_id" value="${order.id}">`);
-
-  // form_1.innerHTML = button_1.outerHTML + input_1.outerHTML;
-
-  let form1 = $(
-    `<form action="/restaurant/owner/confirm_order" method="POST" class="orderButtons" id="acceptForm">
-  <button class="button orderButtons" type="submit" id="acceptButton">Accept</button>
-  <input type="hidden" name="order_id" value="${order.id}">
-  </form>
-  `
-  );
-
-  let form2 = $(
-    `<form action="/restaurant/owner/cancel_order" method="POST" class="orderButtons">
-    <button class="button orderButtons" type="submit" id="cancelButton2">Cancel</button>
-    <input type="hidden" name="order_id" value="${order.id}">
-    </form>
-    `
-  );
 
   let orderBody = $(`
   <div class="cell">
@@ -135,7 +109,8 @@ const generatePendingOrder = function(order) {
   <button class="button orderButtons" type="submit" id="acceptButton">Accept</button>
   <input type="hidden" name="order_id" value="${order.id}">
   </form>
-  <form action="/restaurant/owner/cancel_order" method="POST" class="orderButtons">
+  <form action="/restaurant/owner/cancel_order" method="POST" class="orderButtons" data-order-id=${order.id}
+  data-order-action="cancel">
   <button class="button orderButtons" type="submit" id="cancelButton2">Cancel</button>
   <input type="hidden" name="order_id" value="${order.id}">
   </form>
@@ -143,23 +118,6 @@ const generatePendingOrder = function(order) {
                 </div>
             </div>
         </div>`);
-
-  // form1.on("submit", function(event) {
-  //   debugger;
-  //   event.preventDefault();
-  //   console.log(event);
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/restaurant/owner/confirm_order',
-  //   })
-  // })
-
-  // form2.find('button').on('click', function($button) {
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/restaurant/owner/cancel_order'
-  //   })
-  // });
   return orderBody;
 };
 
@@ -202,16 +160,48 @@ $(() => {
     })
   }
 
+  function cancelOrder(orderId) {
+    return $.ajax({
+      method: 'POST',
+      url: '/restaurant/owner/cancel_order',
+      data: {
+        order_id: orderId
+      }
+    })
+  }
+
+  function confirmOrder(orderId) {
+    return $.ajax({
+      method: 'POST',
+      url: '/restaurant/owner/complete_order',
+      data: {
+        order_id: orderId
+      }
+    })
+  }
+
   $(document).on('submit', "form.orderButtons", function(event) {
     event.preventDefault();
 
-    var $this = $(this)
+    var $this = $(this);
 
     var orderId = $this.data('order-id');
     var action = $this.data('order-action');
 
     if (action == "accept") {
       acceptOrder(orderId).then(function(response) {
+        clearRenderOrderItem('ordersGrid');
+        clearRenderOrderItem('pendingOrdersGrid');
+        renderOrders();
+      })
+    } else if (action == "cancel") {
+      cancelOrder(orderId).then(function(response) {
+        clearRenderOrderItem('ordersGrid');
+        clearRenderOrderItem('pendingOrdersGrid');
+        renderOrders();
+      })
+    } else if (action == "confirm") {
+      confirmOrder(orderId).then(function(response) {
         clearRenderOrderItem('ordersGrid');
         clearRenderOrderItem('pendingOrdersGrid');
         renderOrders();
