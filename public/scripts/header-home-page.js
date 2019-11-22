@@ -102,7 +102,7 @@ $(() => {
 
 
   // HARDCODED RESTAURANT ONE
-  $('.head-nav').append(buildNav(1));
+  $('.head-nav').append(buildNav(null));
 
   $('#form-login').submit(function(e) {
     e.preventDefault();
