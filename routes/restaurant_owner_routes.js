@@ -60,8 +60,6 @@ module.exports = function(database) {
                 to: 'whatsapp:+17059873696'
               })
               .then(message => {});
-            console.log('updating orders to accepted');
-            console.log(rows);
             res.end();
           }
         );
@@ -113,7 +111,6 @@ module.exports = function(database) {
         res.status(200);
         res.json(menu_item);
       }).catch((err) => {
-        console.log('ERROR: ', err);
         throw Error('Could not get GET order items');
       });
   });
@@ -197,17 +194,19 @@ module.exports = function(database) {
       timeToPrepare: utility.minutesToQueryFormat(req.body.newTimeToPrepare),
       isActive: req.body.newActive
     };
+    console.log(newMenuItemObject);
 
     //Restaurant ID fetch from session
     const owner_id = req.session.user_id;
-    restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id)
-      .then(database.addMenuItem(newMenuItemObject, restaurant).then(row => {
-          res.redirect('/restaurant/owner');
-        },
-        rej => {
-          console.log(rej);
-        }));
+    console.log("THIS IS THE OWNER ID", owner_id);
+    restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => {
+      console.log("THIS IS RESTAURANT ID", restaurant);
+      database.addMenuItem(newMenuItemObject, restaurant).then(
+        rows => {
+          res.redirect('/');
+        }
+      )
+    })
   });
-
   return router;
 };
