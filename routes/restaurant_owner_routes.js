@@ -124,6 +124,18 @@ module.exports = function(database) {
 
   });
 
+  router.get('/:id/userName', (req, res) => {
+    menu_items.findNameByOrderId(req.params.id)
+      .then((name) => {
+        console.log(name);
+        res.status(200);
+        res.json(name);
+      }).catch((err) => {
+        console.log('ERROR: ', err);
+        throw Error('Could not get GET order items');
+      });
+  });
+
   router.get('/:id/loadMenuItems', (req, res) => {
     menu_items.findByOrderId(req.params.id)
       .then((menu_item) => {

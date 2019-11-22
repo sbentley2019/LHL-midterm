@@ -21,6 +21,13 @@ const clearMsg = function() {
   });
 };
 
+const checkIfUserIdExist = function() {
+  return $.ajax({
+    type: 'POST',
+    url:'/user/findUser'
+  });
+};
+
 const buildNav = function(user) {
   let nav = `
   <div id="nav" class="top-bar">
@@ -90,10 +97,12 @@ $(() => {
 
   $('#form-sign-up').submit((e)=> {
     e.preventDefault();
-    newUser(this);
+
   });
 
-  $('.head-nav').append(buildNav(null));
+
+  // HARDCODED RESTAURANT ONE
+  $('.head-nav').append(buildNav(1));
 
   $('#form-login').submit(function(e) {
     e.preventDefault();

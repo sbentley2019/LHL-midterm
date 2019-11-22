@@ -28,6 +28,7 @@ module.exports = (db) => {
       });
   });
 
+
   router.post('/newOrder', (req, res) => {
     orders.createOrder().then(order => {
       // Assign Order Id to session
