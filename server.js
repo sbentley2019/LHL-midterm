@@ -85,8 +85,6 @@ app.post("/user/login", (req, res) => {
     return;
   }
 
-  console.log("CHECKING: ", req.session.user_id);
-
   if (!req.session.user_id) {
 
     users.findUserId(req.body.email).then(user => {
@@ -128,11 +126,15 @@ app.post('/user/logout', (req, res) => {
 app.get('/', (req, res) => {
   res.status(200);
 
-  restaurants.findAllRestaurants().then(restaurants => {
-    let allRestaurants = restaurants;
-    res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg || '' });
-  });
+  restaurants.findAllRestaurants().then(all_restaurants => {
+    let allRestaurants = all_restaurants;
 
+
+    restaurants.findRestaurantIdByOwnerId(req.session.user_id).then(exist => {res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg || '' , user_id: req.session.user_id || 0, is_owner: exist.id});
+    }).catch(doesnt_exist => {
+      res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg || '' , user_id: req.session.user_id || 0, is_owner: 0});
+    });
+  });
 });
 
 app.get("/restaurants/:id", (req, res) => {
