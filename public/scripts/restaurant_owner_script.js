@@ -184,6 +184,7 @@ $(() => {
     event.preventDefault();
 
     var $this = $(this);
+    debugger;
 
     var orderId = $this.data('order-id');
     var action = $this.data('order-action');
