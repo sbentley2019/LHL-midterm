@@ -8,7 +8,7 @@ CREATE TABLE menu_items (
   name VARCHAR(255) NOT NULL,
   description TEXT,
   price INTEGER DEFAULT 0 NOT NULL ,
-  time_to_prepare TIME,
+  time_to_prepare TIME DEFAULT 5,
   image_url VARCHAR(255),
   is_active BOOLEAN
 );

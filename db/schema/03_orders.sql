@@ -9,7 +9,7 @@ CREATE TABLE orders (
   restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
   total_cost INTEGER DEFAULT 0,
   start_time TIMESTAMP,
-  estimated_end_time TIMESTAMP,
+  estimated_end_time INTEGER,
   is_active BOOLEAN DEFAULT TRUE,
   current_status ORDERSTATUS DEFAULT 'Pending',
   time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
