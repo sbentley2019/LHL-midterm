@@ -149,20 +149,23 @@
                                                 <%=item.price%>
                                             </p>
                                             <button class="button">Add To Cart</button>
+                                            <button class="close-button " data-close aria-label="Close modal " type="button">
+                  <span aria-hidden="true ">&times;</span>
+                </button>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                <div class="reveal restaurant-owner-edit-modul" id="editImageModul<%=item.id%>" data-reveal data-animation-out="fade-out">
-                                    <div class="restaurant-owner-edit-image-modul-image">
+                                <div class="reveal" id="editImageModul<%=item.id%>" data-reveal data-animation-out="fade-out">
+                                    <div>
                                         <img style="max-width: 200px" src="<%=item.image_url%>">
                                     </div>
-                                    <form action="owner/uploadPhoto" method="POST" class="restaurant-owner-edit-image-modul-image">
-                                        <label>
-                                              <h5>Image URL</h5>
-                                              <input type="text" placeholder="url" name="updateURL">
-                                            </label>
+                                    <form action="owner/uploadPhoto" method="POST" class="">
+
+                                        <h5>Image URL</h5>
+                                        <input type="text" placeholder="url" name="updateURL">
+
                                         <div>
                                             <button class="button" type="submit">Confirm</button>
                                             <button class="button">Cancel</button>
@@ -174,65 +177,14 @@
                 </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editNameModul<%=item.id%>" data-reveal data-animation-out="fade-out">
+                                <div class="reveal" id="editNameModul<%=item.id%>" data-reveal data-animation-out="fade-out">
                                     <form action="owner/updateName" method="POST" class="restaurant-owner-edit-image-modul-image ">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
                                                 <div class="medium-12 cell ">
-                                                    <label>Name
-                            <input type="text " placeholder="name" name="updateName">
-                          </label>
+                                                    <h5>Name</h5>
+                                                    <input type="text" placeholder="name" name="updateName">
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <button class="button " type="submit">Confirm</button>
-                                            <button class="button ">Cancel</button>
-                                        </div>
-                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
-                                    </form>
-                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
-                  <span aria-hidden="true ">&times;</span>
-                </button>
-                                </div>
-
-                                <div class="reveal restaurant-owner-edit-modul " id="editDescriptionModul<%=item.id%>" data-reveal data-animation-out="fade-out">
-
-                                    <form action="owner/updateDescription" method="POST" class="restaurant-owner-edit-image-modul-image">
-                                        <div class="grid-container ">
-                                            <div class="grid-x grid-padding-x ">
-                                                <div class="medium-12 cell ">
-                                                    <label>Description
-                                                          <textarea placeholder="Description" name="updateDescription"></textarea>
-                                                        </label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <button class="button " type="submit">Confirm</button>
-                                            <button class="button ">Cancel</button>E
-                                        </div>
-                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
-                                    </form>
-                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
-                  <span aria-hidden="true ">&times;</span>
-                </button>
-                                </div>
-
-                                <div class="reveal restaurant-owner-edit-modul " id="editPriceModul<%=item.id%>" data-reveal data-animation-out="fade-out">
-
-                                    <form action="owner/updatePrice" method="POST" class="restaurant-owner-edit-image-modul-image ">
-                                        <div class="grid-container ">
-                                            <div class="grid-x grid-padding-x ">
-                                                <div class="medium-12 cell ">
-                                                    <label>Price
-                            <input type="text" placeholder="Price " name="updatePrice">
-                          </label>
-                                                </div>
-
                                             </div>
                                         </div>
 
@@ -247,20 +199,64 @@
                 </button>
                                 </div>
 
-                                <div class="reveal restaurant-owner-edit-modul " id="editTimeModul<%=item.id%>" data-reveal data-animation-out="fade-out">
+                                <div class="reveal" id="editDescriptionModul<%=item.id%>" data-reveal data-animation-out="fade-out">
 
-                                    <form action="owner/updateTime" method="POST" class="restaurant-owner-edit-image-modul-image ">
+                                    <form action="owner/updateDescription" method="POST" class="restaurant-owner-edit-image-modul-image">
                                         <div class="grid-container ">
                                             <div class="grid-x grid-padding-x ">
                                                 <div class="medium-12 cell ">
-                                                    <label>Time in Minutes
-                            <input type="text" placeholder="Minutes" name="updateTime">
-                          </label>
+                                                    <h5>Description</h5>
+                                                    <textarea placeholder="Description" name="updateDescription"></textarea>
                                                 </div>
 
                                             </div>
                                         </div>
 
+                                        <div>
+                                            <button class="button " type="submit">Confirm</button>
+                                            <button class="button ">Cancel</button>
+                                        </div>
+                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
+                                    </form>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+                  <span aria-hidden="true ">&times;</span>
+                </button>
+                                </div>
+
+                                <div class="reveal" id="editPriceModul<%=item.id%>" data-reveal data-animation-out="fade-out">
+
+                                    <form action="owner/updatePrice" method="POST" class="restaurant-owner-edit-image-modul-image ">
+                                        <div class="grid-container ">
+                                            <div class="grid-x grid-padding-x ">
+                                                <div class="medium-12 cell ">
+                                                    <h5>Price</h5>
+                                                    <input type="text" placeholder="Price " name="updatePrice">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <button class="button" type="submit">Confirm</button>
+                                            <button class="button ">Cancel</button>
+                                        </div>
+                                        <input type="hidden" name="menuItemId" value="<%=item.id%>">
+                                    </form>
+                                    <button class="close-button " data-close aria-label="Close modal " type="button ">
+                  <span aria-hidden="true ">&times;</span>
+                </button>
+                                </div>
+
+                                <div class="reveal" id="editTimeModul<%=item.id%>" data-reveal data-animation-out="fade-out">
+
+                                    <form action="owner/updateTime" method="POST" class="restaurant-owner-edit-image-modul-image ">
+                                        <div class="grid-container ">
+                                            <div class="grid-x grid-padding-x ">
+                                                <div class="medium-12 cell ">
+                                                    <h5>Time in Minutes</h5>
+                                                    <input type="text" placeholder="Minutes" name="updateTime">
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div>
                                             <button class="button" class="submit">Confirm</button>
                                             <button class="button">Cancel</button>
@@ -275,12 +271,11 @@
                                 <div class="reveal" id="editActiveModul<%=item.id%>" data-reveal data-animation-out="fade-out">
 
                                     <form action='owner/updateActive' method="POST">
-                                        <label>Select Menu
-                                            <select name="updateActive">
+                                        <h5>Select Menu</h5>
+                                        <select name="updateActive">
                                               <option value="true">True</option>
                                               <option value="false">False</option>
                                             </select>
-                                          </label>
 
                                         <div>
                                             <button class="button" type="submit">Confirm</button>
