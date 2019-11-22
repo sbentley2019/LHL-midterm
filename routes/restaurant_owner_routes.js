@@ -56,18 +56,16 @@ module.exports = function(database) {
             tclient.messages
               .create({
                 from: 'whatsapp:+14155238886',
-                body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
+                body: `Order #${order.id} has been confirmed, it will be ready in ${req.body.order_time} minutes`,
                 to: 'whatsapp:+17059873696'
               })
-              .then(message => {});
-            console.log('updating orders to accepted');
-            console.log(rows);
-            res.end();
+              .then(message => {
+                res.end();
+              });
           }
         );
       });
-
-  })
+  });
 
   /**
    * Cancel order route
@@ -80,31 +78,50 @@ module.exports = function(database) {
         body: `Order #${order_id} has been cancelled. We apologize for any inconvenience.`,
         to: 'whatsapp:+17059873696'
       })
-      .then(message => {});
-    orders.updateOrder('Rejected', order_id, 'current_status').then(
-      rows => {
-        res.end();
-      }
-    );
-  })
+      .then(message => {
+        orders.updateOrder('Rejected', order_id, 'current_status').then(
+          rows => {
+            res.end();
+          });
+      });
+  });
 
   /**
    * Route for completing order
    */
   router.post('/complete_order', (req, res) => {
-    const order_id = req.body.order_id;
-    tclient.messages
-      .create({
-        from: 'whatsapp:+14155238886',
-        body: `Order #${order_id} has been completed. Please pick up at your earliest convenience`,
-        to: 'whatsapp:+17059873696'
-      })
-      .then(message => {});
 
-    orders.updateOrder('Ready', order_id, 'current_status')
-      .then(row => {
-        res.end()
-      });
+    const order_id = req.body.order_id;
+
+    restaurants.findRestaurantIdByOrderId(order_id).then(restaurant => {
+
+      const current_lat = 43.644;
+      const current_lng = -79.402;
+      const destination_lat = restaurant.lat;
+      const destination_lng = restaurant.lng;
+
+      tclient.messages
+        .create({
+          from: 'whatsapp:+14155238886',
+          body: `Order #${order_id} has been completed. Please pick up the order at your earliest convienence.
+
+          Here are the directions to the restaurant: https://www.google.com/maps/dir/?api=1&origin=${current_lat},${current_lng}&destination=${destination_lat},${destination_lng}&travelmode=walking`,
+          to: 'whatsapp:+17059873696'
+        }).then(message => {
+
+          console.log('estimated_end_time', req.body.order_time);
+
+          orders.updateOrder(
+            'Ready', order_id, 'current_status',
+          )
+            .then(row => {
+              orders.updateOrder(req.body.order_time, order_id, 'estimated_end_time');
+            }).then(() => {
+              res.end();
+            });
+        });
+    });
+
   });
 
   router.get('/:id/loadMenuItems', (req, res) => {
