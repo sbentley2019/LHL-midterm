@@ -2,101 +2,164 @@
 <html lang="en">
 
 <head>
-    <title>Home Page</title>
+  <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/home_page.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/home_page.css" type="text/css" />
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/header-home-page.js"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/header-home-page.js"></script>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
-    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundation | Welcome</title>
+  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header class="head-nav">
-    </header>
-
-    <div class="reveal" id="signUpModal" data-reveal>
-        <h1>Sign Up</h1>
-        <form id="form-sign-up" action="/user/new" method="POST">
-            <label for="first">First name:</label>
-            <input type="text" name="first" id="first">
-            <label for="last">Last name:</label>
-            <input type="text" name="last" id="last">
-            <label for="email">email:</label>
-            <input type="email" name="email" id="email">
-            <label for="phone">phone:</label>
-            <input type="text" name="phone" id="phone">
-            <label for="password">password:</label>
-            <input type="password" name="password" id="password">
-            <input type="submit" data-close value="submit">
-        </form>
-        <button class="close-button" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <div class="map-container">
-        <div id="map" class="page-container"></div>
-    </div>
-
-
-    <% if (msg.length > 4) { %>
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p class="modal-text">
-                    <%= msg %>
-                </p>
-            </div>
+  <header class="head-nav">
+    <div id="nav" class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">
+            <h3>!Ritual</h3>
+          </li>
+          <% if (is_owner) { %>
+            <li>
+                <a href="/restaurant/owner">
+                  <button class="button">Restaurant</button>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="top-bar-right">
+            <ul class="menu">
+              <li><h4>Welcome</h4></li>
+              <li>
+                <form id="form-logout" action="/user/logout" method="POST" >
+                <input type="submit" class="button" value="Logout">
+                </form>
+              </li>
+            </ul>
+          </div>
         </div>
-        <% } %>
+    <% } else if (user_id) { %>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li>
+        <h4>Welcome<h4>
+      </li>
+      <li>
+        <form id="form-logout" action="/user/logout" method="POST">
+          <input type="submit" class="button" value="Logout">
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+    <% } else { %>
+    </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li>
+          <form id="form-login" action="/user/login" method="POST">
+            <input type="email" id="email" name="email" placeholder="email">
+            <button class="button" type="submit">Login</button>
+          </form>
+        </li>
+        <li>
+          <button class="button" data-open="signUpModal">Sign Up</button>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <% } %>
 
-            <div class="restaurants-container">
-                <% for (const restaurant of restaurants) {%>
-                    <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-id="<%=restaurant.id%>" data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>">
-                        <div class="restaurant-div">
-                            <img src="<%= restaurant.img_url %>">
-                            <div class="card-text">
-                                <header>
-                                    <p class="header-text">
-                                        <%= restaurant.name %>
-                                            </h4>
-                                            <p class="marker">
-                                                <%= restaurant.id %>
-                                            </p>
-                                </header>
-                                <div class="card-section">
-                                    <p class="card-description">
-                                        <%= restaurant.description %>
-                                    </p>
-                                    <p class="card-business-hours">Business Hours Open
-                                        <%=restaurant.start_hour%> AM -
-                                            <%=restaurant.end_hour%> PM</p>
-                                </div>
-                                <footer>
-                                    <span><%= restaurant.location %></span>
-                                </footer>
-                            </div>
-                        </div>
-                    </a>
-                    <% } %>
-            </div>
+
+  </header>
+
+  <div class="reveal" id="signUpModal" data-reveal>
+    <h1>Sign Up</h1>
+    <form id="form-sign-up" action="/user/new" method="POST">
+      <label for="first">First name:</label>
+      <input type="text" name="first" id="first">
+      <label for="last">Last name:</label>
+      <input type="text" name="last" id="last">
+      <label for="email">email:</label>
+      <input type="email" name="email" id="email">
+      <label for="phone">phone:</label>
+      <input type="text" name="phone" id="phone">
+      <label for="password">password:</label>
+      <input type="password" name="password" id="password">
+      <input type="submit" data-close value="submit">
+    </form>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="map-container">
+    <div id="map" class="page-container"></div>
+  </div>
+
+
+  <% if (msg.length > 4) { %>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p class="modal-text">
+        <%= msg %>
+      </p>
+    </div>
+  </div>
+  <% } %>
+
+  <div class="restaurants-container">
+    <% for (const restaurant of restaurants) {%>
+    <a class="restaurant-cards" href="./restaurants/<%=restaurant.id%>" data-id="<%=restaurant.id%>"
+      data-lng="<%= restaurant.lng %>" data-lat="<%= restaurant.lat %>">
+      <div class="restaurant-div">
+        <img src="<%= restaurant.img_url %>">
+        <div class="card-text">
+          <header>
+            <p class="header-text">
+              <%= restaurant.name %>
+              </h4>
+              <p class="marker">
+                <%= restaurant.id %>
+              </p>
+          </header>
+          <div class="card-section">
+            <p class="card-description">
+              <%= restaurant.description %>
+            </p>
+            <p class="card-business-hours">Business Hours Open
+              <%=restaurant.start_hour%> AM -
+              <%=restaurant.end_hour%> PM</p>
+          </div>
+          <footer>
+            <span><%= restaurant.location %></span>
+          </footer>
+        </div>
+      </div>
+    </a>
+    <% } %>
+  </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 <script>
-    $(document).foundation();
+  $(document).foundation();
+
 </script>
 
 <!-- <script src="/scripts/googleMaps.js"></script>
