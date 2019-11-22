@@ -3,6 +3,12 @@ const router = express.Router();
 const orders = require('../lib/database/orders');
 const menu_items = require('../lib/database/menu_items');
 
+/* Twilio Imports */
+const accountSid = 'AC6aeef0c97f09d55152dc6242c62a5191';
+const authToken = '0958ca806061cb75d424c3b6115cd6cf';
+const twilio = require('twilio');
+const tclient = twilio(accountSid, authToken);
+
 module.exports = (db) => {
 
   /* GET order for a given user_id */
@@ -43,10 +49,33 @@ module.exports = (db) => {
   /* POST to process checkout */
   router.post('/checkout', (req,res) => {
     menu_items.totalOrder(req.session.order_id).then(total_cost => {
-      console.log("totalcost: ", total_cost);
-      orders.processOrder(req.session.order_id, total_cost);
-      res.end();
+
+      const current_lat = 43.644;
+      const current_lng = -79.402;
+      const destination_lat = 43.643;
+      const destination_lng = -79.399;
+
+      tclient.messages
+        .create({
+          from: 'whatsapp:+14155238886',
+          body: `Order #${req.session.order_id} has been placed, you will be charged $ ${total_cost} when the order is accepted.
+          LINK TO RESTAURANT https://www.google.com/maps/dir/?api=1&origin=${current_lat},${current_lng}&destination=${destination_lat},${destination_lng}&travelmode=walking`,
+          to: 'whatsapp:+17059873696'
+        }).then(messages_sent => {
+          orders.processOrder(req.session.order_id, total_cost);
+
+          req.session.msg = "Order has been placed! Please check your phone for updates";
+
+          res.end();
+        });
     });
+  });
+
+  /* Clears Session Msg */
+  router.post('/clearSession', (req,res) => {
+    req.session.msg = "";
+    console.log(req.session.msg);
+    res.end();
   });
 
 
