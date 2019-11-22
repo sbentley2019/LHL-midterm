@@ -5,11 +5,28 @@
   z-index: 5;
   width: 100%;
   .top-bar {
-    background-color: #8bbabb;
+    color: white;
+    background-color: #00203FFF;
+    height: 80px;
+    h3 {
+      line-height: 1.25;
+    }
     .menu {
-      background-color: #8bbabb;
+      color: white;
+      background-color: #00203FFF;
+    }
+    .top-bar-right {
+      .menu {
+        margin-top:10px;
+        padding-bottom: 7px;
+      }
+      width: 30%;
+      h4 {
+        margin-right: 50px;
+      }
     }
   }
+
   #form-login {
     display: flex;
     input {
