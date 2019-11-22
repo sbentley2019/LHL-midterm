@@ -36,10 +36,12 @@ module.exports = function(database) {
   });
 
   router.get('/getOrders', (req, res) => {
-    orders.findByRestaurant(req.session.user_id).then(
-      rows => {
-        res.json({ orderItems: rows });
-      });
+    restaurants.findRestaurantIdByOwnerId(req.session.user_id).then(resId =>  {
+      orders.findByRestaurant(resId.id).then(
+        rows => {
+          res.json({ orderItems: rows });
+        });
+    });
   });
 
   /**
