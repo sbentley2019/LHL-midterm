@@ -69,20 +69,14 @@ app.use("/api/users", usersRoutes(db));
 
 //Passes restaurants database as well as orders database.
 app.use('/restaurant/owner', (req, res, next) => {
-  const restaurant_id = 1;
-  const user_id = req.session.user_id;
-  console.log("user_id: " + req.session);
-  if (user_id) {
-    restaurants.findRestaurantOwnerId(restaurant_id).then(owner_id => {
-      if (owner_id && owner_id === user_id) {
-        next();
-      } else {
-        res.redirect('/');
-      }
-    })
-  } else {
-    res.redirect('/');
-  }
+  let user_id = req.session.user_id;
+  restaurants.findRestaurantOwnerId(user_id).then(restaurant => {
+    if (restaurant) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+  })
 }, restaurant_owner_routes(restaurants, orders));
 
 app.post("/user/login", (req, res) => {
@@ -95,9 +89,9 @@ app.post("/user/login", (req, res) => {
       res.json(null);
     } else {
       req.session.user_id = user.id;
-      restaurants.findRestaurantOwnerId(1).then(owner_id => {
-        if (owner_id && owner_id === user.id) {
-          res.json(1);
+      restaurants.findRestaurantOwnerId(user.id).then(restaurant => {
+        if (restaurant) {
+          res.json(restaurant.id);
         } else {
           res.json(0);
         }
