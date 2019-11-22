@@ -16,6 +16,13 @@ const retrieveMenuItem = function(order_id) {
   });
 };
 
+const getUserNameFromOrderID = function(order_id) {
+  return $.ajax({
+    method: "GET",
+    url: "/restaurant/owner/" + order_id + "/userName",
+  });
+};
+
 const generateOrderItemsList = function(orderItemList) {
   let listBody = '';
   for (const menuItem of orderItemList) {
@@ -35,7 +42,7 @@ const clearRenderOrderItem = function(element) {
   $(`#${element}`).children().detach();
 };
 
-const generateOrder = function(order) {
+const generateOrder = function(order, name) {
   let orderBody = $(`
   <div class="cell">
     <div class="card active_order_card_container">
@@ -67,7 +74,7 @@ const generateOrder = function(order) {
       <div class="card-divider">
           <span class="owner_order_card_footer">
               <div>
-                  <p>From:</p>
+                  <p>From: ${name.first_name} ${name.last_name}</p>
                   <p>ID: ${order.user_id} </p>
               </div>
               <h5>Price ${order.total_cost}</h5>
@@ -129,21 +136,21 @@ $(() => {
     fetchOrderList().then(orderList => {
       for (const order of orderList.orderItems) {
 
-        console.log(order.current_status);
+        getUserNameFromOrderID(order.id).then(name => {
+          if (order.current_status === 'Accepted') {
+            $("#ordersGrid").prepend(generateOrder(order,name));
 
-        if (order.current_status === 'Accepted') {
-          $("#ordersGrid").prepend(generateOrder(order));
+            retrieveMenuItem(order.id).then(orderItemList => {
+              $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
+            });
+          } else if (order.current_status === 'Pending') {
+            $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
 
-          retrieveMenuItem(order.id).then(orderItemList => {
-            $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
-          });
-        } else if (order.current_status === 'Pending') {
-          $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
-
-          retrieveMenuItem(order.id).then(orderItemList => {
-            $(`#pendingOrderBody-${order.id}`).prepend(generateOrderItemsList(orderItemList));
-          });
-        }
+            retrieveMenuItem(order.id).then(orderItemList => {
+              $(`#pendingOrderBody-${order.id}`).prepend(generateOrderItemsList(orderItemList));
+            });
+          }
+        });
       }
     });
   };
