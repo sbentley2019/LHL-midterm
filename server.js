@@ -47,7 +47,7 @@ app.use(methodOverride('_method'));
 app.use(cookieSession({
   httpOnly: false,
   name: 'session',
-  keys: ['user_id', 'order_id','msg'],
+  keys: ['user_id', 'order_id', 'msg'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
@@ -87,7 +87,7 @@ app.use('/restaurant/owner', (req, res, next) => {
 
 app.post("/user/login", (req, res) => {
   if (!req.body.email) {
-    res.status(400).json({ error: 'invalid request: no data in POST body'});
+    res.status(400).json({ error: 'invalid request: no data in POST body' });
     return;
   }
   users.findUserId(req.body.email).then(user => {
@@ -121,8 +121,8 @@ app.get('/', (req, res) => {
 
   restaurants.findAllRestaurants().then(restaurants => {
     let allRestaurants = restaurants;
-
-    res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg });
+    console.log(req.session.msg);
+    res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg || '' });
   });
 
 });
@@ -137,20 +137,20 @@ app.get("/restaurants/:id", (req, res) => {
       restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
         restaurants.findRestaurantById(req.params.id).then(restaurant => {
           let allItems = menu_items;
-          res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
+          res.render('restaurant', { restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id });
         });
       });
     }
   }).catch(no_order_id => {
-  //If no order_id exist create one
-  // HARD CODED USER ID
-    orders.createOrder(1,req.params.id).then(order => {
-    // Sets session on GET request before page loads
+    //If no order_id exist create one
+    // HARD CODED USER ID
+    orders.createOrder(1, req.params.id).then(order => {
+      // Sets session on GET request before page loads
       req.session.order_id = order[0].id;
       restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
         restaurants.findRestaurantById(req.params.id).then(restaurant => {
           let allItems = menu_items;
-          res.render('restaurant', {restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id});
+          res.render('restaurant', { restaurant: restaurant, menu_items: allItems, order_id: req.session.order_id });
         });
       });
     });

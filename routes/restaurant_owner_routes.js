@@ -51,7 +51,6 @@ module.exports = function(database) {
 
     orders.findById(order_id)
       .then(order => {
-<<<<<<< HEAD
         orders.updateOrder('Accepted', order.id, 'current_status').then(
           rows => {
             tclient.messages
@@ -69,24 +68,6 @@ module.exports = function(database) {
       });
 
   })
-=======
-        tclient.messages
-          .create({
-            from: 'whatsapp:+14155238886',
-            body: `Order #${order.id} has been confirmed, it will be ready in ${order_time} minutes`,
-            to: 'whatsapp:+17059873696'
-          })
-          .then(message => {
-            console.log(message);
-            res.redirect('/restaurant/owner');
-          });
-
-      },
-      err => {
-        console.log(err);
-      });
-  });
->>>>>>> 499f3a05f84ad80a95ff6c78fbf1f76f3399b709
 
   /**
    * Cancel order route
@@ -221,12 +202,11 @@ module.exports = function(database) {
     const owner_id = req.session.user_id;
     restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => restaurant.id)
       .then(database.addMenuItem(newMenuItemObject, restaurant).then(row => {
-        res.redirect('/restaurant/owner');
-      },
-      rej => {
-        console.log(rej);
-      })
-      );
+          res.redirect('/restaurant/owner');
+        },
+        rej => {
+          console.log(rej);
+        }));
   });
 
   return router;
