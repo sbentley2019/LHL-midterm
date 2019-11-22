@@ -1,3 +1,4 @@
+// layout.scss
 // See: https://sass-lang.com/
 
 body {
@@ -119,15 +120,15 @@ main.menu {
 
       #restaurant-img {
       width: 75%;
-      object-fit: cover;
+      object-fit: stretch;
       }
 
       #restaurant-information {
         display: block;
-        background: lightblue;
+        background: white;
         width: 25%;
         flex-grow: 1;
-        padding-top: 12%;
+        padding-top: 15%;
         text-align: right;
 
         p {
@@ -243,6 +244,8 @@ main.menu {
       margin: 0 auto;
       order:-1;
       margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
     }
 
     button#checkout {

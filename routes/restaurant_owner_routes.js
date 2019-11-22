@@ -24,8 +24,8 @@ module.exports = function(database) {
       database.findAllMenuItemsForRestaurant(restaurant).then(
         rows => {
           res.render('owner_restaurants', { menuItems: rows });
-        })
-    })
+        });
+    });
 
     //Finds all orders corresponding to restaurant 1
     //TODO: Make restaurnts id dynamic to who ever is logged in
@@ -36,10 +36,12 @@ module.exports = function(database) {
   });
 
   router.get('/getOrders', (req, res) => {
-    orders.findByRestaurant(1).then(
-      rows => {
-        res.json({ orderItems: rows });
-      });
+    restaurants.findRestaurantIdByOwnerId(req.session.user_id).then(resId =>  {
+      orders.findByRestaurant(resId.id).then(
+        rows => {
+          res.json({ orderItems: rows });
+        });
+    });
   });
 
   /**
@@ -122,6 +124,18 @@ module.exports = function(database) {
         });
     });
 
+  });
+
+  router.get('/:id/userName', (req, res) => {
+    menu_items.findNameByOrderId(req.params.id)
+      .then((name) => {
+        console.log(name);
+        res.status(200);
+        res.json(name);
+      }).catch((err) => {
+        console.log('ERROR: ', err);
+        throw Error('Could not get GET order items');
+      });
   });
 
   router.get('/:id/loadMenuItems', (req, res) => {

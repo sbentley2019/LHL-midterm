@@ -84,48 +84,64 @@ app.post("/user/login", (req, res) => {
     res.status(400).json({ error: 'invalid request: no data in POST body' });
     return;
   }
-  users.findUserId(req.body.email).then(user => {
-    if (!user.id) {
-      res.json(null);
-    } else {
-      req.session.user_id = user.id;
-      restaurants.findRestaurantOwnerId(user.id).then(restaurant => {
-        if (restaurant) {
-          res.json(restaurant.id);
-        } else {
-          res.json(0);
-        }
-      })
-    }
-    // res.send(req.session);
-  });
+
+  if (!req.session.user_id) {
+
+    users.findUserId(req.body.email).then(user => {
+      if (!user.id) {
+        res.json(null);
+      } else {
+        req.session.user_id = user.id;
+        restaurants.findRestaurantOwnerId(user.id).then(restaurant => {
+          if (restaurant) {
+            res.json(restaurant.id);
+          } else {
+            res.json(0);
+          }
+        });
+      }
+    });
+
+  } else {
+    restaurants.findRestaurantOwnerId(req.session.user_id).then(restaurant => {
+      if (restaurant) {
+        res.json(restaurant.id);
+      } else {
+        res.json(0);
+      }
+    });
+  }
 });
+
 
 app.post('/user/new', (req, res) => {
   //Insert users.
-})
+});
 
 app.post('/user/logout', (req, res) => {
   req.session.user_id = null;
   res.redirect('/');
-})
+});
 
 app.get('/', (req, res) => {
   res.status(200);
 
-  restaurants.findAllRestaurants().then(restaurants => {
-    let allRestaurants = restaurants;
-    console.log(req.session.msg);
-    res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg || '' });
-  });
+  restaurants.findAllRestaurants().then(all_restaurants => {
+    let allRestaurants = all_restaurants;
 
+
+    restaurants.findRestaurantIdByOwnerId(req.session.user_id).then(exist => {res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg || '' , user_id: req.session.user_id || 0, is_owner: exist.id});
+    }).catch(doesnt_exist => {
+      res.render('index', { title: 'Ritual', restaurants: allRestaurants, msg: req.session.msg || '' , user_id: req.session.user_id || 0, is_owner: 0});
+    });
+  });
 });
 
 app.get("/restaurants/:id", (req, res) => {
   res.status(200);
 
   // TODO: feed user_id - hardcoded 1 for now
-  orders.findActiveOrderId(1, req.params.id).then(order_id => {
+  orders.findActiveOrderId(req.session.user_id, req.params.id).then(order_id => {
     if (order_id) {
       req.session.order_id = order_id;
       restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
@@ -138,7 +154,7 @@ app.get("/restaurants/:id", (req, res) => {
   }).catch(no_order_id => {
     //If no order_id exist create one
     // HARD CODED USER ID
-    orders.createOrder(1, req.params.id).then(order => {
+    orders.createOrder(req.session.user_id, req.params.id).then(order => {
       // Sets session on GET request before page loads
       req.session.order_id = order[0].id;
       restaurants.findAllMenuItemsForRestaurant(req.params.id).then(menu_items => {
