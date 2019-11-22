@@ -30,7 +30,25 @@ const buildNav = function(user) {
         <h3>!Ritual</h3>
       </li>
   `;
-  if (user === 0) {
+  if (user === null) {
+    return nav + `
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li>
+          <form id="form-login" action="/user/login" method="POST" >
+            <input type="email" id="email" name="email" placeholder="email">
+            <button class="button" type="submit">Login</button>
+          </form>
+        </li>
+        <li>
+          <button class="button" data-open="signUpModal">Sign Up</button>
+        </li>
+      </ul>
+    </div>
+  </div>`;
+  } else if (user === 0) {
     return nav + `
       </ul>
     </div>
@@ -45,7 +63,7 @@ const buildNav = function(user) {
       </ul>
     </div>
   </div>`;
-  } else if (user === 1) {
+  } else {
     return nav + `
       <li>
         <a href="/restaurant/owner">
@@ -65,24 +83,6 @@ const buildNav = function(user) {
     </ul>
   </div>
 </div>`
-  } else {
-    return nav + `
-      </ul>
-    </div>
-    <div class="top-bar-right">
-      <ul class="menu">
-        <li>
-          <form id="form-login" action="/user/login" method="POST" >
-            <input type="email" id="email" name="email" placeholder="email">
-            <button class="button" type="submit">Login</button>
-          </form>
-        </li>
-        <li>
-          <button class="button" data-open="signUpModal">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-  </div>`;
   }
 };
 
@@ -93,7 +93,7 @@ $(() => {
     newUser(this);
   });
 
-  $('.head-nav').append(buildNav(3));
+  $('.head-nav').append(buildNav(null));
 
   $('#form-login').submit(function(e) {
     e.preventDefault();
