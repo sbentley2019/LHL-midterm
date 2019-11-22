@@ -99,11 +99,11 @@ const generatePendingOrder = function(order) {
                           <div class="card-divider owner_order_card_footer">
                             <span style="width: 60%; margin: auto">
                               <div class="cell small-2">
-                                <input type="number" id="sliderOutput2" name="order_time" form="acceptForm">
+                                <input type="number" id="sliderOutput2" name="order_time" form="acceptForm-${order.id}">
                               </div>
                             </span>
                           <div>
-                          <form action="/restaurant/owner/confirm_order" method="POST" class="orderButtons" id="acceptForm"
+                          <form action="/restaurant/owner/confirm_order" method="POST" class="orderButtons" id="acceptForm-${order.id}"
                           data-order-id=${order.id}
                           data-order-action="accept">
   <button class="button orderButtons" type="submit" id="acceptButton">Accept</button>
@@ -123,7 +123,7 @@ const generatePendingOrder = function(order) {
 
 $(() => {
   clearRenderOrderItem('ordersGrid');
-  clearRenderOrderItem('pendingOrdersGrid')
+  clearRenderOrderItem('pendingOrdersGrid');
 
   const renderOrders = function() {
     fetchOrderList().then(orderList => {
@@ -136,7 +136,7 @@ $(() => {
 
           retrieveMenuItem(order.id).then(orderItemList => {
             $(`#order-body-${order.id}`).prepend(generateOrderItemsList(orderItemList));
-          })
+          });
         } else if (order.current_status === 'Pending') {
           $("#pendingOrdersGrid").prepend(generatePendingOrder(order));
 
@@ -150,63 +150,59 @@ $(() => {
 
   renderOrders();
 
-  function acceptOrder(orderId) {
+  function acceptOrder(data) {
     return $.ajax({
       method: 'POST',
       url: '/restaurant/owner/confirm_order',
-      data: {
-        order_id: orderId
-      }
-    })
+      data
+    });
   }
 
-  function cancelOrder(orderId) {
+  function cancelOrder(data) {
     return $.ajax({
       method: 'POST',
       url: '/restaurant/owner/cancel_order',
-      data: {
-        order_id: orderId
-      }
-    })
+      data
+    });
   }
 
-  function confirmOrder(orderId) {
+  function confirmOrder(data) {
     return $.ajax({
       method: 'POST',
       url: '/restaurant/owner/complete_order',
-      data: {
-        order_id: orderId
-      }
-    })
+      data
+    });
   }
 
   $(document).on('submit', "form.orderButtons", function(event) {
     event.preventDefault();
 
-    var $this = $(this);
-    debugger;
-
-    var orderId = $this.data('order-id');
-    var action = $this.data('order-action');
+    let $this = $(this);
+    let action = $this.data('order-action');
+    let data = $(this).serialize();
 
     if (action == "accept") {
-      acceptOrder(orderId).then(function(response) {
+      acceptOrder(data).then(function(response) {
         clearRenderOrderItem('ordersGrid');
         clearRenderOrderItem('pendingOrdersGrid');
         renderOrders();
-      })
+      });
+
     } else if (action == "cancel") {
-      cancelOrder(orderId).then(function(response) {
+      cancelOrder(data).then(function(response) {
         clearRenderOrderItem('ordersGrid');
         clearRenderOrderItem('pendingOrdersGrid');
         renderOrders();
-      })
+      });
+
     } else if (action == "confirm") {
-      confirmOrder(orderId).then(function(response) {
+      confirmOrder(data).then(function(response) {
         clearRenderOrderItem('ordersGrid');
         clearRenderOrderItem('pendingOrdersGrid');
         renderOrders();
-      })
+      });
     }
+
+
   });
 });
