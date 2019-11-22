@@ -179,7 +179,7 @@ module.exports = function(database) {
       price: req.body.newPrice,
       timeToPrepare: utility.minutesToQueryFormat(req.body.newTimeToPrepare),
       isActive: req.body.newActive
-    }
+    };
 
     //Restaurant ID fetch from session
     const owner_id = req.session.user_id;
@@ -192,8 +192,6 @@ module.exports = function(database) {
       })
       );
   });
-
-  //-------------Orders view-------------------------
 
   return router;
 };

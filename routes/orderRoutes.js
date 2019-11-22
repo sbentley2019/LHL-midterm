@@ -74,6 +74,7 @@ module.exports = (db) => {
   /* Clears Session Msg */
   router.post('/clearSession', (req,res) => {
     req.session.msg = "";
+    console.log(req.session.msg);
     res.end();
   });
 
