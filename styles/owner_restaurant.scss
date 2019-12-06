@@ -1,3 +1,12 @@
+//---------Global
+h5 {
+    font-size: 2em;
+}
+
+th {
+    max-width: 300px;
+}
+
 //----------Dashboard css--------------------------
 .restaurant-owner-logout-button {
     position: absolute;
@@ -43,9 +52,11 @@
 }
 
 .restaurant-owner-table-image-container {
-    width: 100px;
+    width: 50px;
     padding: 5%;
 }
+
+.owner-tab-home {}
 
 //Dashboard footer scss
 .owner_footer_container {

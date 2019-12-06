@@ -32,6 +32,14 @@ $(() => {
       gestureHandling: 'cooperative'
     });
 
+    let userMarker = new google.maps.Marker({
+      position: {lat: currentLat, lng: currentLng},
+      map: map,
+      size: new google.maps.Size(15, 15),
+      animation: google.maps.Animation.DROP,
+      title: 'Current Location'
+    });
+
     // This puts all the restaurants as markers on the map
     $('.restaurant-cards').each(function() {
       let coordinates = {lat: Number($(this).attr('data-lat')), lng: Number($(this).attr('data-lng')) };
