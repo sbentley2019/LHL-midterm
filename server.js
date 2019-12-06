@@ -1,11 +1,5 @@
 // load .env data into process.env
-// require('dotenv').config();
-
-// Imported Modules
-const restaurants = require("./lib/database/restaurants");
-const orders = require("./lib/database/orders");
-const users = require("./lib/database/users");
-const menu_items = require("./lib/database/menu_items");
+require("dotenv").config();
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -23,6 +17,12 @@ const { Pool } = require("pg");
 const dbParams = require("./lib/database/db.js");
 const db = new Pool(dbParams);
 db.connect();
+
+// Imported Modules
+const restaurants = require("./lib/database/restaurants")(db);
+const orders = require("./lib/database/orders")(db);
+const users = require("./lib/database/users")(db);
+const menu_items = require("./lib/database/menu_items")(db);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
