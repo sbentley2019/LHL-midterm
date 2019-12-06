@@ -82,7 +82,7 @@ app.use(
       }
     });
   },
-  restaurant_owner_routes(restaurants, orders)
+  restaurant_owner_routes(db)
 );
 
 app.post("/user/login", (req, res) => {

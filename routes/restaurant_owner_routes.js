@@ -22,7 +22,7 @@ module.exports = function(db) {
       .findRestaurantIdByOwnerId(owner_id)
       .then(restaurant => restaurant.id)
       .then(restaurant => {
-        database.findAllMenuItemsForRestaurant(restaurant).then(rows => {
+        restaurants.findAllMenuItemsForRestaurant(restaurant).then(rows => {
           res.render("owner_restaurants", { menuItems: rows });
         });
       });
@@ -156,7 +156,7 @@ module.exports = function(db) {
   router.post("/uploadPhoto", (req, res) => {
     const updatedImageURL = req.body.updateURL;
     const menuItemId = req.body.menuItemId;
-    database
+    restaurants
       .updateMenuItem(updatedImageURL, menuItemId, "image_url")
       .then(rows => {
         res.redirect("/restaurant/owner");
@@ -166,7 +166,7 @@ module.exports = function(db) {
   router.post("/updateName", (req, res) => {
     const updatedName = req.body.updateName;
     const menuItemId = req.body.menuItemId;
-    database.updateMenuItem(updatedName, menuItemId, "name").then(rows => {
+    restaurants.updateMenuItem(updatedName, menuItemId, "name").then(rows => {
       res.redirect("/restaurant/owner");
     });
   });
@@ -174,7 +174,7 @@ module.exports = function(db) {
   router.post("/updateDescription", (req, res) => {
     const update = req.body.updateDescription;
     const menuItemId = req.body.menuItemId;
-    database.updateMenuItem(update, menuItemId, "description").then(rows => {
+    restaurants.updateMenuItem(update, menuItemId, "description").then(rows => {
       res.redirect("/restaurant/owner");
     });
   });
@@ -182,16 +182,16 @@ module.exports = function(db) {
   router.post("/updatePrice", (req, res) => {
     const update = req.body.updatePrice;
     const menuItemId = req.body.menuItemId;
-    database.updateMenuItem(update, menuItemId, "price").then(rows => {
+    restaurants.updateMenuItem(update, menuItemId, "price").then(rows => {
       res.redirect("/restaurant/owner");
     });
   });
 
-  //TODO: page not updating, database not updating
+  //TODO: page not updating, restaurants not updating
   router.post("/updateTime", (req, res) => {
     const update = utility.minutesToQueryFormat(Number(req.body.updateTime));
     const menuItemId = req.body.menuItemId;
-    database
+    restaurants
       .updateMenuItem(update, menuItemId, "time_to_prepare")
       .then(rows => {
         res.redirect("/restaurant/owner");
@@ -202,7 +202,7 @@ module.exports = function(db) {
   router.post("/updateActive", (req, res) => {
     const update = req.body.updateActive;
     const menuItemId = req.body.menuItemId;
-    database.updateMenuItem(update, menuItemId, "is_active").then(rows => {
+    restaurants.updateMenuItem(update, menuItemId, "is_active").then(rows => {
       res.redirect("/restaurant/owner");
     });
   });
@@ -223,7 +223,7 @@ module.exports = function(db) {
     console.log("THIS IS THE OWNER ID", owner_id);
     restaurants.findRestaurantIdByOwnerId(owner_id).then(restaurant => {
       console.log("THIS IS RESTAURANT ID", restaurant);
-      database.addMenuItem(newMenuItemObject, restaurant).then(rows => {
+      restaurants.addMenuItem(newMenuItemObject, restaurant).then(rows => {
         res.redirect("/");
       });
     });
