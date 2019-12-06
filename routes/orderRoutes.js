@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const orders = require("../lib/database/orders");
-const menu_items = require("../lib/database/menu_items");
 
 /* Twilio Imports */
 const accountSid = "AC6aeef0c97f09d55152dc6242c62a5191";
@@ -10,6 +8,8 @@ const twilio = require("twilio");
 const tclient = twilio(accountSid, authToken);
 
 module.exports = db => {
+  const orders = require("../lib/database/orders")(db);
+  const menu_items = require("../lib/database/menu_items")(db);
   /* GET order for a given user_id */
   router.get("/:id", (req, res) => {
     orders

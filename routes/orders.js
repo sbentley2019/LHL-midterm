@@ -1,9 +1,11 @@
 const express = require('express');
 const router  = express.Router();
-const orders = require('../lib/database/orders');
-const menu_items = require('../lib/database/menu_items');
 
 module.exports = (db) => {
+
+  const orders = require("../lib/database/orders")(db);
+  const menu_items = require("../lib/database/menu_items")(db);
+
   /* GET order for a given user_id */
   router.get('/:id', (req, res) => {
     orders.findByUserId()

@@ -1,6 +1,3 @@
-const restaurants = require("../lib/database/restaurants");
-const orders = require("../lib/database/orders");
-const menu_items = require("../lib/database/menu_items");
 const express = require("express");
 const router = express.Router();
 const utility = require("../lib/utility");
@@ -11,7 +8,10 @@ const authToken = "0958ca806061cb75d424c3b6115cd6cf";
 const twilio = require("twilio");
 const tclient = twilio(accountSid, authToken);
 
-module.exports = function(database) {
+module.exports = function(db) {
+  const restaurants = require("../lib/database/restaurants")(db);
+  const orders = require("../lib/database/orders")(db);
+  const menu_items = require("../lib/database/menu_items")(db);
   /**
    * Restaurant owner side. This contains two views, dashboard and orders
    * Restaurant id is queried using owner_id from cookie
