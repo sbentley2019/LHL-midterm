@@ -4,11 +4,11 @@
 
 ## Screenshots
 
-!["!Ritual"]()
+!["!Ritual home page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-home-page.png?raw=true)
 
-!["!Ritual"]()
+!["!Ritual restaurant user page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-page.png?raw=true)
 
-!["!Ritual"]()
+!["!Ritual restaurant side page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-side-page.png?raw=true)
 
 ## Getting Started
 
