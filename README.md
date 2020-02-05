@@ -1,6 +1,6 @@
 # !Ritual
 
-!Ritual is a simple food ordering app that allows users to view close restaurants on a map and order food from their browsers.
+!Ritual is a simple food ordering app that allows users to view close restaurants on a map and order food from their browsers. Created over the period of a week in a team of 3 for our midterm project at Lighthouse Labs.
 
 ## Screenshots
 
