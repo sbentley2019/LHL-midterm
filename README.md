@@ -24,7 +24,7 @@
 5. Fix to binaries for sass: `npm rebuild node-sass`
 6. Reset database: `npm run db:reset`
 7. Run the app using `npm start`.
-8. Visit `http://localhost:8080/`
+8. Visit <http://localhost:8080/>
 
 ## Dependencies
 
