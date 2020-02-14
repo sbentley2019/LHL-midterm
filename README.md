@@ -2,14 +2,6 @@
 
 !Ritual is a simple food ordering app that allows users to view close restaurants on a map and order food from their browsers. Created over the period of a week in a team of 3 for our midterm project at Lighthouse Labs.
 
-## Screenshots
-
-!["!Ritual home page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-home-page.png?raw=true)
-
-!["!Ritual restaurant user page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-page.png?raw=true)
-
-!["!Ritual restaurant side page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-side-page.png?raw=true)
-
 ## Getting Started
 
 1. Clone the repository into a local folder.
@@ -44,3 +36,11 @@
 - node-sass-middleware 0.11.x or above
 - pg 6.x or above
 - pg-native 3.x or above
+
+## Screenshots
+
+!["!Ritual home page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-home-page.png?raw=true)
+
+!["!Ritual restaurant user page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-page.png?raw=true)
+
+!["!Ritual restaurant side page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-side-page.png?raw=true)
