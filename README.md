@@ -18,6 +18,14 @@
 7. Run the app using `npm start`.
 8. Visit <http://localhost:8080/>
 
+## Screenshots
+
+!["!Ritual home page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-home-page.png?raw=true)
+
+!["!Ritual restaurant user page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-page.png?raw=true)
+
+!["!Ritual restaurant side page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-side-page.png?raw=true)
+
 ## Dependencies
 
 - Node 10.x or above
@@ -36,11 +44,3 @@
 - node-sass-middleware 0.11.x or above
 - pg 6.x or above
 - pg-native 3.x or above
-
-## Screenshots
-
-!["!Ritual home page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-home-page.png?raw=true)
-
-!["!Ritual restaurant user page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-page.png?raw=true)
-
-!["!Ritual restaurant side page"](https://github.com/sbentley2019/LHL-midterm/blob/master/public/docs/!Ritual-restaurant-side-page.png?raw=true)
